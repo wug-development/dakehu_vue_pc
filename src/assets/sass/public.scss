@@ -1,0 +1,35 @@
+@import './set.scss';
+/* 全局 */
+*{outline: none;}
+body,div,p,ul,li,table,tbody,tr,td,textarea,form,input,h1,h2,h3,h4,h5,dl,dt,dd,img,iframe,header,nav,section,article,footer,figure,figcaption,menu{ margin:0; padding:0; list-style:none; }
+html,body{ font-family: "pingfang", "Microsoft YaHei", "SimHei", sans-serif; -webkit-user-select:none; -webkit-text-size-adjust:none; line-height:25px; font-size: 14px; color: #444; display: block; min-height: 100%;background: #f3f3f3; }
+a{ text-decoration:none; color: inherit; }
+header,nav,section,article,footer,figure,figcaption{ display:block; }
+ol,ul { margin:0; padding:0; }
+input[type=text],input[type=password],input[type=number],input[type=tel],textarea{ border: 0; height: 100%; }
+textarea{ min-height:70px; line-height: 25px; }
+.clear{clear: both;}
+.boxwidth{ width: 1200px; margin: 0 auto; }
+.pubbtn{ padding: 5px 30px; line-height: 20px; background-color: $pubcolor; text-align: center; color: #fff; cursor: pointer; a{ display: block; height: 100%; } }
+.pubbtn:hover{ background-color: $pubcolorhover; } 
+.box-shadow{ box-shadow: 2.4px 2.4px 4px #ddd; }
+
+input.txts{
+    width: 150px;
+    height: 40px;
+    border: 1px solid #ccc;
+    text-indent: 1em;
+}
+div.btn{
+    width: 150px;
+    line-height: 30px;
+    background-color: $pubcolor;
+    text-align: center;
+    color: #fff;
+    border: 1px solid $pubcolor;
+    cursor: pointer;
+    a{
+        display: block;
+        height: 100%;
+    }
+}
