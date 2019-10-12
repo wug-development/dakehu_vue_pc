@@ -3,7 +3,7 @@
         <div class="pubheader-box">
             <div class="logo"><img src="../../assets/images/logo.png" alt=""></div>
             <div class="name-box">
-                <a class="name" id="lab_name">M秒奇艺</a>
+                <a class="name" id="lab_name">{{uname}}</a>
             </div>
         </div>
     </div>
@@ -11,7 +11,18 @@
 
 <script>
 export default {
-
+    data () {
+        return {
+            uname: ''
+        }
+    },
+    created () {
+        const _account = sessionStorage.getItem('account')
+        if (_account) {
+            let _user = JSON.parse(_account)
+            this.uname = _user.uname
+        }
+    }
 }
 </script>
 

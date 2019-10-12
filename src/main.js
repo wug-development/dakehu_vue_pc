@@ -9,12 +9,14 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import messagebox from 'element-ui/lib/message-box'
 
+import common from '../common/common'
 
 Vue.config.productionTip = false
 Vue.prototype.$http = Axios
 Vue.prototype.uris = process.env.API_URL
 Vue.prototype.uriw = process.env.APIW_URL
 Vue.prototype.urio = process.env.APIO_URL
+Vue.prototype.utils = common.utils
 Vue.prototype.MessageBox = messagebox
 
 Vue.use(ElementUI)

@@ -85,8 +85,22 @@
                 text-indent: 1rem;
                 padding: 0;
                 margin: 0;
+                border-radius: 0;
+                color: #444;
+            }
+            input::placeholder{
+                color: #999;
             }
             .layui-edge{
+                display: none;
+            }
+            .el-input{
+                width: auto;
+            }
+            .el-input__icon{
+                line-height: 30px;
+            }
+            .el-input__prefix{
                 display: none;
             }
         }
@@ -119,7 +133,6 @@
             background-size: 20px auto;
         }
         .daodadate{
-            display: none;
             background: url('../assets/images/icon_book_outdate.png') no-repeat;
             background-position: 208px center;
             background-size: 20px auto;
@@ -143,11 +156,11 @@
         background-color: $pubcolorhover;
     }
     .made-box{
-        display: none;
         height: auto;
         padding-bottom: 20px;
         .text-box{
             border: 1px solid #ccc;
+            margin-bottom: 20px;
             textarea{
                 resize: none;
                 border: 0;
