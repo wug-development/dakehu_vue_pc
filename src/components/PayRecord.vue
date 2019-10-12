@@ -47,125 +47,13 @@
                         <th>状态</th>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>108556</td>
-                            <td>支付宝</td>
-                            <td>2019/4/8</td>
-                            <td>M妙奇艺</td>
-                            <td></td>
-                            <td><span class="green">等待确认</span></td>
-                        </tr>
-                        <tr>
-                            <td>108556</td>
-                            <td>刷卡</td>
-                            <td>2019/4/8</td>
-                            <td>M妙奇艺-北京分公司</td>
-                            <td></td>
-                            <td>收款完成</td>
-                        </tr>
-                        <tr>
-                            <td>108556</td>
-                            <td>支付宝</td>
-                            <td>2019/4/8</td>
-                            <td>M妙奇艺-北京分公司</td>
-                            <td></td>
-                            <td>收款完成</td>
-                        </tr>
-                        <tr>
-                            <td>108556</td>
-                            <td>支付宝</td>
-                            <td>2019/4/8</td>
-                            <td>M妙奇艺-北京分公司</td>
-                            <td></td>
-                            <td>收款完成</td>
-                        </tr>
-                        <tr>
-                            <td>108556</td>
-                            <td>支付宝</td>
-                            <td>2019/4/8</td>
-                            <td>M妙奇艺</td>
-                            <td></td>
-                            <td>收款完成</td>
-                        </tr>
-                        <tr>
-                            <td>108556</td>
-                            <td>支付宝</td>
-                            <td>2019/4/8</td>
-                            <td>M妙奇艺-北京分公司</td>
-                            <td></td>
-                            <td>收款完成</td>
-                        </tr>
-                        <tr>
-                            <td>108556</td>
-                            <td>支付宝</td>
-                            <td>2019/4/8</td>
-                            <td>M妙奇艺-北京分公司</td>
-                            <td></td>
-                            <td>收款完成</td>
-                        </tr>
-                        <tr>
-                            <td>108556</td>
-                            <td>支付宝</td>
-                            <td>2019/4/8</td>
-                            <td>M妙奇艺-北京分公司</td>
-                            <td></td>
-                            <td>收款完成</td>
-                        </tr>
-                        <tr>
-                            <td>108556</td>
-                            <td>支付宝</td>
-                            <td>2019/4/8</td>
-                            <td>M妙奇艺-北京分公司</td>
-                            <td></td>
-                            <td>收款完成</td>
-                        </tr>
-                        <tr>
-                            <td>108556</td>
-                            <td>支付宝</td>
-                            <td>2019/4/8</td>
-                            <td>M妙奇艺-北京分公司</td>
-                            <td></td>
-                            <td>收款完成</td>
-                        </tr>
-                        <tr>
-                            <td>108556</td>
-                            <td>支付宝</td>
-                            <td>2019/4/8</td>
-                            <td>M妙奇艺-北京分公司</td>
-                            <td></td>
-                            <td>收款完成</td>
-                        </tr>
-                        <tr>
-                            <td>108556</td>
-                            <td>支付宝</td>
-                            <td>2019/4/8</td>
-                            <td>M妙奇艺-北京分公司</td>
-                            <td></td>
-                            <td>收款完成</td>
-                        </tr>
-                        <tr>
-                            <td>108556</td>
-                            <td>支付宝</td>
-                            <td>2019/4/8</td>
-                            <td>M妙奇艺-北京分公司</td>
-                            <td></td>
-                            <td>收款完成</td>
-                        </tr>
-                        <tr>
-                            <td>108556</td>
-                            <td>支付宝</td>
-                            <td>2019/4/8</td>
-                            <td>M妙奇艺-北京分公司</td>
-                            <td></td>
-                            <td>收款完成</td>
-                        </tr>
-                        <tr>
-                            <td>108556</td>
-                            <td>支付宝</td>
-                            <td>2019/4/8</td>
-                            <td>M妙奇艺-北京分公司</td>
-                            <td></td>
-                            <td>收款完成</td>
+                        <tr v-for="(item, i) in paylist" :key="i">
+                            <td>￥{{item.dnMoney}}</td>
+                            <td>{{item.dcPayType}}</td>
+                            <td>{{item.dtAddDatetime}}</td>
+                            <td>{{uname}}</td>
+                            <td>{{item.dcRemarks}}</td>
+                            <td><span :class='item.dnStatus == 1?"green":""'>{{item.dnStatus == 1?'收款完成':'等待确认'}}</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -187,7 +75,14 @@ import Footer from './public/Footer.vue'
 import Menu from './public/Menu.vue'
 export default {
     data () {
-        return {}
+        return {
+            uname: '',
+            userID: '',
+            page: 1,   
+            payCount: 0,
+            qiankuan: 0,
+            paylist: []
+        }
     },    
     components: {
         Header,
@@ -196,8 +91,32 @@ export default {
     },
     methods: {
         changePage (v) {
-            
+            this.page = v
+            this.getList()
+        },
+        getList () {
+            this.utils.http({
+                name: this,
+                uri: '/payrecord/getrecordlist',
+                params: {
+                    params: { cid: this.userID}
+                },
+                success: res=>{
+                    console.log(res)
+                    if(res.status === 200 && res.data.status === 1){
+                        this.paylist = res.data.data.orderlist
+                        this.payCount = format(res.data.data.paycount)
+                        this.qiankuan = format(res.data.data.qiankuan)
+                    }
+                }
+            })
         }
+    },
+    created () {        
+        let acount = JSON.parse(sessionStorage.getItem('account'))
+        this.userID = acount.id
+        this.uname = acount.uname
+        this.getList()
     }
 }
 </script>
