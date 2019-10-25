@@ -227,7 +227,7 @@ export default {
                                 })
                             })                            
                         } else {
-                            this.MessageBox('下单成功！', res.data.msg)
+                            this.MessageBox('下单失败！', res.data.msg)
                         }
                     }
                 })
