@@ -36,3 +36,10 @@ div.btn{
 .el-autocomplete-suggestion{
     width: 500px !important;
 }
+.el-radio__input.is-checked .el-radio__inner {
+    border-color: $pubcolor;
+    background: $pubcolor;
+}
+.el-radio__input.is-checked+.el-radio__label {
+    color: $pubcolor;
+}

@@ -14,6 +14,7 @@ import common from '../common/common'
 Vue.config.productionTip = false
 Vue.prototype.$http = Axios
 Vue.prototype.uris = process.env.API_URL
+Vue.prototype.urim = process.env.APIM_URL
 Vue.prototype.uriw = process.env.APIW_URL
 Vue.prototype.urio = process.env.APIO_URL
 Vue.prototype.utils = common.utils

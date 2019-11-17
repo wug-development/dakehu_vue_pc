@@ -9,21 +9,21 @@
                 <div class="padding">
                     <div class="menu">
                         <div @click="ticketType = 0" :class="'go' + (ticketType == 0?' cur':'')">单程</div>
-                        <div @click="ticketType = 1" :class="'return' + (ticketType == 1?' cur':'')">往返</div>
+                        <div v-if="flightType" @click="ticketType = 1" :class="'return' + (ticketType == 1?' cur':'')">往返</div>
                         <div @click="ticketType = 2" :class="'made' + (ticketType == 2?' cur':'')">定制</div>
                     </div>
                     <div class="go-return-box" v-if="ticketType != 2">
                         <div class="out">
-                            <el-autocomplete class="inline-input" :clearable="true" v-model="flightInfo.startCityText" :fetch-suggestions="querySearch" placeholder="出发地" @blur="checkCity(0)" @select="selStartCity" ></el-autocomplete>
+                            <el-autocomplete class="inline-input" :clearable="false" v-model="flightInfo.startCityText" :fetch-suggestions="querySearch" placeholder="出发地" @blur="checkCity(0)" @select="selStartCity" ></el-autocomplete>
                         </div>
                         <div class="daoda">
-                            <el-autocomplete class="inline-input" :clearable="true" v-model="flightInfo.endCityText" :fetch-suggestions="queryEndSearch" placeholder="出发地" @blur="checkCity(1)" @select="selEndCity" ></el-autocomplete>
+                            <el-autocomplete class="inline-input" :clearable="false" v-model="flightInfo.endCityText" :fetch-suggestions="queryEndSearch" placeholder="出发地" @blur="checkCity(1)" @select="selEndCity" ></el-autocomplete>
                         </div>
                         <div class="outdate">
-                            <el-date-picker v-model="flightInfo.startTime" type="date" placeholder="选择出发日期"> </el-date-picker>
+                            <el-date-picker v-model="flightInfo.startTime" type="date" value-format="yyyy-MM-dd" placeholder="选择出发日期"> </el-date-picker>
                         </div>
                         <div class="daodadate" v-if="ticketType">
-                            <el-date-picker v-model="flightInfo.endTime" type="date" placeholder="选择返回日期"> </el-date-picker>
+                            <el-date-picker v-model="flightInfo.endTime" type="date" value-format="yyyy-MM-dd" placeholder="选择返回日期"> </el-date-picker>
                         </div>
                         <div class="btn" @click="findFlight">搜索</div>
                     </div>
@@ -233,7 +233,7 @@
 
             <!--国内列表-->
             <div class="flight-search boxwidth" v-else>
-                <div class="flight-search-title"><span class="go">上海</span> <span class="icon-go"></span> <span class="mudi">北京</span> <span class="ltype s">（单程）</span> <span class="gdate s">01月06日</span></div>
+                <div class="flight-search-title"><span class="go">{{this.flightInfo.startCity}}</span> <span class="icon-go"></span> <span class="mudi">{{this.flightInfo.endCity}}</span> <span class="ltype s">（单程）</span> <span class="gdate s">{{this.flightInfo.startTime}}</span></div>
                 <ul class="flight-search-list">
                     <li class="thead">
                         <div class="w26">航空公司/舱位/航班号</div>
@@ -242,77 +242,71 @@
                         <div class="w15">价格/折扣（不含税费）</div>
                         <div class="w12"></div>
                     </li>
-                    <li class="tbody">
+                    <li class="tbody" v-for="(item, i) in dataList" :key="i">
                         <div class="tbody-flg">
                             <div class="w26 flg-airinfo flg-flex">
                                 <div>
-                                    <div class="flg-airinfo-logo"><img src="../assets/images/icon_flight_logo.png" alt=""></div>
+                                    <div class="flg-airinfo-logo"><img :src="'/static/icons/' + (item.flightNo.substr(0,2)) + '.gif'" alt=""></div>
                                     <div class="flg-airinfo-company">
-                                        <div>中国航空</div> 
-                                        <span>机型：<span>77L</span></span>
+                                        <div>{{checkAirCompany(item.flightNo.substr(0,2))}}</div> 
+                                        <span>机型：<span>{{item.planeType}}</span></span>
                                     </div>
                                     <div class="flg-airinfo-site">
-                                        <div>DL186</div>
-                                        <span>(特价经济舱位)</span>
+                                        <div>{{item.flightNo}}</div>
+                                        <span>({{item.seatItems[0].seatMsg.replace("特价舱","特价经济舱")}})</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="w10 flg-airtime flg-flex">
-                                <div><span>22:00</span><span>出发</span></div>
-                                <div><span>22:00</span><span>到达</span></div>
+                                <div>{{item.depTime.substr(0,2) + ':' + item.depTime.substr(2,2)}}<span>出发</span></div>
+                                <div>{{item.arriTime.substr(0,2) + ':' + item.arriTime.substr(2,2)}}<span>到达</span></div>
                             </div>
                             <div class="w15 flg-airport flg-flex">
                                 <div>
-                                    <div>上海浦东机场</div>
-                                    <div>上海浦东机场</div>
+                                    <div>{{checkAirPort(item.orgCity)}}{{item.orgJetquay || ''}}</div>
+                                    <div>{{checkAirPort(item.dstCity)}}{{item.dstJetquay || ''}}</div>
                                 </div>
                             </div>
                             <div class="w15 flg-moneyfix flg-flex">
-                                <div class="flg-money"><span>&yen;</span>4999</div>
-                                <div class="flg-fix">2.5折 <span class="flg-moneyfix-tgq">退改签</span></div>
+                                <div class="flg-money"><span>&yen;</span>{{item.seatItems[0].parPrice}}</div>
+                                <div class="flg-fix">{{ReturnDisCount(item.seatItems[0].discount)}}  
+                                    <span class="flg-moneyfix-tgq" @mouseover="checkTGQ(item.flightNo.substr(0,2), item.seatItems[0].seatCode, i, 0)">
+                                        退改签
+                                        <label class="tgq" v-html="item.seatItems[0].param4"></label>
+                                    </span>
+                                </div>
                             </div>
                             <div class="w12 flg-handle flg-flex">
-                                <div class="flg-btn pubbtn">预定</div>
-                                <div class="flg-btn-changecontent flg-btn-more">更多航班</div>
+                                <div class="flg-btn pubbtn" @click="bookFlight(item, item.seatItems[0])">预定</div>
+                                <div v-if="item.seatItems.length > 1" :class='"flg-btn-changecontent" + (selMore == item.flightNo?" flg-btn-more":"")' @click="checkMore(item.flightNo)">更多航班</div>
                             </div>
                         </div>
-                        <ul class="flg-morelist">
-                            <li class="flg-morelist-item">
+                        <ul class="flg-morelist" v-show="selMore == item.flightNo">
+                            <li class="flg-morelist-item" v-for="(f, index) in item.seatItems" :key="index" v-if="index > 0">
                                 <div class="w26 flg-company flg-flex"></div>
                                 <div class="w10 flg-airtime flg-flex"></div>
                                 <div class="w15 flg-airport flg-flex">
                                     <div>
-                                        <div>特价经济舱位</div>
+                                        <div>{{f.seatMsg.replace("特价舱","特价经济舱")}}</div>
                                     </div>
                                 </div>
                                 <div class="w15 flg-moneyfix flg-flex">
-                                    <div class="flg-money"><span>&yen;</span>4999</div>
-                                    <div class="flg-fix">2.5折 <span class="flg-moneyfix-tgq">退改签</span></div>
-                                </div>
-                                <div class="w12 flg-handle flg-flex">
-                                    <div class="flg-btn pubbtn">预定</div>
-                                </div>
-                            </li> 
-                            <li class="flg-morelist-item">
-                                <div class="w26 flg-company flg-flex"></div>
-                                <div class="w10 flg-airtime flg-flex"></div>
-                                <div class="w15 flg-airport flg-flex">
-                                    <div>
-                                        <div>特价经济舱位</div>
+                                    <div class="flg-money"><span>&yen;</span>{{f.parPrice}}</div>
+                                    <div class="flg-fix">{{ReturnDisCount(f.discount)}} 
+                                        <span class="flg-moneyfix-tgq" @mouseover="checkTGQ(item.flightNo.substr(0,2), f.seatCode, i, index)">
+                                            退改签
+                                            <label class="tgq" v-html="f.param4"></label>
+                                        </span>
                                     </div>
                                 </div>
-                                <div class="w15 flg-moneyfix flg-flex">
-                                    <div class="flg-money"><span>&yen;</span>4999</div>
-                                    <div class="flg-fix">2.5折 <span class="flg-moneyfix-tgq">退改签</span></div>
-                                </div>
                                 <div class="w12 flg-handle flg-flex">
-                                    <div class="flg-btn pubbtn">预定</div>
+                                    <div class="flg-btn pubbtn" @click="bookFlight(item, f)">预定</div>
                                 </div>
-                            </li>                       
+                            </li>                     
                         </ul>
                         <div class="flg-other">
-                            <span>机建+燃油：50+0元</span>
-                            <span>飞行时间：4小时20分钟</span>
+                            <span>机建+燃油：{{item.airportTax}}+{{item.fuelTax}}元</span>
+                            <span>飞行时间：{{checkTime(item.depTime,item.arriTime)}}</span>
                         </div>
                     </li>
                 </ul>
@@ -359,6 +353,10 @@ export default {
             gnendCityList: [],
             startList: [],
             backList: [],
+            airCompany: [],
+            airPort: [],
+            dataList: [],
+            selMore: '',
             showMore: ''
         }
     },
@@ -473,8 +471,11 @@ export default {
                         'type': this.ticketType
                     }
                 }
-                this.isLoading = true
-                getFightList(this, param)
+                if (this.flightInfo.ticketType) {
+                    getFightList(this, param)
+                } else {
+                    this.getGNFlightList()
+                }
             }
         },
         saveDingzhi () {
@@ -517,6 +518,122 @@ export default {
                 this.utils.setItem('backFlight', JSON.stringify(e))
             }
             this.$router.push({ path: '/flightinfo' })
+        },
+        getGNFlightList () {
+            this.isLoading = true
+            // 获取航班
+            this.$http.get(this.urim + '/flight/getgnflights', {params: {
+                scity: this.flightInfo.startCityShort,
+                ecity: this.flightInfo.endCityShort,
+                sdate: this.flightInfo.startTime
+            }})
+            .then(res => {
+                if (res && res.data && res.data.status != 0) {
+                    var _d = res.data.data
+                    if (_d.data.returnCode === 'S') {
+                        this.airCompany = _d.airCompany
+                        this.airPort = _d.airPort
+                        this.dataList = _d.data.flightItems[0].flights
+                    }
+                }
+                this.isLoading = false
+            }).catch(res => {
+                this.isLoading = false
+            })
+        },
+        checkCompany: function () {
+            this.selChildCompany = ''
+            this.$http.get(this.apis + '/api/company/getfiltersubcompany', {params: {
+                id: this.selCompany.id
+            }})
+            .then(res => {
+                if (res && res.data && res.data.status != 0) {
+                    this.childCompany = res.data.data
+                }
+            })
+        },
+        checkMore (v) {
+            if (this.selMore == v) {
+                this.selMore = ''
+            } else {
+                this.selMore = v
+            }
+        },
+        checkAirCompany (v) {
+            let txt = '';
+            if (v) {
+                for (let i=0; i<this.airCompany.length; i++) {
+                    if (this.airCompany[i].CarrierCode == v) {
+                        txt = this.airCompany[i].ShortName
+                    }
+                }
+            }
+            return txt
+        },
+        checkAirPort (v) {
+            let txt = '';
+            if (v) {
+                for (let i=0; i<this.airPort.length; i++) {
+                    if (this.airPort[i].dcCode == v) {
+                        txt = this.airPort[i].dcAirPortName
+                        break;
+                    }
+                }
+            }
+            return txt
+        },
+        ReturnDisCount (discount){
+            var str = "";
+            if (parseFloat(discount) * 10 >= 10)
+            {
+                str = "全价";
+            }
+            else
+            {
+                str = parseFloat(parseFloat(discount) * 10).toFixed(1) + "折";
+            }
+            return str;
+        },
+        checkTime(v1, v2) {
+            var h1 = Number(v1.substr(0,2))
+            var m1 = Number(v1.substr(2,2))
+            var h2 = Number(v2.substr(0,2))
+            var m2 = Number(v2.substr(2,2))
+            var hours = 0, minutes = 0
+            hours = h2 - h1
+            if (h2 < h1) {
+                hours = h2 + 24 - h1
+            }
+            minutes = m2 - m1
+            if (m2 < m1) {
+                hours -= 1
+                minutes = m2 + 60 -m1
+            }
+            return hours + "时" + minutes + "分";
+        },
+        checkTGQ (v, code, m, n) {
+            // 获取退改签
+            if (!this.dataList[m].seatItems[n].param4) {
+                this.$http.get(this.uris + '/flight/getflighttgq', {params: {
+                    flightNo: v,
+                    seatCode: code
+                }})
+                .then(res => {
+                    if (res && res.data && res.data.status != 0) {
+                        var _o = res.data.data.replace('更改条件', '<b>更改条件</b>').replace('退票条件', '<br/><b>退票条件</b>').replace('签转条件', '<br/><b>签转条件</b>')
+                        if (_o == '') {
+                            this.dataList[m].seatItems[n].param4 = '未找到条件';
+                        } else {
+                            this.dataList[m].seatItems[n].param4 = _o;
+                        }
+                    }
+                })
+            }
+        },
+        bookFlight (item, f) {
+            this.utils.setItem('selFlight', JSON.stringify(item))
+            this.utils.setItem('bookFlightSeat', JSON.stringify(f))
+            this.$router.push({ path: '/gnflightinfo' })
         }
     },
     components: {
@@ -579,14 +696,18 @@ export default {
                 'type': ttype
             }
         }
-        this.isLoading = true
         
-        getFightList(this, param)
+        if (this.flightType) {
+            getFightList(this, param)
+        } else {
+            this.getGNFlightList()
+        }
     }
 }
 
 //获取航班线路
 function getFightList(vue, param){
+    vue.isLoading = true
     vue.utils.http({
         uri: '/flight/getflightlist',
         params: param,
@@ -620,16 +741,15 @@ function getFightList(vue, param){
                         }
                     }
                 }
-
                 //返程
                 if(vue.flightInfo.flightType === 1){
                     for(let i=0; i<len; i++){
                         let item = data.hangxianS[i]
-                        if(item.length>0){                  
+                        if(item.length>0){           
                             let em = vue.flightInfo.endTime.split('-')[1]
                             let dnum = DateDiff(vue.flightInfo.startTime, vue.endDate)
                             let piaojia = getPiaojia(data.piaojia[i], em, dnum)
-                            if(piaojia){
+                            if(piaojia){     
                                 clist.push(item[0].CompanyCode)
                                 for(let m=0; m<item.length; m++){
                                     item[m].otherFlight = data.zhuanjiS[i][m]
@@ -660,7 +780,7 @@ function getFightList(vue, param){
                                 for(let m=0; m<sitem.length; m++){
                                     sitem[m].airinfo = regs.data.aircomInfo[i]
                                 }
-                                if(vue.flightInfo.flightType === 1){
+                                if(vue.flightType === 1){
                                     let eitem = elist[i]
                                     for(let n=0; n<eitem.length; n++){
                                         eitem[n].airinfo = regs.data.aircomInfo[len+i]
@@ -675,7 +795,7 @@ function getFightList(vue, param){
                                 }
                             }
                             vue.startList = compare(slist)
-                            if(vue.flightInfo.flightType === 1){
+                            if(vue.flightType === 1){
                                 for(let i=0; i<elist.length; i++){
                                     for(let j in elist[i]){
                                         elist[i][j].airtype = regs.data.airInfo[m++]
@@ -684,8 +804,6 @@ function getFightList(vue, param){
                                 vue.backList = compare(elist)
                             }
                             vue.isLoading = false
-                            console.log(vue.startList)
-                            console.log(vue.backList)
                         }else{
                             vue.isLoading = false
                             vue.notFind = true
@@ -889,6 +1007,7 @@ function getEndCityList(vue, data){
             .tbody{
                 margin-top: 10px;
                 border-top: 5px solid $pubcolor;
+                background-color: #fff;   
                 .tbody-flg{
                     min-height: 80px;
                     line-height: 30px;
@@ -897,8 +1016,7 @@ function getEndCityList(vue, data){
                     flex-wrap: wrap;
                     text-align: center;
                     box-shadow: 0 2px 4px #ededed;
-                    padding: 10px 0;   
-                    background-color: #fff;                 
+                    padding: 10px 0;                 
                 }                
                 .flg-flex{
                     display: flex;
@@ -1002,10 +1120,31 @@ function getEndCityList(vue, data){
                     }
                     .flg-fix{                        
                         color: #b1b0b0;
-                    }
-                    .flg-moneyfix-tgq{
-                        color: #4eb0e4;
-                        cursor: pointer;
+                        .flg-moneyfix-tgq{
+                            position: relative;
+                            color: #4eb0e4;
+                            cursor: pointer;
+                            .tgq{
+                                display: none;
+                                position: absolute;
+                                z-index: 99999;
+                                width: 240px;
+                                left: 0;
+                                top: 15px;
+                                border: 1px solid $pubcolor;
+                                background-color: #fff;
+                                padding: 10px 6px;
+                                box-sizing: border-box;
+                                text-align: left;
+                                color: #777;
+                                b{
+                                    color: #000;
+                                }
+                            }
+                        }
+                        span:hover .tgq{
+                            display: block;
+                        }
                     }
                 }
                 .flg-handle{
@@ -1016,7 +1155,7 @@ function getEndCityList(vue, data){
                         border-radius: 5px;
                     }
                     .flg-btn-changecontent{
-                        color: #1c87ca;
+                        color: #fe7122;
                         line-height: 20px;
                         cursor: pointer;
                         position: relative;
@@ -1053,6 +1192,15 @@ function getEndCityList(vue, data){
                         border-width:6px 6px 0;
                         border-style:solid;
                         border-color:#fe7122 transparent transparent;/*灰 透明 透明 */
+                    }
+                    .flg-btn-more::after{
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        right: -2px;
+                        border-width:6px;
+                        border-style:solid;
+                        border-color: transparent transparent #fe7122 transparent;
                     }
                 }             
                 .flg-morelist{

@@ -7,6 +7,13 @@ module.exports = {
                 '^/apis': ''
             }
         },
+        '/apim': {
+            target: 'http://dakehuapi.airkx.cn/api/',
+            changeOrigin: true,
+            pathRewrite: {
+                '^/apim': ''
+            }
+        },
         '/apio': {
             target: 'http://m.airkx.com/mwork/',
             changeOrigin: true,

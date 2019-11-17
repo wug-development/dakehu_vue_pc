@@ -4,27 +4,27 @@
 
         <div class="boxwidth bookbox">
             <div class="tab">
-                <div data-type="gn" @click="flightType = 0" :class="flightType?'':'cur'">预订国内</div>
-                <div data-type="gj" @click="flightType = 1" :class="flightType?'cur':''">预订国际</div>
+                <div data-type="gn" @click="selCountry(0)" :class="flightType?'':'cur'">预订国内</div>
+                <div data-type="gj" @click="selCountry(1)" :class="flightType?'cur':''">预订国际</div>
             </div>
             <div class="padding">
                 <div class="menu">
                     <div @click="ticketType = 0" :class="'go' + (ticketType == 0?' cur':'')">单程</div>
-                    <div @click="ticketType = 1" :class="'return' + (ticketType == 1?' cur':'')">往返</div>
+                    <div v-show="flightType == 1" @click="ticketType = 1" :class="'return' + (ticketType == 1?' cur':'')">往返</div>
                     <div @click="ticketType = 2" :class="'made' + (ticketType == 2?' cur':'')">定制</div>
                 </div>
                 <div class="go-return-box" v-if="ticketType != 2">
                     <div class="out">
-                        <el-autocomplete class="inline-input" :clearable="true" v-model="flightInfo.startCityText" :fetch-suggestions="querySearch" placeholder="出发地" @blur="checkCity(0)" @select="selStartCity" ></el-autocomplete>
+                        <el-autocomplete class="inline-input" :clearable="false" v-model="flightInfo.startCityText" :fetch-suggestions="querySearch" placeholder="出发地" @blur="checkCity(0)" @select="selStartCity" ></el-autocomplete>
                     </div>
                     <div class="daoda">
-                        <el-autocomplete class="inline-input" :clearable="true" v-model="flightInfo.endCityText" :fetch-suggestions="queryEndSearch" placeholder="出发地" @blur="checkCity(1)" @select="selEndCity" ></el-autocomplete>
+                        <el-autocomplete class="inline-input" :clearable="false" v-model="flightInfo.endCityText" :fetch-suggestions="queryEndSearch" placeholder="出发地" @blur="checkCity(1)" @select="selEndCity" ></el-autocomplete>
                     </div>
                     <div class="outdate">
-                        <el-date-picker v-model="flightInfo.startTime" type="date" placeholder="选择出发日期"> </el-date-picker>
+                        <el-date-picker v-model="flightInfo.startTime" type="date" value-format="yyyy-MM-dd" placeholder="选择出发日期"> </el-date-picker>
                     </div>
-                    <div class="daodadate" v-if="ticketType">
-                        <el-date-picker v-model="flightInfo.endTime" type="date" placeholder="选择返回日期"> </el-date-picker>
+                    <div class="daodadate" v-show="ticketType">
+                        <el-date-picker v-model="flightInfo.endTime" type="date" format="yyyy-MM-dd" value-format="yyyy-MM-dd" placeholder="选择返回日期"> </el-date-picker>
                     </div>
                     <div class="btn" @click="findFlight">搜索</div>
                 </div>
@@ -119,6 +119,17 @@ export default {
         Footer
     },
     methods: {
+        selCountry (v) {
+            if (v) {
+                this.flightType = 1
+                this.ticketType = 1
+            } else {
+                this.flightType = 0
+                this.ticketType = 0
+            }
+            this.flightInfo.endCityText = ''
+            this.flightInfo.endCityShort = ''
+        },
         querySearch (queryString, cb) {
             let res = this.startCityList
             let arr = []

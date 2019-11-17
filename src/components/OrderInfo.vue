@@ -13,51 +13,51 @@
                     <tbody>
                         <tr>
                             <td>订单号：</td>
-                            <td>75770  张伟铃</td>
+                            <td>{{orderInfo.dcOrderID}}  {{orderInfo.dcLinkName}}</td>
                             <td>预订时间 ：</td>
-                            <td>2018/6/5  16:21:12</td>
+                            <td>{{orderInfo.dtAddTime}}</td>
                         </tr>
                         <tr>
                             <td>出发日期：</td>
-                            <td>2018/6/17</td>
+                            <td>{{orderInfo.dcStartDate}}</td>
                             <td>订单状态：</td>
-                            <td>等待处理</td>
+                            <td>{{orderInfo.dnStatus == 0? '等待处理' : '预定成功'}}</td>
                         </tr>
                         <tr>
                             <td>起落机场: </td>
-                            <td>上海虹桥机场-北京首都机场</td>
+                            <td>{{orderInfo.flight[0].dcSPortName}}-{{orderInfo.flight[0].dcEPortName}}</td>
                             <td>票号：</td>
-                            <td></td>
+                            <td>{{orderInfo.dcOrderCode}}</td>
                         </tr>
                         <tr>
                             <td>航班号：</td>
-                            <td>CA118</td>
+                            <td>{{orderInfo.flight[0].dcAirCode}}</td>
                             <td>航站楼：</td>
-                            <td></td>
+                            <td>{{orderInfo.flight[0].dcSJetquay}}-{{orderInfo.flight[0].dcEJetquay}}</td>
                         </tr>
                         <tr>
                             <td>起落时间：</td>
-                            <td>10:55-11:55</td>
+                            <td>{{orderInfo.flight[0].dcSTime}}-{{orderInfo.flight[0].dcETime}}</td>
                             <td>CTCM：</td>
-                            <td>18625435412</td>
+                            <td>{{orderInfo.dcCTCM}}</td>
                         </tr>
                         <tr>
                             <td>舱位：</td>
-                            <td>经济舱</td>
+                            <td>{{orderInfo.flight[0].dcSeatMsg}}</td>
                             <td>CTCT: </td>
-                            <td></td>
+                            <td>{{orderInfo.dcCTCT}}</td>
                         </tr>
                         <tr>
                             <td>折扣：</td>
-                            <td></td>
+                            <td>{{orderInfo.dnDiscount == 1?'全价': (orderInfo.dnDiscount * 10 + '折')}}</td>
                             <td>记录编号：</td>
-                            <td></td>
+                            <td>{{orderInfo.dcOrderCode}}</td>
                         </tr>
                         <tr>
                             <td>订单金额: </td>
-                            <td>1260 ( 1180  + 税金 60 + 服务费 20 )*1人</td>
+                            <td>{{orderInfo.dnTotalPrice}} ( {{orderInfo.dnPrice}}  + 税金 {{orderInfo.dnTax}} )*{{orderInfo.person.length}}人</td>
                             <td>备注：</td>
-                            <td></td>
+                            <td>{{orderInfo.dcContent}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -71,29 +71,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>徐坤（成人）</td>
-                            <td>18625435412</td>
+                        <tr v-for="(item, i) in orderInfo.person" :key="i">
+                            <td>{{item.pername}}</td>
+                            <td>{{item.phone}}</td>
                             <td>身份证</td>
-                            <td>26443556841422265</td>
-                        </tr>
-                        <tr>
-                            <td>徐坤（成人）</td>
-                            <td>18625435412</td>
-                            <td>身份证</td>
-                            <td>26443556841422265</td>
-                        </tr>
-                        <tr>
-                            <td>徐坤（成人）</td>
-                            <td>18625435412</td>
-                            <td>身份证</td>
-                            <td>26443556841422265</td>
-                        </tr>
-                        <tr>
-                            <td>徐坤（成人）</td>
-                            <td>18625435412</td>
-                            <td>身份证</td>
-                            <td>26443556841422265</td>
+                            <td>{{item.idcard}}</td>
                         </tr>
                     </tbody>
                 </table>               

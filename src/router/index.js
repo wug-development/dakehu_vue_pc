@@ -4,6 +4,7 @@ import Login from '@/components/Login'
 import Index from '@/components/Index'
 import FlightList from '@/components/FlightList'
 import FlightInfo from '@/components/FlightInfo'
+import GNFlightInfo from '@/components/GNFlightInfo'
 import OrderList from '@/components/OrderList'
 import OrderInfo from '@/components/OrderInfo'
 import PayRecord from '@/components/PayRecord'
@@ -32,6 +33,11 @@ export default new Router({
             path: '/flightinfo',
             name: 'FlightInfo',
             component: FlightInfo
+        },
+        {
+            path: '/gnflightinfo',
+            name: 'GNFlightInfo',
+            component: GNFlightInfo
         },
         {
             path: '/orderlist',

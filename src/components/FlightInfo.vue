@@ -295,7 +295,7 @@ export default {
                 })
                 this.person.splice(index, 1)
                 if (this.person.length < 1) {
-                    this.person.push(JSON.stringify(this.shiliPerson))
+                    this.person.push(JSON.parse(JSON.stringify(this.shiliPerson)))
                 }
             } else {
                 this.selP.push(i)
