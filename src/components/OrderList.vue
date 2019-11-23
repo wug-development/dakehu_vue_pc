@@ -9,23 +9,35 @@
                 <div class="orderlist-search-box">
                     <div class="book-time">
                         预订时间：
-                        <input type="text" maxlength="50" />
-                        <span>至</span>
-                        <input type="text" maxlength="50" >
+                        <el-date-picker
+                        value-format="yyyy-MM-dd"
+                        v-model="dates"
+                        type="daterange"
+                        range-separator="至"
+                        start-placeholder="开始日期"
+                        end-placeholder="结束日期">
+                        </el-date-picker>
                     </div>
-                    <div class="div_mag">
+                    <div class="div_mag" v-if="comList.length > 0">
                         分公司：
-                        <select name="ddl_com" id=""></select>
+                        <el-select class="txt" v-model="childCompany" placeholder="请选择">
+                            <el-option
+                            v-for="item in comList"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                            </el-option>
+                        </el-select>
                     </div>
                     <div class="div_mag">
                         姓名：
-                        <input type="text" maxlength="50" >
+                        <el-input class="txt" v-model="name" maxlength="50" placeholder=""></el-input>
                     </div>
-                    <div class="div_no">
+                    <div class="div_mag div_no">
                         <span>票号：</span>
-                        <input type="text" maxlength="50" >
+                        <el-input class="txt" v-model="ticketno" maxlength="50" placeholder=""></el-input>
                     </div>
-                    <div class="pubbtn btn">搜索</div>
+                    <div class="pubbtn btn" @click="getList">搜索</div>
                 </div>
                 <table class="table-list" cellpadding="0" cellspacing="0">
                     <thead>
@@ -41,20 +53,20 @@
                     <tbody>
                         <tr v-for="(item, i) in orderList" :key="i">
                             <td class="cur" @click="checkInfo(item.OrderID)">{{item.OrderID}}</td>
-                            <td>{{item.person.length > 0? item.person[0].pername : ''}}</td>
+                            <td>{{item.name}}</td>
                             <td>{{item.startDate}}</td>
                             <td>{{item.startCity}} - {{item.endCity}}</td>
                             <td>{{item.OrderCode}}</td>
                             <td>{{item.TotalPrice}}</td>
                             <td>{{item.addTime}}</td>
-                            <td>{{item.Status == 1?'处理完成':(item.Status == 2?'后补等待':'等待处理')}}</td>
+                            <td>{{item.Status == 1?'处理完成':'等待处理'}}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="boxwidth">
                 <div id="page" class="page_div">
-                    <el-pagination background layout="prev, pager, next" @current-change="changePage" :total="1000"></el-pagination>
+                    <el-pagination background layout="prev, pager, next" @current-change="changePage" :total="itemCount"></el-pagination>
                 </div>
             </div>
         </div>
@@ -72,9 +84,13 @@ export default {
         return {
             userID: '',
             orderList: '',
-            payCount: '',
-            qiankuan: '',
-            page: 1
+            itemCount: 0,
+            comList: [],
+            page: 1,
+            dates: [],
+            childCompany: '',
+            name: '',
+            ticketno: ''
         }
     },    
     components: {
@@ -93,6 +109,7 @@ export default {
             })
         },
         getList () {
+            this.dates = this.dates || []
             this.utils.http({
                 name: this,
                 uri: '/order/getorderlist',
@@ -101,20 +118,31 @@ export default {
                         cid: this.userID,
                         page: this.page, 
                         pagenum: 10, 
-                        sdate: '', 
-                        edate: '', 
-                        filtername: '', 
-                        tno: '',
-                        subcid: ''
+                        sdate: this.dates[0] || '', 
+                        edate: this.dates[1] || '', 
+                        filtername: this.name, 
+                        tno: this.ticketno,
+                        subcid: this.childCompany.id || ''
                     }
                 },
                 success: res=>{
                     console.log(res)
                     if(res.status === 200 && res.data.status === 1){
-                        this.orderList = res.data.data.orderlist
-                        this.payCount = format(res.data.data.paycount)
-                        this.qiankuan = format(res.data.data.qiankuan)
+                        this.orderList = res.data.data.data
+                        if (res.data.data.count) {
+                            this.itemCount = res.data.data.count
+                        }
                     }
+                }
+            })
+        },
+        getCompnay () {            
+            this.$http.get(this.uris + '/company/getfiltersubcompany', {params: {
+                id: this.userID
+            }})
+            .then(res => {
+                if (res && res.data && res.data.status != 0) {
+                    this.comList = res.data.data
                 }
             })
         }
@@ -122,7 +150,8 @@ export default {
     created () {
         let acount = JSON.parse(sessionStorage.getItem('account'))
         this.userID = acount.id
-        this.getList()     
+        this.getList()
+        this.getCompnay()   
     }
 }
 </script>
@@ -164,43 +193,31 @@ export default {
                 margin-top: 25px;
                 border: 1px solid #ccc;
                 border-radius: 5px;
-                padding: 25px;
+                padding: 25px 25px 0 25px;
                 box-sizing: border-box;
                 display: flex;
                 flex-wrap: wrap;
-                justify-content: flex-start;
+                justify-content: space-between;
                 div{
                     line-height: 35px;
                     span{
                         margin: 0 5px;
                     }
-                    input, select{
-                        height: 35px;
-                        line-height: 33px;
-                        box-sizing: border-box;
-                        padding-left: 15px;
-                        color: #666;
-                        font-size: 14px;
+                    .txt{
                         width: 170px;
-                        border-radius: 3px;
-                        border: 1px solid #ccc;
                     }
                 }
                 .div_mag{
-                    margin-left: 90px;
+                    margin-bottom: 20px;
                 }
                 .div_no{
-                    margin-top: 20px;
                     span{
                         margin: 0 28px 0 0;
                     }
                 }
                 .btn{
-                    position: absolute;
-                    right: 50px;
-                    top: 80px;
                     height: 35px;
-                    line-height: 25px;
+                    line-height: 23px;
                     border-radius: 5px;
                     width: 100px;
                     box-sizing: border-box;

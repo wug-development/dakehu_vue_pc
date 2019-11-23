@@ -6,8 +6,6 @@ html,body{ font-family: "pingfang", "Microsoft YaHei", "SimHei", sans-serif; -we
 a{ text-decoration:none; color: inherit; }
 header,nav,section,article,footer,figure,figcaption{ display:block; }
 ol,ul { margin:0; padding:0; }
-input[type=text],input[type=password],input[type=number],input[type=tel],textarea{ border: 0; height: 100%; }
-textarea{ min-height:70px; line-height: 25px; }
 .clear{clear: both;}
 .boxwidth{ width: 1200px; margin: 0 auto; }
 .pubbtn{ padding: 5px 30px; line-height: 20px; background-color: $pubcolor; text-align: center; color: #fff; cursor: pointer; a{ display: block; height: 100%; } }

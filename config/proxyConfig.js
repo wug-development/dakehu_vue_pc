@@ -1,7 +1,7 @@
 module.exports = {
     proxy: {
         '/apis': {
-            target: 'http://localhost:63844/api/',
+            target: 'http://localhost:63844/api/', // http://dakehuapi.airkx.cn/api/
             changeOrigin: true,
             pathRewrite: {
                 '^/apis': ''

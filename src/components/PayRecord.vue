@@ -8,28 +8,28 @@
                 <div class="money fukuan">
                     <div class="icon-money icon-fukuan"></div>
                     <div>
-                        <div>178,722.00</div>
+                        <div>{{utils.format(account.paycount)}}</div>
                         <span>付款总额</span>
                     </div>
                 </div>
                 <div class="money qiankuan">
                     <div class="icon-money icon-qiankuan"></div>
                     <div>
-                        <div>18,722.00</div>
+                        <div>{{utils.format(account.debt)}}</div>
                         <span>剩余欠款</span>
                     </div>
                 </div>
                 <div class="money xinyong">
                     <div class="icon-money icon-xinyong"></div>
                     <div>
-                        <div>178,722.00</div>
+                        <div>{{utils.format(account.credit, 0, '')}}</div>
                         <span>可用额度</span>
                     </div>
                 </div>
                 <div class="money jiesuan">
                     <div class="icon-money icon-jiesuan"></div>
                     <div>
-                        <div>178,722.00</div>
+                        <div>{{utils.format(account.urgentmoney)}}</div>
                         <span>急需结算金额</span>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
             </div>
             <div class="boxwidth">
                 <div id="page" class="page_div">                    
-                    <el-pagination background layout="prev, pager, next" @current-change="changePage" :total="1000"></el-pagination>
+                    <el-pagination background layout="prev, pager, next" @current-change="changePage" :total="itemCount"></el-pagination>
                 </div>
             </div>
         </div>
@@ -79,8 +79,8 @@ export default {
             uname: '',
             userID: '',
             page: 1,   
-            payCount: 0,
-            qiankuan: 0,
+            itemCount: 0,
+            account: {},
             paylist: []
         }
     },    
@@ -97,16 +97,38 @@ export default {
         getList () {
             this.utils.http({
                 name: this,
-                uri: '/payrecord/getrecordlist',
+                uri: '/payrecord/getPayList',
                 params: {
-                    params: { cid: this.userID}
+                    params: { 
+                        cid: this.userID,
+                        page: this.page,
+                        pagenum: 10
+                    }
                 },
                 success: res=>{
                     console.log(res)
                     if(res.status === 200 && res.data.status === 1){
-                        this.paylist = res.data.data.orderlist
-                        this.payCount = format(res.data.data.paycount)
-                        this.qiankuan = format(res.data.data.qiankuan)
+                        this.paylist = res.data.data.data
+                        if (this.page === 1) {
+                            this.itemCount = res.data.data.pagecount
+                        }
+                    }
+                }
+            })
+        },
+        getAccountInfo () {
+            this.utils.http({
+                name: this,
+                uri: '/company/getCompanyAccount',
+                params: {
+                    params: { 
+                        id: this.userID
+                    }
+                },
+                success: res=>{
+                    if(res.status === 200 && res.data.status === 1){
+                        this.account = res.data.data[0]
+                        console.log(this.account)
                     }
                 }
             })
@@ -117,6 +139,7 @@ export default {
         this.userID = acount.id
         this.uname = acount.uname
         this.getList()
+        this.getAccountInfo()
     }
 }
 </script>

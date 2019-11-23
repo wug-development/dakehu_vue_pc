@@ -7,7 +7,7 @@
             请仔细核对您的订单详情 <span>(取消此订单请联系管理员！)</span>
         </div>
         <div class="boxwidth orderinfo-box-body box-shadow">
-            <div class="icon-back"></div>
+            <div class="icon-back" @click="toBack"></div>
             <div class="gn-box" v-if="orderInfo && orderInfo.dnOrderType == 0">
                 <table class="detail" cellpadding="0" cellspacing="0">
                     <tbody>
@@ -27,7 +27,7 @@
                             <td>起落机场: </td>
                             <td>{{orderInfo.flight[0].dcSPortName}}-{{orderInfo.flight[0].dcEPortName}}</td>
                             <td>票号：</td>
-                            <td>{{orderInfo.dcOrderCode}}</td>
+                            <td>{{orderInfo.dcTicketNO}}</td>
                         </tr>
                         <tr>
                             <td>航班号：</td>
@@ -188,6 +188,11 @@ export default {
         Header,
         Footer,
         Menu
+    },
+    methods: {
+        toBack () {
+            this.$router.go(-1)
+        }
     },
     created () {
         this.orderID = this.$route.query.id

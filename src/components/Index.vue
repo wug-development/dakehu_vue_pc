@@ -52,14 +52,14 @@
                 </thead>
                 <tbody>
                     <tr v-for="(item, i) in orderList" :key="i">
-                        <td>111</td>
-                        <td>111</td>
-                        <td>111</td>
-                        <td>111</td>
-                        <td>111</td>
-                        <td>111</td>
-                        <td>111</td>
-                        <td class="red">111</td>
+                        <td  class="cur" @click="checkInfo(item.dcOrderID)">{{item.dcOrderID}}</td>
+                        <td>{{item.dcLinkName}}</td>
+                        <td>{{item.dcStartDate}}</td>
+                        <td>{{item.dcStartCity}} - {{item.dcBackCity}}</td>
+                        <td>{{item.dcOrderCode}}</td>
+                        <td>{{item.dnTotalPrice}}</td>
+                        <td>{{item.dtAddTime}}</td>
+                        <td>{{item.dnStatus == 1?'处理完成':'等待处理'}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -111,7 +111,8 @@ export default {
                 subc: 0
             },
             dzContent: '',
-            orderList: []
+            orderList: [],
+            page: 1
         }
     },
     components: {
@@ -199,9 +200,9 @@ export default {
                 this.utils.alert(this, '请选择到达城市')
             }else if (this.flightInfo.startTime === "") {
                 this.utils.alert(this, '请选择出发时间')
-            } else if (this.ticketType === 1 && this.flightInfo.endTime === "") {
+            } else if (this.flightType === 1 && this.flightInfo.endTime === "") {
                 this.utils.alert(this, '请选择返回时间')
-            } else if (this.utils.dateTab(this.flightInfo.startTime, this.flightInfo.endTime)) {
+            } else if (this.flightType === 1 && this.utils.dateTab(this.flightInfo.startTime, this.flightInfo.endTime)) {
                 this.utils.alert(this, '返回时间不得早于出发时间')
             } else {
                 this.utils.setItem("scity", this.flightInfo.startCity)
@@ -243,6 +244,29 @@ export default {
                     }
                 })
             }
+        },
+        checkInfo (id) {
+            this.$router.push({
+                path: '/orderdetail?id=' + id
+            })
+        },
+        getNowOrder () {
+            this.utils.http({
+                name: this,
+                uri: '/order/GetNowOrder',
+                params: {
+                    params: {
+                        cid: this.accountInfo.id,
+                        page: this.page,
+                        pagenum: 100
+                    }
+                },
+                success: res=>{
+                    if(res.data.status === 1){
+                        this.orderList = res.data.data.data
+                    }
+                }
+            })
         }
     },
     created () {
@@ -289,6 +313,8 @@ export default {
 
         // 获取城市列表
         getCityList(this)
+
+        this.getNowOrder()
     }
 }
 
@@ -428,7 +454,11 @@ function getEndCityList(vue, data){
                     }
                     .red {
                         color: #f00;
-                    }                 
+                    }
+                    .cur{
+                        color: #22a070;
+                        cursor: pointer;
+                    }              
                 }
             }
         }

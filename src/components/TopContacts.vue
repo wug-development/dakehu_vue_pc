@@ -35,7 +35,7 @@
             </div>
             <div class="boxwidth">
                 <div id="page" class="page_div">
-                    <el-pagination background layout="prev, pager, next" @current-change="changePage" :total="1000"></el-pagination>
+                    <el-pagination background layout="prev, pager, next" @current-change="changePage" :total="itemCount"></el-pagination>
                 </div>
             </div>
         </div>
@@ -53,6 +53,7 @@ export default {
         return {
             personList: '',
             page: 1,
+            itemCount: 0,
             userID: '',
             tname: ''
         }
@@ -65,6 +66,7 @@ export default {
     methods: {
         changePage (v) {
             this.page = v
+            this.getList()
         },
         getList () {
             this.utils.http({
@@ -81,8 +83,10 @@ export default {
                 success: res=>{
                     console.log(res)
                     if(res.status === 200 && res.data.status === 1){
-                        this.personList = res.data.data
-                        // this.pList = res.data.data
+                        this.personList = res.data.data.data
+                        if (this.page === 1) {
+                            this.itemCount = res.data.data.count
+                        }
                     }
                 }
             })
@@ -90,7 +94,8 @@ export default {
     },
     created () {
         let acount = JSON.parse(sessionStorage.getItem('account'))
-        this.userID = acount.id        
+        this.userID = acount.id
+        this.getList()     
     }
 }
 </script>
