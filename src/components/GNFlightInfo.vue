@@ -1,5 +1,5 @@
 <template>
-    <div class="flightinfo-box">
+    <div class="gnflightinfo-box">
         <Header></Header>
         <Menu t="index"></Menu>
         <ProgressBar p="3"></ProgressBar>
@@ -14,7 +14,7 @@
                     </div>
                     <ul class="trip-info">
                         <li>
-                            <div class="air-logo"><img :src="'/static/icons/' + (flight.flightNo.substr(0,2)) + '.gif'" alt="LOGO"></div>
+                            <div class="air-logo"><img :src="'/icons/' + (flight.flightNo.substr(0,2)) + '.gif'" alt="LOGO"></div>
                             <div class="air-company">{{flight.airCompanyName}} {{flight.flightNo}} {{flight.planeType}}</div>
                             <div class="air-port">
                                 <div><span class="air-port-time">{{flight.depTime.substr(0,2) + ':' + flight.depTime.substr(2,2)}}</span> <span>{{flight.sAirPort}}{{flight.orgJetquay || ''}}</span></div>
@@ -378,7 +378,7 @@ export default {
 
 <style lang="scss">
 @import '@/assets/sass/set.scss';
-.flightinfo-box{
+.gnflightinfo-box{
     .person-box-body{
         min-height: 500px;
         padding-bottom: 20px;
@@ -702,6 +702,7 @@ export default {
                         text-align: center;
                         padding: 0;
                         box-sizing: border-box;
+                        border: 0;
                     }
                     input:read-only{
                         background-color: #ebebeb;
@@ -735,6 +736,7 @@ export default {
                 overflow: hidden;
                 input{
                     width: 1100px;
+                    border: 0;
                 }
             }
             .submit{

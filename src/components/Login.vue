@@ -59,6 +59,12 @@ export default {
     },
     created () {
         let that = this
+        let _uname = this.$route.query.uname
+        let _upass = this.$route.query.upass
+        if (_uname && _upass) {
+            this.uname = _uname
+            this.upass = _upass
+        }
         document.onkeypress = function(e) {
             var keycode = document.all ? event.keyCode : e.which
             if (keycode == 13) {

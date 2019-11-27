@@ -246,7 +246,7 @@
                         <div class="tbody-flg">
                             <div class="w26 flg-airinfo flg-flex">
                                 <div>
-                                    <div class="flg-airinfo-logo"><img :src="'/static/icons/' + (item.flightNo.substr(0,2)) + '.gif'" alt=""></div>
+                                    <div class="flg-airinfo-logo"><img :src="'/icons/' + (item.flightNo.substr(0,2)) + '.gif'" alt=""></div>
                                     <div class="flg-airinfo-company">
                                         <div>{{checkAirCompany(item.flightNo.substr(0,2))}}</div> 
                                         <span>机型：<span>{{item.planeType}}</span></span>

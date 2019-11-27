@@ -58,7 +58,7 @@
                         <td>{{item.dcStartCity}} - {{item.dcBackCity}}</td>
                         <td>{{item.dcOrderCode}}</td>
                         <td>{{item.dnTotalPrice}}</td>
-                        <td>{{item.dtAddTime}}</td>
+                        <td>{{item.dtAddTime.replace('T', ' ')}}</td>
                         <td>{{item.dnStatus == 1?'处理完成':'等待处理'}}</td>
                     </tr>
                 </tbody>
@@ -315,6 +315,23 @@ export default {
         getCityList(this)
 
         this.getNowOrder()
+
+        this.$http.get('http://vip.airkx.cn/static/version.json', { params: {}})
+        .then((res) => {
+            let _v = res.data
+            if (typeof(_v) === 'string') {
+                _v = JSON.parse(_v)
+            }
+            
+            let _lv = sessionStorage.getItem('version')
+            if (_lv) {
+                if (_v.v != Number(_lv)) {
+                    window.location.href = 'http://vip.airkx.cn/?v=' + _v.v + '/#/index'
+                }
+            } else {
+                sessionStorage.setItem('version', _v.v)
+            }
+        })
     }
 }
 

@@ -55,7 +55,7 @@
                         </tr>
                         <tr>
                             <td>订单金额: </td>
-                            <td>{{orderInfo.dnTotalPrice}} ( {{orderInfo.dnPrice}}  + 税金 {{orderInfo.dnTax}} )*{{orderInfo.person.length}}人</td>
+                            <td>{{orderInfo.dnTotalPrice}} ( {{orderInfo.dnPrice}}  + 税金 {{orderInfo.dnTax}}  + 服务费 {{orderInfo.dnServicePrice}} + 保险 {{orderInfo.dnSafePrice}})*{{orderInfo.person.length}}人</td>
                             <td>备注：</td>
                             <td>{{orderInfo.dcContent}}</td>
                         </tr>
