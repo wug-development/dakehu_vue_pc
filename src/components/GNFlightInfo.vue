@@ -45,17 +45,16 @@
                         <li v-for="(item, i) in person" :key="i">
                             <div class="cjr">
                                 <span>乘客姓名：</span>
-                                <select name="ddl_person_type">
-                                    <option value="1">成人</option>
-                                    <option value="2">儿童</option>
-                                </select>
+                                <el-select v-model="item.type" placeholder="成人">
+                                    <el-option v-for="p in personType" :key="p" :label="p" :value="p"></el-option>
+                                </el-select>
                                 <input type="text" v-model="item.name" maxlength="50" />
                             </div>
                             <div class="csrq">
                                 <span>证件信息：</span>
-                                <select name="ddl_card" id="">
-                                    <option value="1">身份证</option>
-                                </select>
+                                <el-select v-model="item.cardtype" value-key="value" @change="changeCardType(item)" placeholder="身份证">
+                                    <el-option v-for="t in cardType" :key="t.key" :label="t.value" :value="t.key"></el-option>
+                                </el-select>
                                 <input type="text" v-model="item.idcard" maxlength="50" />
                                 <div class="formnotice"></div>
                             </div>
@@ -84,7 +83,11 @@
                         <label class="pubbtn btn-addpreson" @click="addPerson">+ 乘机人</label>
                         <label class="btn-person">常用乘机人</label>
                     </div>
-                    <div class="moreperson-box">
+                    <div class="div-persearch">
+                        <input type="text" v-model="searchKey" class="txt-search" placeholder="请输入乘机人姓名或手机号" /> 
+                        <div class="btn" @click="searchPer">搜索</div>
+                    </div>
+                    <div class="moreperson-box" v-infinite-scroll="loadMorePer" infinite-scroll-immediate="false">
                         <table>
                             <thead>
                                 <tr>
@@ -98,9 +101,10 @@
                             </thead>
                             <tbody>
                                 <tr v-for="(p, i) in PersonList">
-                                    <td><div :class='"checkbox" + (selP.indexOf(i) > -1? " cur":"")' @click="checkPerson(p, i)"></div></td>
+                                    <td><div :class='"checkbox" + (selP.indexOf(p.id) > -1? " cur":"")' @click="checkPerson(i, p.id)"></div></td>
                                     <td><input type="text" :readonly="isEdit == i ? false : 'readonly'" v-model="p.name" maxlength="20"></td>
-                                    <td><input type="text" style="width:150px;" :readonly="isEdit == i ? false : 'readonly'" v-model="p.idcard" maxlength="20"></td>
+                                    <td v-if="p.idcard"><input type="text" style="width:150px;" :readonly="isEdit == i ? false : 'readonly'" v-model="p.idcard" maxlength="20"></td>
+                                    <td v-else="p.hzh"><input type="text" style="width:150px;" :readonly="isEdit == i ? false : 'readonly'" v-model="p.hzh" maxlength="20"></td>
                                     <td><input type="text" :readonly="isEdit == i ? false : 'readonly'" v-model="p.phone" maxlength="20"></td>
                                     <td><input type="text" :readonly="isEdit == i ? false : 'readonly'" v-model="p.jjphone" maxlength="20"></td>
                                     <td>
@@ -147,28 +151,32 @@ export default {
             seat: {},
             airCompany: [],
             TotalPrice: 0,
+            personType: ['成人', '儿童'],
+            cardType: [],
             selP: [],
             search: {},
             PersonList: '',
             shiliPerson: {
                 name: '',//联系人
-                sex: '',//性别
                 hzh: '',//护照号码
-                hzyxq: '',//护照有效期
-                csrq: '',//出生日期
                 idcard: '',//身份证
                 type: '成人',//类型
                 id: '',
                 phone: '',//手机号
                 jjphone: '',//紧急手机号
-                safenum: '' // 购买保险
+                safenum: '', // 购买保险
+                cardtype: 1, // 1身份证2护照
             },
             person: [],
             pList: [], // 提交订单
             content: '',
             tgqgd: '',
             isEdit: 'null',
-            isSumiting: false
+            isSumiting: false,
+            searchKey: '',
+            page: 0,
+            isMorePer: false,
+            morePerLoading: false
         }
     },
     components: {
@@ -181,41 +189,100 @@ export default {
         checkContent (v) {
             return v.replace(/\n/g,"<br/>")
         },
+        searchPer () {
+            this.page = 0
+            this.isMorePer = false
+            this.loadMorePer()
+        },
+        loadMorePer () {
+            if (!this.morePerLoading && !this.isMorePer) {
+                this.page += 1
+                this.morePerLoading = true
+                this.getPerson()
+            }
+        },
+        changeCardType (item) {
+            if (item.id) {
+                for (let i in this.PersonList) {
+                    if (this.PersonList[i].id === item.id) {
+                        if (item.cardtype === 1) {
+                            item.idcard = this.PersonList[i].idcard
+                        } else if (item.cardtype === 2) {
+                            item.idcard = this.PersonList[i].hzh
+                        }
+                    }
+                }
+            }
+        },
         getPerson () {
             this.$http.get(this.uris + '/passenger/GetPersonList', {params: {
-                cid: this.userID
+                cid: this.userID,
+                page: this.page,
+                pagenum: 20,
+                key: this.searchKey
             }})
             .then(res => {
                 if (res && res.data && res.data.status != 0) {
-                    this.PersonList = res.data.data
-                    for(let i in this.PersonList) {
-                        this.PersonList[i].checked = false
-                        //this.PersonList[i].safenum = 0
-                    }
+                    if (res.data.data.data.length > 0) {
+                        if (res.data.data.pagecount) {
+                            this.PersonList = res.data.data.data
+                            for(let i in this.PersonList) {
+                                this.PersonList[i].checked = false
+                            }
+                        } else {
+                            for (let i in res.data.data.data) {
+                                res.data.data.data[i].checked = false
+                                this.PersonList.push(res.data.data.data[i])
+                            }
+                        }
+                    } else {
+                        this.isMorePer = true
+                    }            
                 }
+                this.morePerLoading = false
             });
         },
-        checkPerson (p, i) {
-            if (this.selP.indexOf(i) > -1) {
-                this.selP.splice(this.selP.indexOf(i), 1)
-                let index = this.person.findIndex(v => {
-                    return v.id === p.id
+        checkPerson (v, id) {
+            let _index = this.selP.indexOf(id)
+            if (_index > -1) {
+                this.selP.splice(_index, 1)
+                let _i = this.person.findIndex(item => {
+                    return item.id === id
                 })
-                this.person.splice(index, 1)
+                this.person.splice(_i, 1)
                 if (this.person.length < 1) {
-                    this.person.push(JSON.parse(JSON.stringify(this.shiliPerson)))
+                    this.addPerson()
                 }
             } else {
-                this.selP.push(i)
-                if (this.person.length === 1 && this.person[0].name === '') {
-                    this.person[0] = p
-                } else {
+                this.selP.push(id)
+                if (this.selP.length) {
+                    let obj = this.PersonList[v]
+                    let _no = obj.idcard
+                    let _t = 1
+                    if (_no.trim() === '' && obj.hzh.trim() !== '') {
+                        _no = obj.hzh
+                        _t = 2
+                    }
+                    let p = {
+                        id: obj.id,
+                        type: obj.type == 1? "成人": "儿童",
+                        name: obj.name,
+                        cardtype: _t,
+                        idcard: _no,
+                        phone: obj.phone,
+                        jjphone: obj.jjphone,
+                        safenum: 0
+                    }
+                    if (this.person.length < 2 && this.person[0].name === '') {
+                        this.person = []
+                    }
+                    console.log(p)
                     this.person.push(p)
                 }
             }
         },
         addPerson () {
-            this.person.push(JSON.stringify(this.shiliPerson))
+            this.person.push(JSON.parse(JSON.stringify(this.shiliPerson)))
         },
         savePerson (p) {
             this.$http.post(this.uris + '/passenger/saveperson', p)
@@ -314,9 +381,11 @@ export default {
         this.userID = _account.id || ''
         this.username = _account.uname
 
-        this.person.push(this.shiliPerson)
+        this.addPerson()
 
-        this.getPerson()
+        this.loadMorePer()
+        
+        this.cardType = this.utils.getCardType()
         
         let scode = this.utils.getItem("scode") || 'PEK'
         let ecode = this.utils.getItem("ecode") || 'LAX'
@@ -604,6 +673,12 @@ export default {
                                 box-sizing: border-box;
                                 padding-left: 10px;
                             }
+                            .el-select{
+                                margin-right: 10px;
+                                .el-input__inner{
+                                    width: 90px;
+                                }
+                            }
                             .formnotice{
                                 font-family: '宋体', sans-serif;
                                 width: 100%;
@@ -642,7 +717,8 @@ export default {
                     right: 25px;
                     padding: 10px 15px;
                     .pubbtn{
-                        padding: 5px 20px;
+                        padding: 5px 0;
+                        width: 60px;
                     }
                 }
             }          
@@ -676,7 +752,21 @@ export default {
                 .btn-person:hover{
                     background-color: #E65D0C;
                 }
-            }   
+            }
+            .div-persearch{
+                position: absolute;
+                top: 45px;
+                right: 150px;
+                display: flex;
+                .txt-search{
+                    width: 240px;
+                    padding-left: 10px;
+                }
+                .btn{
+                    margin-left: 15px;
+                    width: 80px;
+                }
+            }  
             .moreperson-box{
                 position: absolute;
                 top: 100px;
