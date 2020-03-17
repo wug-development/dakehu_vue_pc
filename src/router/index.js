@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/components/Login'
+import Main from '@/components/Main'
 import Index from '@/components/Index'
 import FlightList from '@/components/FlightList'
 import FlightInfo from '@/components/FlightInfo'
@@ -16,8 +16,8 @@ export default new Router({
     routes: [
         {
             path: '/',
-            name: 'Login',
-            component: Login
+            name: 'Main',
+            component: Main
         },
         {
             path: '/index',

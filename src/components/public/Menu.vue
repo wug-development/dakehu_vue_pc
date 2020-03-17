@@ -28,7 +28,7 @@ export default {
         loginout () {
             sessionStorage.setItem('account', '')
             this.$router.push({
-                path: '/login'
+                path: '/'
             })
         }
     },

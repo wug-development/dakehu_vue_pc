@@ -1,8 +1,8 @@
 <template>
-    <div class="login-box">
+    <div class="main-box">
         <Header></Header>
         <div class="boxwidth">
-            <div class="login-body">
+            <div class="main-body">
                 <div class="login-form">
                     <div class="from-title">凯行网企业VIP登陆</div>
                     <input type="text" class="txts" v-model="uname" placeholder="请输入用户名"><br>
@@ -17,11 +17,11 @@
 </template>
 
 <script>
-import Header from './public/Header.vue'
+import Header from './public/MainHeader.vue'
 import Footer from './public/Footer.vue'
 
 export default {
-    name: 'Login',
+    name: 'Main',
     data () {
         return {
             uname: '',
@@ -76,7 +76,7 @@ export default {
 </script>
 
 <style lang="scss">
-.login-body{
+.main-body{
     height: 600px;
     position: relative;
     .login-form{
