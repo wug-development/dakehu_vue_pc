@@ -8,6 +8,8 @@ import Axios from 'axios'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import messagebox from 'element-ui/lib/message-box'
+import Carousel from 'element-ui/lib/carousel'
+import CarouselItem from 'element-ui/lib/carousel-item'
 
 import common from '../common/common'
 
@@ -19,6 +21,9 @@ Vue.prototype.uriw = process.env.APIW_URL
 Vue.prototype.urio = process.env.APIO_URL
 Vue.prototype.utils = common.utils
 Vue.prototype.MessageBox = messagebox
+
+Vue.component(Carousel.name, Carousel)
+Vue.component(CarouselItem.name, CarouselItem)
 
 Vue.use(ElementUI)
 

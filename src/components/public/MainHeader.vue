@@ -3,12 +3,12 @@
         <div class="mh-body">
             <div class="logo"><img src="../../assets/images/logo.png" alt=""></div>
             <nav>
-                <a href="/">首页</a>
-                <a href="">关于我们</a>
-                <a href="">业务板块</a>
-                <a href="">合作伙伴</a>
-                <a href="">政府采购</a>
-                <a href="">联系我们</a>
+                <router-link :to="{path: '/'}">首页</router-link>
+                <router-link :to="{path: '/aboutme'}">关于我们</router-link>
+                <router-link :to="{path: '/business'}">业务板块</router-link>
+                <router-link :to="{path: '/customer'}">合作伙伴</router-link>
+                <router-link :to="{path: '/govpro'}">政府采购</router-link>
+                <router-link :to="{path: '/linkme'}">联系我们</router-link>
             </nav>
             <div class="link-phone">
                 010-84098177 &nbsp;/ &nbsp;18601183533

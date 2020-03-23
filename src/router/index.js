@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/components/Main'
+import Aboutme from '@/components/Aboutme'
+import Business from '@/components/Business'
+import Customer from '@/components/Customer'
+import GovPro from '@/components/GovPro'
+import LinkMe from '@/components/LinkMe'
 import Index from '@/components/Index'
 import FlightList from '@/components/FlightList'
 import FlightInfo from '@/components/FlightInfo'
@@ -18,6 +23,31 @@ export default new Router({
             path: '/',
             name: 'Main',
             component: Main
+        },
+        {
+            path: '/aboutme',
+            name: 'Aboutme',
+            component: Aboutme
+        },
+        {
+            path: '/business',
+            name: 'Business',
+            component: Business
+        },
+        {
+            path: '/customer',
+            name: 'Customer',
+            component: Customer
+        },
+        {
+            path: '/govpro',
+            name: 'GovPro',
+            component: GovPro
+        },
+        {
+            path: '/linkme',
+            name: 'LinkMe',
+            component: LinkMe
         },
         {
             path: '/index',
