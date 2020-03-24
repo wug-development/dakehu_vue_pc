@@ -1,7 +1,7 @@
 <template>
     <div class="main-header-box">
-        <div class="mh-body">
-            <div class="logo"><img src="../../assets/images/logo.png" alt=""></div>
+        <div class="mh-body boxwidth">
+            <div class="logo"><router-link :to="{path: '/'}"><img src="../../assets/images/logo.png" alt=""></router-link></div>
             <nav>
                 <router-link :to="{path: '/'}">首页</router-link>
                 <router-link :to="{path: '/aboutme'}">关于我们</router-link>
@@ -29,8 +29,6 @@ export default {
     height: 82px;
     background-color: #fff;
     .mh-body{
-        width: $body-width;
-        margin: 0 auto; 
         display: flex;
         align-items: center;
         justify-content: space-between;

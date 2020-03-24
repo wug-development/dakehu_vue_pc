@@ -72,7 +72,7 @@
                 </div>
             </div>
         </div>
-        <div class="company-zizhi">
+        <div class="company-zizhi" v-if="showzizhi">
             <div class="boxwidth">
                 <div class="zizhi-title">资质荣誉</div>
                 <div class="zizhi-card">
@@ -108,50 +108,59 @@ export default {
             Percentage: 0,
             Midnum: 5000,
             PercentageTwo: 0,
+            showzizhi: false
         }
     },
     components: {
         Header,
         Footer
     },
-    created () {
-        var NUM_OLD = 918300; //第一个最大数
-        var NUM_NEW = 918397; //最后数据
-        var NUM_PERNEW = 0; //百分数初始值
-        var NUM_PEROLD = 98.8; //百分数最后数据
-        var NUM_MIDNEW = 5000; //初始计算值
-        var NUM_MIDOLD = 5118;
-        var NUM_BFB = 0;
-        var NUM_YS = 0.0;
-        var NUM_BFBNEW = 99;
-        var timer = setInterval(() => {
-            if (NUM_OLD < NUM_NEW) {
-                NUM_OLD++;
-                this.Bignum = NUM_OLD.toLocaleString();
-            } else {
-                NUM_OLD = NUM_NEW;                
-            }
-
-            if (NUM_PERNEW < NUM_PEROLD) {
-                NUM_PERNEW += 1.1;
-                this.Percentage = parseFloat(NUM_PERNEW).toFixed(1)
-            }
-
-            if (NUM_MIDNEW < NUM_MIDOLD) {
-                NUM_MIDNEW++;
-                this.Midnum = NUM_MIDNEW.toLocaleString();
-            }
-            if (NUM_BFB < NUM_BFBNEW) {
-                NUM_BFB++;
-                if(parseInt(NUM_BFB)%10 == 0 && NUM_YS<=0.7){
-                    NUM_YS+=0.1;
+    methods: {
+        loadData () {
+            var NUM_OLD = 918300; //第一个最大数
+            var NUM_NEW = 918397; //最后数据
+            var NUM_PERNEW = 0; //百分数初始值
+            var NUM_PEROLD = 98.8; //百分数最后数据
+            var NUM_MIDNEW = 5000; //初始计算值
+            var NUM_MIDOLD = 5118;
+            var NUM_BFB = 0;
+            var NUM_YS = 0.0;
+            var NUM_BFBNEW = 99;
+            var timer = setInterval(() => {
+                if (NUM_OLD < NUM_NEW) {
+                    NUM_OLD++;
+                    this.Bignum = NUM_OLD.toLocaleString();
+                } else {
+                    NUM_OLD = NUM_NEW;                
                 }
-                this.PercentageTwo = NUM_BFB+NUM_YS;
-            }
-            if(NUM_MIDNEW>=5118){
-                clearInterval(timer)
-            }
-        }, 25);
+
+                if (NUM_PERNEW < NUM_PEROLD) {
+                    NUM_PERNEW += 1.1;
+                    this.Percentage = parseFloat(NUM_PERNEW).toFixed(1)
+                }
+
+                if (NUM_MIDNEW < NUM_MIDOLD) {
+                    NUM_MIDNEW++;
+                    this.Midnum = NUM_MIDNEW.toLocaleString();
+                }
+                if (NUM_BFB < NUM_BFBNEW) {
+                    NUM_BFB++;
+                    if(parseInt(NUM_BFB)%10 == 0 && NUM_YS<=0.7){
+                        NUM_YS+=0.1;
+                    }
+                    this.PercentageTwo = NUM_BFB+NUM_YS;
+                }
+                if(NUM_MIDNEW>=5118){
+                    clearInterval(timer)
+                }
+            }, 25);
+        }
+    },
+    mounted () {
+        setTimeout(() => {
+            this.loadData()
+            this.showzizhi = true
+        }, 1000)
     }
 }
 </script>

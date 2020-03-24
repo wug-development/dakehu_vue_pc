@@ -1,19 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Main from '@/components/Main'
-import Aboutme from '@/components/Aboutme'
-import Business from '@/components/Business'
-import Customer from '@/components/Customer'
-import GovPro from '@/components/GovPro'
-import LinkMe from '@/components/LinkMe'
-import Index from '@/components/Index'
-import FlightList from '@/components/FlightList'
-import FlightInfo from '@/components/FlightInfo'
-import GNFlightInfo from '@/components/GNFlightInfo'
-import OrderList from '@/components/OrderList'
-import OrderInfo from '@/components/OrderInfo'
-import PayRecord from '@/components/PayRecord'
-import TopContacts from '@/components/TopContacts'
 
 Vue.use(Router)
 
@@ -22,72 +8,100 @@ export default new Router({
         {
             path: '/',
             name: 'Main',
-            component: Main
+            component (resolve) {
+                require(['@/components/Main'], resolve)
+            }
         },
         {
             path: '/aboutme',
             name: 'Aboutme',
-            component: Aboutme
+            component (resolve) {
+                require(['@/components/Aboutme'], resolve)
+            }
         },
         {
             path: '/business',
             name: 'Business',
-            component: Business
+            component (resolve) {
+                require(['@/components/Business'], resolve)
+            }
         },
         {
             path: '/customer',
             name: 'Customer',
-            component: Customer
+            component (resolve) {
+                require(['@/components/Customer'], resolve)
+            }
         },
         {
             path: '/govpro',
             name: 'GovPro',
-            component: GovPro
+            component (resolve) {
+                require(['@/components/GovPro'], resolve)
+            }
         },
         {
             path: '/linkme',
             name: 'LinkMe',
-            component: LinkMe
+            component (resolve) {
+                require(['@/components/LinkMe'], resolve)
+            }
         },
         {
             path: '/index',
             name: 'Index',
-            component: Index
+            component (resolve) {
+                require(['@/components/Index'], resolve)
+            }
         },
         {
             path: '/flightlist',
             name: 'FlightList',
-            component: FlightList
+            component (resolve) {
+                require(['@/components/FlightList'], resolve)
+            }
         },
         {
             path: '/flightinfo',
             name: 'FlightInfo',
-            component: FlightInfo
+            component (resolve) {
+                require(['@/components/FlightInfo'], resolve)
+            }
         },
         {
             path: '/gnflightinfo',
             name: 'GNFlightInfo',
-            component: GNFlightInfo
+            component (resolve) {
+                require(['@/components/GNFlightInfo'], resolve)
+            }
         },
         {
             path: '/orderlist',
             name: 'OrderList',
-            component: OrderList
+            component (resolve) {
+                require(['@/components/OrderList'], resolve)
+            }
         },
         {
             path: '/orderdetail',
             name: 'OrderInfo',
-            component: OrderInfo
+            component (resolve) {
+                require(['@/components/OrderInfo'], resolve)
+            }
         },
         {
             path: '/payrecord',
             name: 'PayRecord',
-            component: PayRecord
+            component (resolve) {
+                require(['@/components/PayRecord'], resolve)
+            }
         },
         {
             path: '/topcontacts',
             name: 'TopContacts',
-            component: TopContacts
+            component (resolve) {
+                require(['@/components/TopContacts'], resolve)
+            }
         }
     ]
 })

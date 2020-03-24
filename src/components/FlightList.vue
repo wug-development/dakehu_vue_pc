@@ -763,27 +763,28 @@ function getFightList(vue, param){
                     }
                 }
                 
-                vue.utils.ajax({
-                    uri: 'FindAirComJixingServlet',
+                vue.utils.http({
+                    uri: '/flight/GetJixing',
                     params: {
                         params: {
-                            aircom: JSON.stringify(clist),
-                            jixing: JSON.stringify(alist)
+                            aircom: clist.join(','),
+                            jixing: alist.join(',')
                         }
                     },
                     name: vue,
                     success: regs => {
-                        if(regs.status === 200 && regs.data.airInfo.length > 0){
+                        if(regs.status === 200 && regs.data.data && regs.data.data.airInfo.length > 0){
+                            let _data = regs.data.data
                             len = slist.length
                             for(let i=0; i<len; i++){
                                 let sitem = slist[i]
                                 for(let m=0; m<sitem.length; m++){
-                                    sitem[m].airinfo = regs.data.aircomInfo[i]
+                                    sitem[m].airinfo = _data.aircomInfo[i]
                                 }
                                 if(vue.flightType === 1){
                                     let eitem = elist[i]
                                     for(let n=0; n<eitem.length; n++){
-                                        eitem[n].airinfo = regs.data.aircomInfo[len+i]
+                                        eitem[n].airinfo = _data.aircomInfo[len+i]
                                     }
                                 }
                             }
@@ -791,14 +792,14 @@ function getFightList(vue, param){
                             let m = 0;
                             for(let i=0; i<slist.length; i++){
                                 for(let j in slist[i]){
-                                    slist[i][j].airtype = regs.data.airInfo[m++]
+                                    slist[i][j].airtype = _data.airInfo[m++]
                                 }
                             }
                             vue.startList = compare(slist)
                             if(vue.flightType === 1){
                                 for(let i=0; i<elist.length; i++){
                                     for(let j in elist[i]){
-                                        elist[i][j].airtype = regs.data.airInfo[m++]
+                                        elist[i][j].airtype = _data.airInfo[m++]
                                     }
                                 }
                                 vue.backList = compare(elist)

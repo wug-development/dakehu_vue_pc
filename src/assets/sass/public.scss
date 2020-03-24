@@ -7,7 +7,7 @@ a{ text-decoration:none; color: inherit; }
 header,nav,section,article,footer,figure,figcaption{ display:block; }
 ol,ul { margin:0; padding:0; }
 .clear{clear: both;}
-.boxwidth{ width: 1200px; margin: 0 auto; }
+.boxwidth{ min-width: 1200px; max-width: 1440px; margin: 0 auto; }
 .pubbtn{ padding: 5px 30px; line-height: 20px; background-color: $pubcolor; text-align: center; color: #fff; cursor: pointer; a{ display: block; height: 100%; } }
 .pubbtn:hover{ background-color: $pubcolorhover; } 
 .box-shadow{ box-shadow: 2.4px 2.4px 4px #ddd; }

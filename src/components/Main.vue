@@ -110,52 +110,7 @@
             <div class="cus-title">客户信任</div>
             <div class="cus-dot"></div>
             <ul class="cus-list">
-                <li><img src="../assets/images/icon-logo/comlogo_0.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_1.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_2.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_3.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_4.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_5.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_6.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_7.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_8.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_9.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_10.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_11.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_12.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_13.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_14.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_15.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_16.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_17.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_18.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_19.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_20.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_21.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_22.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_23.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_24.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_25.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_26.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_27.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_28.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_29.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_30.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_31.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_32.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_33.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_34.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_35.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_36.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_37.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_38.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_39.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_40.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_41.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_42.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_43.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_44.png" alt=""></li>
-                <li><img src="../assets/images/icon-logo/comlogo_45.png" alt=""></li>
+                <li v-for="(item, i) in imgcount" :key="i"><img :src='"../assets/images/icon-logo/comlogo_" + i + ".png"' alt=""></li>
             </ul>
         </div>
         <Footer></Footer>
@@ -171,7 +126,8 @@ export default {
     data () {
         return {
             uname: '',
-            upass: ''
+            upass: '',
+            imgcount: 0
         }
     },
     components: {
@@ -216,7 +172,12 @@ export default {
             if (keycode == 13) {
                 that.login()
             }
-        }
+        }        
+    },
+    mounted () {
+        setTimeout(() => {
+            this.imgcount = 46
+        }, 5000)
     }
 }
 </script>
