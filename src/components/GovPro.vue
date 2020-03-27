@@ -101,6 +101,7 @@ export default {
                 width: 290px;
                 height: 422px;
                 box-shadow: 0 0 5px #eee;
+                float: left;
                 .item-img{
                     height: 210px;
                     overflow: hidden;

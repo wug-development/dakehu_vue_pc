@@ -19,6 +19,7 @@
                     </div>
                 </div>
             </div>
+            <div style="clear:both;"></div>
         </div>
         <div class="bus-mod-box">
             <div class="boxwidth">
@@ -34,6 +35,7 @@
                     <img src="../assets/images/bus/bus_gn.jpg" alt="">
                 </div>
             </div>
+            <div style="clear:both;"></div>
         </div>
         <div class="bus-mod-box">
             <div class="boxwidth">
@@ -49,6 +51,7 @@
                     </div>
                 </div>
             </div>
+            <div style="clear:both;"></div>
         </div>
         <div class="bus-mod-box">
             <div class="boxwidth">
@@ -64,6 +67,7 @@
                     <img src="../assets/images/bus/bus_qz.jpg" alt="">
                 </div>
             </div>
+            <div style="clear:both;"></div>
         </div>
         <div class="bus-mod-box">
             <div class="boxwidth">
@@ -79,6 +83,7 @@
                     </div>
                 </div>
             </div>
+            <div style="clear:both;"></div>
         </div>
         <Footer></Footer>
     </div>
@@ -162,9 +167,11 @@ export default {
         }
         .mod-l{
             float: left;
+            max-width: 50%;
         }
         .mod-r{
             float: right;
+            max-width: 50%;
         }
         .mod-l.mod-info{
             padding-right: 40px;

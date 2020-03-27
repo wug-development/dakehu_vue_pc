@@ -65,6 +65,7 @@ export default {
 .mainfooter-box{
     background-color: #212121;
     color: #fff;
+    clear: both;
     .ft-yewu{
         height: 212px;
         display: flex;
@@ -74,6 +75,7 @@ export default {
             width: 300px;
             height: 80px;
             display: flex;
+            float: left;
             .yw-fbkj{
                 background: url('../../assets/images/icon-fbkjfw.png') no-repeat center;
             }
@@ -134,6 +136,7 @@ export default {
         .footer-beianNo{
             color: #888888;
             line-height: 60px;
+            clear: both;
         }
         .card-all{
             margin: 0;
@@ -142,6 +145,7 @@ export default {
                 width: 118px;
                 height: 38px;
                 margin-right: 30px;
+                float: left;
                 a{
                     display: block;
                     width: 100%;

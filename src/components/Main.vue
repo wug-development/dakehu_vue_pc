@@ -112,6 +112,7 @@
             <ul class="cus-list">
                 <li v-for="(item, i) in imgcount" :key="i"><el-image :key='imguri + "/icon-logo/comlogo_" + i + ".png"' :src='imguri + "/icon-logo/comlogo_" + i + ".png"' lazy></el-image></li>
             </ul>
+            <div style="clear:both;"></div>
         </div>
         <Footer></Footer>
     </div>
@@ -192,7 +193,7 @@ export default {
                 that.login()
             }
         }
-        
+
         this.getVersion()     
     }
 }
@@ -328,6 +329,7 @@ export default {
                 padding-top: 52px;
                 box-sizing: border-box;
                 text-align: center;
+                float: left;
                 .icon-gj{
                     background: url('../assets/images/main/icon-bus_gj.png') no-repeat center;
                     height: 94px;
@@ -485,9 +487,12 @@ export default {
             padding: 40px 20px;
             li{
                 float: left;
-                img{
-                    display: block;
-                    width: 142px;
+                .el-image{
+                    height: 58px;
+                    img{
+                        display: block;
+                        width: 142px;
+                    }
                 }
             }
         }

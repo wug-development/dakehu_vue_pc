@@ -5,7 +5,7 @@
             <div class="my-data">
                 <div class="data-title">我们的数据</div>
                 <div class="data-sub-title">2019年1月1日至2020年2月1日，我们的接待数据</div>
-                <div class="data-list">
+                <div class="data-list boxwidth">
                     <div class="data-item">
                         <div class="item-data"><span>{{Bignum}}</span></div>
                         <div class="item-name">累计购票</div>
@@ -188,6 +188,7 @@ export default {
                 font-size: 16px;
                 .data-item{
                     margin: 0 75px;
+                    float: left;
                     .item-data{
                         font-size: 44px;
                         span{

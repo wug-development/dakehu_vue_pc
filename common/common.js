@@ -122,40 +122,40 @@ var utils = {
             //.compvare(defualt.compvare);
         }
     },
-    http(options){
+    http: function(options){
         return this.ajax(options, options.name.uris)
     },
-    alert(vue, content, title){
+    alert: function(vue, content, title){
         return vue.MessageBox(content, title || '温馨提示')
     },
-    checkTel(val){
+    checkTel: function(val){
         return /^(((1[3456789][0-9]{1})|(15[0-9]{1}))+\d{8})$/.test(val)
     },
-    checkEmail(v){
+    checkEmail: function(v){
         return /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(v);
     },
-    englishName(name){
+    englishName: function(name){
         return /^[a-zA-Z\/ ]{2,20}$/.test(name)
     },
-    isNumber(v) {
+    isNumber: function(v) {
         return new RegExp(/^\d+$/).test(v)
     },
-    isEn(v){
+    isEn: function(v){
         return new RegExp(/^[A-Za-z]+$/).test(v)
     },
-    isCn(v){
+    isCn: function(v){
         return new RegExp(/^[\u4e00-\u9fa5]+$/).test(v)
     },
-    isNumberEn(v){
+    isNumberEn: function(v){
         return new RegExp(/^[A-Za-z0-9]+$/).test(v)
     },
-    clearSpace(v){
+    clearSpace: function(v){
         return v.replace(/ /g,'')
     },
-    getAccount(vue){
-        const _account = sessionStorage.getItem('account')
+    getAccount: function(vue){
+        var _account = sessionStorage.getItem('account')
         if (!_account) {
-            vue.MessageBox.alert('请登录').then(() => {
+            vue.MessageBox.alert('请登录').then(function () {
                 vue.$router.push({
                     path: '/'
                 })
@@ -166,7 +166,7 @@ var utils = {
         }
     },
     // 参数：金额，保留几位小数，货币符号，千位分隔符，小数分隔符
-    format (number, places, symbol, thousand, decimal) {
+    format: function (number, places, symbol, thousand, decimal) {
         number = number || 0;
         places = !isNaN(places = Math.abs(places)) ? places : 2;
         symbol = symbol !== undefined ? symbol : "￥";
@@ -177,8 +177,8 @@ var utils = {
             j = (j = i.length) > 3 ? j % 3 : 0;
         return symbol + negative + (j ? i.substr(0, j) + thousand : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousand) + (places ? decimal + Math.abs(number - i).toFixed(places).slice(2) : "");
     },
-    getCardType (v) {
-        let arr = [
+    getCardType: function (v) {
+        var arr = [
             { key: 1, value: '身份证'},
             { key: 2, value: '护照'},
             { key: 3, value: '军官证'},
@@ -187,7 +187,7 @@ var utils = {
             { key: 6, value: '其他'},
         ]
         if (v) {
-            let t = ''
+            var t = ''
             for(var i in arr) {
                 if (arr[i].key === v) {
                     t = arr[i].value
