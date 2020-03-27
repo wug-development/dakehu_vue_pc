@@ -7,19 +7,19 @@
                 <div class="data-sub-title">2019年1月1日至2020年2月1日，我们的接待数据</div>
                 <div class="data-list">
                     <div class="data-item">
-                        <div class="item-data"><span id="big_num">{{Bignum}}</span></div>
+                        <div class="item-data"><span>{{Bignum}}</span></div>
                         <div class="item-name">累计购票</div>
                     </div>
                     <div class="data-item">
-                        <div class="item-data"><span id="percentage">{{Percentage}}</span>%</div>
+                        <div class="item-data"><span>{{Percentage}}</span>%</div>
                         <div class="item-name">出票成功率</div>
                     </div>
                     <div class="data-item">
-                        <div class="item-data"><span id="mid_num">{{Midnum}}</span></div>
+                        <div class="item-data"><span>{{Midnum}}</span></div>
                         <div class="item-name">累计受理申请</div>
                     </div>
                     <div class="data-item">
-                        <div class="item-data"><span id="percentage_two">{{PercentageTwo}}</span>%</div>
+                        <div class="item-data"><span>{{PercentageTwo}}</span>%</div>
                         <div class="item-name">综合通过率</div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
         <div class="company-info company-travel-info">
             <div class="boxwidth aboutme-info-body">
                 <div class="aboutme-info-img">
-                    <img src="../assets/images/zizhi/aboutme_09.png" alt="">
+                    <el-image :key='imguri + "/zizhi/aboutme_09.png"' :src='imguri + "/zizhi/aboutme_09.png"' lazy></el-image>
                 </div>
                 <div class="info-content">
                     <div class="info-title">
@@ -68,25 +68,20 @@
                     <br/>将努力为提高全民素质增进与世界各国人民及社会各界的友好交往和专业交流做出我们应有的贡献。
                 </div>
                 <div class="team-img">
-                    <img src="../assets/images/zizhi/aboutme_13.png" alt="">
+                    <el-image :key='imguri + "/zizhi/aboutme_13.png"' :src='imguri + "/zizhi/aboutme_13.png"' lazy></el-image>
                 </div>
             </div>
         </div>
-        <div class="company-zizhi" v-if="showzizhi">
+        <div class="company-zizhi">
             <div class="boxwidth">
                 <div class="zizhi-title">资质荣誉</div>
                 <div class="zizhi-card">
-                    <div><img src="../assets/images/zizhi/aboutme_17.png" alt=""></div>
-                    <div><img src="../assets/images/zizhi/aboutme_19.jpg" alt=""></div>
-                    <div><img src="../assets/images/zizhi/aboutme_21.png" alt=""></div>
-                    <div><img src="../assets/images/zizhi/aboutme_23.png" alt=""></div>
-                    <div><img src="../assets/images/zizhi/aboutme_25.png" alt=""></div>
-                    <div><img src="../assets/images/zizhi/aboutme_27.png" alt=""></div>
+                    <div v-for="item in zizhis"><el-image :key='imguri + "/zizhi/aboutme_" + item + ".png"' :src='imguri + "/zizhi/aboutme_" + item + ".png"' alt="" lazy></el-image></div>
                 </div>
                 <div class="swiper-container zizhi-cert">
                     <el-carousel indicator-position="outside">
-                        <el-carousel-item v-for="item in 7" :key="item">
-                            <img :src='"../assets/images/gsjx/gsjx" + item + ".png"' alt="">
+                        <el-carousel-item v-for="(item, i) in 7" :key="i">
+                            <el-image :key='imguri + "/gsjx/gsjx" + item + ".png"' :src='imguri + "/gsjx/gsjx" + item + ".png"' alt="" lazy></el-image>
                         </el-carousel-item>
                     </el-carousel>
                 </div>
@@ -108,7 +103,8 @@ export default {
             Percentage: 0,
             Midnum: 5000,
             PercentageTwo: 0,
-            showzizhi: false
+            showzizhi: false,
+            zizhis: [17,19,21,23,25,27]
         }
     },
     components: {
@@ -127,6 +123,7 @@ export default {
             var NUM_YS = 0.0;
             var NUM_BFBNEW = 99;
             var timer = setInterval(() => {
+                console.log(1)
                 if (NUM_OLD < NUM_NEW) {
                     NUM_OLD++;
                     this.Bignum = NUM_OLD.toLocaleString();
@@ -153,13 +150,13 @@ export default {
                 if(NUM_MIDNEW>=5118){
                     clearInterval(timer)
                 }
+                console.log(2)
             }, 25);
         }
     },
     mounted () {
         setTimeout(() => {
             this.loadData()
-            this.showzizhi = true
         }, 1000)
     }
 }

@@ -110,7 +110,7 @@
             <div class="cus-title">客户信任</div>
             <div class="cus-dot"></div>
             <ul class="cus-list">
-                <li v-for="(item, i) in imgcount" :key="i"><img :src='"../assets/images/icon-logo/comlogo_" + i + ".png"' alt=""></li>
+                <li v-for="(item, i) in imgcount" :key="i"><el-image :key='imguri + "/icon-logo/comlogo_" + i + ".png"' :src='imguri + "/icon-logo/comlogo_" + i + ".png"' lazy></el-image></li>
             </ul>
         </div>
         <Footer></Footer>
@@ -127,7 +127,7 @@ export default {
         return {
             uname: '',
             upass: '',
-            imgcount: 0
+            imgcount: 46
         }
     },
     components: {
@@ -157,6 +157,25 @@ export default {
                     }
                 })
             }
+        },
+        getVersion () {
+            this.$http.get('http://www.airkx.cn/static/version.json?v=' + Math.random(), { params: {}})
+            .then((res) => {
+                let _v = res.data
+                if (typeof(_v) === 'string') {
+                    _v = JSON.parse(_v)
+                }
+                
+                let _lv = sessionStorage.getItem('version')
+                if (_lv) {
+                    if (_v.v != Number(_lv)) {
+                        sessionStorage.setItem('version', _v.v)
+                        window.location.href = 'http://www.airkx.cn/?v=' + _v.v + '/#/index'
+                    }
+                } else {
+                    sessionStorage.setItem('version', _v.v)
+                }
+            })
         }
     },
     created () {
@@ -172,12 +191,9 @@ export default {
             if (keycode == 13) {
                 that.login()
             }
-        }        
-    },
-    mounted () {
-        setTimeout(() => {
-            this.imgcount = 46
-        }, 5000)
+        }
+        
+        this.getVersion()     
     }
 }
 </script>

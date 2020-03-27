@@ -267,25 +267,6 @@ export default {
                     }
                 }
             })
-        },
-        getVersion () {
-            this.$http.get('http://vip.airkx.cn/static/version.json?v=' + Math.random(), { params: {}})
-            .then((res) => {
-                let _v = res.data
-                if (typeof(_v) === 'string') {
-                    _v = JSON.parse(_v)
-                }
-                
-                let _lv = sessionStorage.getItem('version')
-                if (_lv) {
-                    if (_v.v != Number(_lv)) {
-                        sessionStorage.setItem('version', _v.v)
-                        window.location.href = 'http://vip.airkx.cn/?v=' + _v.v + '/#/index'
-                    }
-                } else {
-                    sessionStorage.setItem('version', _v.v)
-                }
-            })
         }
     },
     created () {
@@ -334,8 +315,6 @@ export default {
         getCityList(this)
 
         this.getNowOrder()
-
-        this.getVersion()
     }
 }
 

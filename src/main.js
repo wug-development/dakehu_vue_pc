@@ -10,6 +10,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import messagebox from 'element-ui/lib/message-box'
 import Carousel from 'element-ui/lib/carousel'
 import CarouselItem from 'element-ui/lib/carousel-item'
+import Image from 'element-ui/lib/image'
 
 import common from '../common/common'
 
@@ -21,9 +22,11 @@ Vue.prototype.uriw = process.env.APIW_URL
 Vue.prototype.urio = process.env.APIO_URL
 Vue.prototype.utils = common.utils
 Vue.prototype.MessageBox = messagebox
+Vue.prototype.imguri = process.env.IMG_URL
 
 Vue.component(Carousel.name, Carousel)
 Vue.component(CarouselItem.name, CarouselItem)
+Vue.component(Image.name, Image)
 
 Vue.use(ElementUI)
 

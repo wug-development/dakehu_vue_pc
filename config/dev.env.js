@@ -6,5 +6,6 @@ module.exports = merge({
     API_URL: '"/apis"',
     APIM_URL: '"/apim"',
     APIO_URL: '"/apio"',
-    APIW_URL: '"/apiw"'
+    APIW_URL: '"/apiw"',
+    IMG_URL: '"http://vip.airkx.cn"'
 })

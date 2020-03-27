@@ -17,15 +17,22 @@
                 height: 100%;
             }
             .loading{
+                position: relative;
                 height: 100%;
-                background: url('./static/loading.gif') no-repeat center;
                 background-color: #36C3E5;
+            }
+            .loading img{
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                margin-left: -200px;
+                margin-top: -200px;
             }
         </style>
     </head>
     <body>
         <div id="app">
-            <div class="loading"></div>
+            <div class="loading"><img src="http://vip.airkx.cn/loading.gif" alt=""></div>
         </div>
         <!-- built files will be auto injected -->
     </body>
