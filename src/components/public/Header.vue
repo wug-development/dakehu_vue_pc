@@ -1,7 +1,7 @@
 <template>
     <div class="pubheader">
         <div class="pubheader-box">
-            <div class="logo"><img src="../../assets/images/logo.png" alt=""></div>
+            <div class="logo" @click="toHome"><img src="../../assets/images/logo.png" alt=""></div>
             <div class="name-box">
                 <a class="name" id="lab_name">{{uname}}</a>
             </div>
@@ -14,6 +14,13 @@ export default {
     data () {
         return {
             uname: ''
+        }
+    },
+    methods: {
+        toHome () {
+            this.$router.push({
+                path: '/'
+            })
         }
     },
     created () {
@@ -37,6 +44,7 @@ export default {
         .logo{
             float: left;
             padding-top: 8px;
+            cursor: pointer;
         }
         .name-box{
             float: right;

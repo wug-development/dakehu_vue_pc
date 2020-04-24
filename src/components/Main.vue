@@ -46,21 +46,21 @@
                     <div class="item-title">企业月结</div>
                     <div class="item-content">凯行网是中国航协及国际航协批<br/>准设立的一级机票代理机构</div>
                     <div class="item-more">MORE ></div>
-                    <div class="item-btn-more">了解更多 ></div>
+                    <div class="item-btn-more" @click="toQYYJ">了解更多 ></div>
                 </li>
                 <li>
                     <div class="icon-qz"></div>
                     <div class="item-title">签证</div>
                     <div class="item-content">凯行网是中国航协及国际航协批<br/>准设立的一级机票代理机构</div>
                     <div class="item-more">MORE ></div>
-                    <div class="item-btn-more">了解更多 ></div>
+                    <div class="item-btn-more" @click="toVisa">了解更多 ></div>
                 </li>
                 <li>
                     <div class="icon-bx"></div>
                     <div class="item-title">保险</div>
                     <div class="item-content">凯行网是中国航协及国际航协批<br/>准设立的一级机票代理机构</div>
                     <div class="item-more">MORE ></div>
-                    <div class="item-btn-more">了解更多 ></div>
+                    <div class="item-btn-more" @click="toSafe">了解更多 ></div>
                 </li>
             </ul>
         </div>
@@ -71,26 +71,26 @@
                     <div class="ab-title">关于我们</div>
                     <div class="icon-dot"></div>
                     <div class="ab-content">
-                        北京凯行网航空服务有限公司成立于2004年，作为一家专业的机票代理商，与国际国内100余家航空公司建立了良好的销售代理关系。公司秉承诚恳、热情、快捷的服务方式和极具竞争力的价格得到广大客户的信赖，以及社会各界同仁的支持，并与多家留学服务中介机构、科研院所、民间组织、外企商会以及大中型企事业单位签约。
+                        北京凯行网航空服务有限公司成立于2000年，作为一家专业的机票代理商，与国际国内500余家航空公司建立了良好的销售代理关系。公司秉承诚恳、热情、快捷的服务方式和极具竞争力的价格得到广大客户的信赖，以及社会各界同仁的支持，并与多家留学服务中介机构、科研院所、民间组织、外企商会以及大中型企事业单位签约。
                         凯行网机票服务中心每年的出团率达到数百次，在业内名列前茅，树立了凯行网在业内的品牌形象；您的票量越大，凯行网为您争取到的机位票价将更低。
                     </div>
                     <ul class="ab-list">
                         <li>
                             <div class="ab-num">
-                                2004
+                                2000
                                 <span>年</span>
                             </div>
                             <div class="ab-txt">
-                                公司成立于2004年
+                                公司成立于2000年
                             </div>
                         </li>
                         <li>
                             <div class="ab-num num3">
-                                100
+                                500
                                 <span>+</span>
                             </div>
                             <div class="ab-txt">
-                                与国际国内100余家航空公司<br/>建立了良好的销售代理关系
+                                与国际国内500余家航空公司<br/>建立了良好的销售代理关系
                             </div>
                         </li>
                         <li>
@@ -151,7 +151,7 @@ export default {
                     if (res.data.status == '1') {
                         sessionStorage.setItem('account', JSON.stringify(res.data.data[0]))
                         this.$router.push({
-                            path: '/index'
+                            path: '/orderlist'
                         })
                     } else {
                         this.MessageBox(res.data.msg)
@@ -176,6 +176,21 @@ export default {
                 } else {
                     sessionStorage.setItem('version', _v.v)
                 }
+            })
+        },
+        toQYYJ () {
+            this.$router.push({
+                path: '/monthlyknots'
+            })
+        },
+        toVisa () {
+            this.$router.push({
+                path: '/visa'
+            })
+        },
+        toSafe () {
+            this.$router.push({
+                path: '/safe'
             })
         }
     },

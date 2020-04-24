@@ -1,7 +1,7 @@
 <template>
     <div class="flightlist-box">
         <Header></Header>
-        <Menu t="index"></Menu>
+        <Menu t="order"></Menu>
         <ProgressBar p="1"></ProgressBar>
 
         <div v-loading="isLoading">
@@ -139,7 +139,7 @@
                             <div class="w12 flg-more flg-flex">
                                 <div v-if="item.length > 1" class="cur">
                                     <span v-if="showMore === i" @click="showMore = ''">收起</span>
-                                    <span v-else @click="showMore = i">更多航班</span>
+                                    <span v-else @click="showMore = i">更多舱位</span>
                                 </div>
                                 <div v-else>更多航班</div>
                             </div>
@@ -278,7 +278,7 @@
                             </div>
                             <div class="w12 flg-handle flg-flex">
                                 <div class="flg-btn pubbtn" @click="bookFlight(item, item.seatItems[0])">预定</div>
-                                <div v-if="item.seatItems.length > 1" :class='"flg-btn-changecontent" + (selMore == item.flightNo?" flg-btn-more":"")' @click="checkMore(item.flightNo)">更多航班</div>
+                                <div v-if="item.seatItems.length > 1" :class='"flg-btn-changecontent" + (selMore == item.flightNo?" flg-btn-more":"")' @click="checkMore(item.flightNo)">更多舱位</div>
                             </div>
                         </div>
                         <ul class="flg-morelist" v-show="selMore == item.flightNo">

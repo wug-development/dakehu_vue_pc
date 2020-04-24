@@ -102,6 +102,34 @@ export default new Router({
             component (resolve) {
                 require(['@/components/TopContacts'], resolve)
             }
+        },
+        {
+            path: '/monthlyknots',
+            name: 'Monthlyknots',
+            component (resolve) {
+                require(['@/components/Monthlyknots'], resolve)
+            }
+        },
+        {
+            path: '/visa',
+            name: 'Visa',
+            component (resolve) {
+                require(['@/components/Visa'], resolve)
+            }
+        },
+        {
+            path: '/safe',
+            name: 'Safe',
+            component (resolve) {
+                require(['@/components/Safe'], resolve)
+            }
+        },
+        {
+            path: '/agree',
+            name: 'Contracttemplate',
+            component (resolve) {
+                require(['@/components/Contracttemplate'], resolve)
+            }
         }
     ]
 })

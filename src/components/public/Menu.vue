@@ -1,9 +1,9 @@
 <template>
     <div class="pubmenu">
         <ul class="menubox">
-            <li :class="tab=='index'?'cur':''" @click="toPage('index')">机票预订</li>
+            <!-- <li :class="tab=='index'?'cur':''" @click="toPage('index')">机票预订</li> -->
             <li :class="tab=='order'?'cur':''" @click="toPage('orderlist')">订单查询</li>
-            <li :class="tab=='record'?'cur':''" @click="toPage('payrecord')">汇款记录</li>
+            <li :class="tab=='record'?'cur':''" @click="toPage('payrecord')">付款记录</li>
             <li :class="tab=='contact'?'cur':''" @click="toPage('topcontacts')">常用联系人</li>
             <li :class="tab=='credit'?'cur':''">信用额度 <span>（10000）</span></li>
             <li :class="tab=='out'?'cur':''" @click="loginout">退出</li>
@@ -16,7 +16,7 @@ export default {
     props: ['t'],
     data () {
         return {
-            tab: 'index'
+            tab: 'order'
         }
     },
     methods: {

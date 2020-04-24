@@ -39,7 +39,7 @@
                 <div class="payrecord-title">付款记录</div>
                 <table class="table-list" cellpadding="0" cellspacing="0">
                     <thead>
-                        <th>汇款金额</th>
+                        <th>付款金额</th>
                         <th>方式</th>
                         <th>日期</th>
                         <th>付款单位</th>

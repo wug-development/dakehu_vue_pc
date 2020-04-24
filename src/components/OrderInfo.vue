@@ -4,10 +4,10 @@
         <Menu t="order"></Menu>
 
         <div class="boxwidth orderinfo-box-title box-shadow">
-            请仔细核对您的订单详情 <span>(取消此订单请联系管理员！)</span>
+            请仔细核对您的订单详情 <span>(取消此订单请联系客服！)</span>
         </div>
         <div class="boxwidth orderinfo-box-body box-shadow">
-            <div class="icon-back" @click="toBack"></div>
+            <div class="icon-back" @click="toBack">处理该订单客服：{{orderInfo.dcAdminName}}</div>
             <div class="gn-box" v-if="orderInfo && orderInfo.dnOrderType == 0">
                 <table class="detail" cellpadding="0" cellspacing="0">
                     <tbody>
@@ -49,7 +49,7 @@
                         </tr>
                         <tr>
                             <td>折扣：</td>
-                            <td>{{orderInfo.dnDiscount == 1?'全价': (orderInfo.dnDiscount * 10 + '折')}}</td>
+                            <td>{{orderInfo.dnDiscount == 1?'全价': ((orderInfo.dnDiscount * 10).toFixed(2) + '折')}}</td>
                             <td>记录编号：</td>
                             <td>{{orderInfo.dcOrderCode}}</td>
                         </tr>
@@ -256,6 +256,8 @@ export default {
         .icon-back{
             height: 22px;
             background: url('../assets/images/icon-left.png') no-repeat left center;
+            padding-left: 40px;
+            color: #f00;
         }
         .person-list{
             margin-top: 50px;

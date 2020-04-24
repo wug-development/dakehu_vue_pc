@@ -1,7 +1,7 @@
 <template>
     <div class="flightinfo-box">
         <Header></Header>
-        <Menu t="index"></Menu>
+        <Menu t="order"></Menu>
         <ProgressBar p="3"></ProgressBar>
                 
         <div class="person-box-body">
