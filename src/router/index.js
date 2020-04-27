@@ -118,6 +118,27 @@ export default new Router({
             }
         },
         {
+            path: '/visalist',
+            name: 'VisaList',
+            component (resolve) {
+                require(['@/components/Visalist'], resolve)
+            }
+        },
+        {
+            path: '/visainfo',
+            name: 'Visainfo',
+            component (resolve) {
+                require(['@/components/Visainfo'], resolve)
+            }
+        },
+        {
+            path: '/visabook',
+            name: 'Visabook',
+            component (resolve) {
+                require(['@/components/Visabook'], resolve)
+            }
+        },
+        {
             path: '/safe',
             name: 'Safe',
             component (resolve) {
@@ -131,5 +152,12 @@ export default new Router({
                 require(['@/components/Contracttemplate'], resolve)
             }
         }
-    ]
+    ],
+    scrollBehavior (to, from, saveTop) {
+        if (saveTop) {
+            return saveTop
+        } else {
+            return {x: 0, y: 0}
+        }
+    }
 })

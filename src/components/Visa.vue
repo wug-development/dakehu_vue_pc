@@ -12,154 +12,114 @@
             <div class="carousel">
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <img src="../assets/images/visa/lb-03.png" alt="">
-                            <p>
-                                <span>日本签证</span>
-                                <span>
-                                ￥600
-                                <i>起</i>
-                            </span>
-                            </p>
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="../assets/images/visa/lb-01.png" alt="">
-                            <p>
-                                <span>马来西亚签证</span>
-                                <span>
-                                ￥900
-                                <i>起</i>
-                            </span>
-                            </p>
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="../assets/images/visa/lb-02.png" alt="">
-                            <p>
-                                <span>澳大利亚签证</span>
-                                <span>
-                                ￥1200
-                                <i>起</i>
-                            </span>
-                            </p>
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="../assets/images/visa/lb-03.png" alt="">
-                            <p>
-                                <span>日本签证</span>
-                                <span>
-                                ￥600
-                                <i>起</i>
-                            </span>
-                            </p>
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="../assets/images/visa/lb-01.png" alt="">
-                            <p>
-                                <span>马来西亚签证</span>
-                                <span>
-                                ￥900
-                                <i>起</i>
-                            </span>
-                            </p>
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="../assets/images/visa/lb-02.png" alt="">
-                            <p>
-                                <span>澳大利亚签证</span>
-                                <span>
-                                ￥1200
-                                <i>起</i>
-                            </span>
-                            </p>
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="../assets/images/visa/lb-03.png" alt="">
-                            <p>
-                                <span>日本签证</span>
-                                <span>
-                                ￥600
-                                <i>起</i>
-                            </span>
-                            </p>
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="../assets/images/visa/lb-01.png" alt="">
-                            <p>
-                                <span>马来西亚签证</span>
-                                <span>
-                                ￥900
-                                <i>起</i>
-                            </span>
-                            </p>
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="../assets/images/visa/lb-02.png" alt="">
-                            <p>
-                                <span>澳大利亚签证</span>
-                                <span>
-                                ￥1200
-                                <i>起</i>
-                            </span>
-                            </p>
-                        </div>
+                        <el-carousel :interval="5000" arrow="always">
+                            <el-carousel-item v-for="item in 3" :key="item">
+                                <div class="swiper-slide">
+                                    <img src="../assets/images/visa/lb-03.png" alt="">
+                                    <p>
+                                        <span>日本签证</span>
+                                        <span>
+                                        ￥600
+                                        <i>起</i>
+                                    </span>
+                                    </p>
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="../assets/images/visa/lb-01.png" alt="">
+                                    <p>
+                                        <span>马来西亚签证</span>
+                                        <span>
+                                        ￥900
+                                        <i>起</i>
+                                    </span>
+                                    </p>
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="../assets/images/visa/lb-02.png" alt="">
+                                    <p>
+                                        <span>澳大利亚签证</span>
+                                        <span>
+                                        ￥1200
+                                        <i>起</i>
+                                    </span>
+                                    </p>
+                                </div>
+                            </el-carousel-item>
+                        </el-carousel>
                     </div>
-                    <div class="swiper-button-prev swiper-button-black"></div>
-                    <div class="swiper-button-next swiper-button-black"></div>
                 </div>
             </div>
             <div class="order-wrapper">
                 <div class="order-l">
-                    <div class="world-map-wrap">
+                    <div :class='"world-map-wrap " + mapbgclass'>
                         <div class="world-map" id="world_map">
                             <img src="../assets/images/visa/red-r-horn.png" alt="世界地图" usemap="#imgMap">
                             <map name="imgMap" id="imgMap">
-                                <!--<area shape="poly" coords="352,316,358,306，374,300,393,286,416,281,432，276，442，301，450，320，442，342，429,354,412,372,398,349,376,341,351,347,347,344,351,323" href ="#" alt="Venus" />-->
-                                <!--<area id="asia" shape="poly" coords="322 316,371 384,328 348,424 384,474 380,508 330,510 296，454 234,414 232,404 202,400 266,398 276，371 283,321 313" href ="javascript:void(0);" alt="亚洲" />-->
-                                <area id="asia" shape="rect" coords="190,37,442,200" href="javascript:void(0);" alt="Venus" />
-                                <area id="africa" shape="rect" coords="16,143,196,354" href="javascript:void(0);" alt="Venus" />
-                                <area id="europe" shape="rect" coords="37,19,199,138" href="javascript:void(0);" alt="Venus" />
-                                <area id="oceania" shape="rect" coords="338,281,478,378" href="javascript:void(0);" alt="Venus" />
-                                <area id="america" shape="rect" coords="460,18,787,556" href="javascript:void(0);" alt="Venus" />
+                                <area id="asia" shape="rect" coords="190,37,442,200" @click="changeZhou(1)" alt="Venus" />
+                                <area id="africa" shape="rect" coords="16,143,196,354" @click="changeZhou(2)" alt="Venus" />
+                                <area id="europe" shape="rect" coords="37,19,199,138" @click="changeZhou(3)" alt="Venus" />
+                                <area id="oceania" shape="rect" coords="338,281,478,378" @click="changeZhou(4)" alt="Venus" />
+                                <area id="america" shape="rect" coords="460,18,787,556" @click="changeZhou(5)" alt="Venus" />
                             </map>
                         </div>
                         <ul>
-                            <li id="world_asia" style="display: block;">
+                            <li id="world_asia" v-if="showZhow==1">
                                 <div class="world-map-class">
                                     <p>亚洲 Asia</p>
                                     <ul>
-                                        <li></li>
+                                        <li>
+                                            <span v-for="(item, i) in yazhou" :key="i" @click="toPage(item.name)">
+                                                {{item.name}}
+                                            </span>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
-                            <li id="world_europe" style="display: none;">
+                            <li id="world_europe" v-if="showZhow==3">
                                 <div class="world-map-class">
                                     <p>欧洲 Europe</p>
                                     <ul>
-                                        <li></li>
+                                        <li>
+                                            <span v-for="(item, i) in ozhou" :key="i" @click="toPage(item.name)">
+                                                {{item.name}}
+                                            </span>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
-                            <li id="world_africa" style="display: none;">
+                            <li id="world_africa" v-if="showZhow==2">
                                 <div class="world-map-class">
                                     <p>非洲 Africa</p>
                                     <ul>
-                                        <li></li>
+                                        <li>
+                                            <span v-for="(item, i) in feizhou" :key="i" @click="toPage(item.name)">
+                                                {{item.name}}
+                                            </span>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
-                            <li id="world_american" style="display: none;">
+                            <li id="world_american" v-if="showZhow==5">
                                 <div class="world-map-class">
                                     <p>美洲 American</p>
                                     <ul>
-                                        <li></li>
+                                        <li>
+                                            <span v-for="(item, i) in meizhou" :key="i" @click="toPage(item.name)">
+                                                {{item.name}}
+                                            </span>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
-                            <li id="world_oceania" style="display: none;">
+                            <li id="world_oceania" v-if="showZhow==4">
                                 <div class="world-map-class">
                                     <p>大洋洲 Oceania</p>
                                     <ul>
-                                        <li></li>
+                                        <li>
+                                            <span v-for="(item, i) in aozhou" :key="i" @click="toPage(item.name)">
+                                                {{item.name}}
+                                            </span>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
@@ -171,67 +131,66 @@
                     <img src="../assets/images/visa/menu.png" alt="">
                     最新签证订单
                 </h2>
-                    <ul id="messages_wrap">
-                    </ul>
+                    <ul id="messages_wrap" v-html="ulli"></ul>
                 </div>
             </div>
             <div class="hotarea">
                 <h1 class="hotarea-title">热门国家或地区</h1>
                 <div class="hotarea-cont">
                     <ul class="hotarea-nav">
-                        <li class="active-bor-b">热门</li>
-                        <li>亚洲</li>
-                        <li>欧洲</li>
-                        <li>美洲</li>
-                        <li>非洲</li>
-                        <li>大洋洲</li>
+                        <li :class='changeImg === 0 ?"active-bor-b":""' @mouseenter="changeImg=0">热门</li>
+                        <li :class='changeImg === 1 ?"active-bor-b":""' @mouseenter="changeImg=1">亚洲</li>
+                        <li :class='changeImg === 2 ?"active-bor-b":""' @mouseenter="changeImg=2">欧洲</li>
+                        <li :class='changeImg === 3 ?"active-bor-b":""' @mouseenter="changeImg=3">美洲</li>
+                        <li :class='changeImg === 4 ?"active-bor-b":""' @mouseenter="changeImg=4">非洲</li>
+                        <li :class='changeImg === 5 ?"active-bor-b":""' @mouseenter="changeImg=5">大洋洲</li>
                     </ul>
                     <div class="hotarea-sub">
                         <ol class="continent-box">
-                            <li style="display: block;">
-                                <div class="pst-relative">
+                            <li v-if="changeImg === 0">
+                                <div class="pst-relative" @click="toPage('澳大利亚')">
                                     <img src="../assets/images/visa/adly-01.png" alt="" class="imgfir" title="澳大利亚">
                                     <div class="pst-absolute councry-box bjcl-zs">
                                         <span>澳大利亚</span>
                                         <span>签证价格1288MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative mg0">
+                                <div class="pst-relative mg0" @click="toPage('美国')">
                                     <img src="../assets/images/visa/mg-01.png" alt="" class="imgsec" title="美国">
                                     <div class="pst-absolute councry-box bottom_90 bjcl-ac6a00">
                                         <span>美国</span>
                                         <span>签证价格568MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative">
+                                <div class="pst-relative" @click="toPage('日本')">
                                     <img src="../assets/images/visa/rb-01.png" alt="" class="imgthi" title="日本">
                                     <div class="pst-absolute councry-box bottom_90 bjcl-448aca">
                                         <span>日本</span>
                                         <span>签证价格789MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative">
+                                <div class="pst-relative" @click="toPage('韩国')">
                                     <img src="../assets/images/visa/hg-01.png" alt="" class="imgthi" title="韩国">
                                     <div class="pst-absolute councry-box bottom_90 bjcl-fff100">
                                         <span>韩国</span>
                                         <span>签证价格568MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative">
+                                <div class="pst-relative" @click="toPage('意大利')">
                                     <img src="../assets/images/visa/ydl-01.png" alt="" class="imgthi" title="意大利">
                                     <div class="pst-absolute councry-box bjcl-hz bottom_90  ">
                                         <span>意大利</span>
                                         <span>签证价格2288MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative mg0">
+                                <div class="pst-relative mg0" @click="toPage('新西兰')">
                                     <img src="../assets/images/visa/xxl-01.png" alt="" class="imgfor" title="新西兰">
                                     <div class="pst-absolute councry-box bjcl-ll">
                                         <span>新西兰</span>
                                         <span>签证价格1288MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative mg0">
+                                <div class="pst-relative mg0" @click="toPage('澳大利亚')">
                                     <img src="../assets/images/visa/fg-01.png" alt="" class="imgfor" title="澳大利亚">
                                     <div class="pst-absolute councry-box bjcl-zs">
                                         <span>澳大利亚</span>
@@ -239,50 +198,50 @@
                                     </div>
                                 </div>
                             </li>
-                            <li style="display:none;">
-                                <div class="pst-relative">
+                            <li v-if="changeImg === 1">
+                                <div class="pst-relative" @click="toPage('新加坡')">
                                     <img src="../assets/images/visa/ydl-01.png" alt="" class="imgsec" title="新加坡">
                                     <div class="pst-absolute councry-box bjcl-fee905">
                                         <span>新加坡</span>
                                         <span>签证价格2288MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative">
+                                <div class="pst-relative" @click="toPage('菲律宾')">
                                     <img src="../assets/images/visa/xxl-01.png" alt="" class="imgthi" title="菲律宾">
                                     <div class="pst-absolute councry-box bjcl-ff2d00 bottom_90">
                                         <span>菲律宾</span>
                                         <span>签证价格1288MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative">
+                                <div class="pst-relative" @click="toPage('土耳其')">
                                     <img src="../assets/images/visa/fg-01.png" alt="" class="imgthi" title="土耳其">
                                     <div class="pst-absolute councry-box bjcl-6a3f02 bottom_90">
                                         <span>土耳其</span>
                                         <span>签证价格1288MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative mg0">
+                                <div class="pst-relative mg0" @click="toPage('泰国')">
                                     <img src="../assets/images/visa/mg-01.png" alt="" class="imgthi" title="泰国">
                                     <div class="pst-absolute councry-box bottom_90 bjcl-236fef">
                                         <span>泰国</span>
                                         <span>签证价格568MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative nofloat">
+                                <div class="pst-relative nofloat" @click="toPage('马来西亚')">
                                     <img src="../assets/images/visa/rb-01.png" alt="" class="imgsec" title="马来西亚">
                                     <div class="pst-absolute councry-box bottom_90 bjcl-ff00f0">
                                         <span>马来西亚</span>
                                         <span>签证价格789MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative">
+                                <div class="pst-relative" @click="toPage('越南')">
                                     <img src="../assets/images/visa/hg-01.png" alt="" class="imgsec" title="越南">
                                     <div class="pst-absolute councry-box bottom_90 bjcl-00ffff">
                                         <span>越南</span>
                                         <span>签证价格568MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative mg0">
+                                <div class="pst-relative mg0" @click="toPage('蒙古')">
                                     <img src="../assets/images/visa/adly-01.png" alt="" class="imgfir" title="蒙古">
                                     <div class="pst-absolute councry-box bjcl-0aa81c">
                                         <span>蒙古</span>
@@ -290,43 +249,43 @@
                                     </div>
                                 </div>
                             </li>
-                            <li style="display: none">
-                                <div class="pst-relative">
+                            <li v-if="changeImg === 2">
+                                <div class="pst-relative" @click="toPage('白俄罗斯')">
                                     <img src="../assets/images/visa/adly-01.png" alt="" class="imgfif" title="白俄罗斯">
                                     <div class="pst-absolute councry-box bjcl-fee905 bottom_90">
                                         <span>白俄罗斯</span>
                                         <span>签证价格1288MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative mg0">
+                                <div class="pst-relative mg0" @click="toPage('挪威')">
                                     <img src="../assets/images/visa/adly-01.png" alt="" class="imgsix" title="挪威">
                                     <div class="pst-absolute councry-box bjcl-ff00f0 bottom_90">
                                         <span>挪威</span>
                                         <span>签证价格1288MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative">
+                                <div class="pst-relative" @click="toPage('英国')">
                                     <img src="../assets/images/visa/mg-01.png" alt="" class="imgsev" title="英国">
                                     <div class="pst-absolute councry-box bottom_90 bjcl-ff2d00">
                                         <span>英国</span>
                                         <span>签证价格568MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative">
+                                <div class="pst-relative" @click="toPage('德国')">
                                     <img src="../assets/images/visa/rb-01.png" alt="" class="imgsev" title="德国">
                                     <div class="pst-absolute councry-box bottom_90 bjcl-236fef">
                                         <span>德国</span>
                                         <span>签证价格789MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative">
+                                <div class="pst-relative" @click="toPage('瑞士')">
                                     <img src="../assets/images/visa/hg-01.png" alt="" class="imgsev" title="瑞士">
                                     <div class="pst-absolute councry-box bottom_90 bjcl-0aa81c">
                                         <span>瑞士</span>
                                         <span>签证价格568MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative mg0">
+                                <div class="pst-relative mg0" @click="toPage('西班牙')">
                                     <img src="../assets/images/visa/hg-01.png" alt="" class="imgsev" title="西班牙">
                                     <div class="pst-absolute councry-box bottom_90 bjcl-00ffff">
                                         <span>西班牙</span>
@@ -334,36 +293,36 @@
                                     </div>
                                 </div>
                             </li>
-                            <li style="display: none">
-                                <div class="pst-relative">
+                            <li v-if="changeImg === 3">
+                                <div class="pst-relative" @click="toPage('美国')">
                                     <img src="../assets/images/visa/american-01.png" alt="" class="imgeig" title="美国">
                                     <div class="pst-absolute councry-box bottom_90 bjcl-c92415">
                                         <span>美国</span>
                                         <span>签证价格1568MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative">
+                                <div class="pst-relative" @click="toPage('加拿大')">
                                     <img src="../assets/images/visa/american-02.png" alt="" class="imgeig" title="加拿大">
                                     <div class="pst-absolute councry-box bottom_90 bjcl-024dca">
                                         <span>加拿大</span>
                                         <span>签证价格568MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative mg0">
+                                <div class="pst-relative mg0" @click="toPage('秘鲁')">
                                     <img src="../assets/images/visa/american-03.png" alt="" class="imgnen" title="秘鲁">
                                     <div class="pst-absolute councry-box bottom_90 bjcl-56c901">
                                         <span>秘鲁</span>
                                         <span>签证价格568MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative">
+                                <div class="pst-relative" @click="toPage('巴西')">
                                     <img src="../assets/images/visa/american-04.png" alt="" class="imgten" title="巴西">
                                     <div class="pst-absolute councry-box bottom_90 bjcl-c214ab">
                                         <span>巴西</span>
                                         <span>签证价格568MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative mg0">
+                                <div class="pst-relative mg0" @click="toPage('古巴')">
                                     <img src="../assets/images/visa/american-05.png" alt="" class="imgten" title="古巴">
                                     <div class="pst-absolute councry-box bottom_90 bjcl-f6f905">
                                         <span>古巴</span>
@@ -371,36 +330,36 @@
                                     </div>
                                 </div>
                             </li>
-                            <li style="display: none">
-                                <div class="pst-relative">
+                            <li v-if="changeImg === 4">
+                                <div class="pst-relative" @click="toPage('赞比亚')">
                                     <img src="../assets/images/visa/africa-01.png" alt="" class="imgeig" title="赞比亚">
                                     <div class="pst-absolute councry-box bottom_90 bjcl-fecd08">
                                         <span>赞比亚</span>
                                         <span>签证价格568MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative">
+                                <div class="pst-relative" @click="toPage('纳米比亚')">
                                     <img src="../assets/images/visa/africa-02.png" alt="" class="imgnen" title="纳米比亚">
                                     <div class="pst-absolute councry-box bottom_90 bjcl-f94101">
                                         <span>纳米比亚</span>
                                         <span>签证价格568MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative mg0">
+                                <div class="pst-relative mg0" @click="toPage('肯尼亚')">
                                     <img src="../assets/images/visa/africa-03.png" alt="" class="imgeig" title="肯尼亚">
                                     <div class="pst-absolute councry-box bottom_90 bjcl-2887fb">
                                         <span>肯尼亚</span>
                                         <span>签证价格568MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative nofloat1">
+                                <div class="pst-relative nofloat1" @click="toPage('刚果')">
                                     <img src="../assets/images/visa/africa-04.png" alt="" class="imgten" title="刚果">
                                     <div class="pst-absolute councry-box bottom_90 bjcl-2bfe08">
                                         <span>刚果</span>
                                         <span>签证价格568MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative nofloat2">
+                                <div class="pst-relative nofloat2" @click="toPage('埃及')">
                                     <img src="../assets/images/visa/africa-05.png" alt="" class="imgten" title="埃及">
                                     <div class="pst-absolute councry-box bottom_90 bjcl-024dca">
                                         <span>埃及</span>
@@ -408,22 +367,22 @@
                                     </div>
                                 </div>
                             </li>
-                            <li style="display:none;">
-                                <div class="pst-relative">
+                            <li v-if="changeImg === 5">
+                                <div class="pst-relative" @click="toPage('大溪地')">
                                     <img src="../assets/images/visa/oceania-01.png" alt="" class="imgeig" title="大溪地">
                                     <div class="pst-absolute councry-box bottom_90 bjcl-fecd08">
                                         <span>大溪地</span>
                                         <span>签证价格568MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative">
+                                <div class="pst-relative" @click="toPage('澳大利亚')">
                                     <img src="../assets/images/visa/oceania-02.png" alt="" class="imgele" title="澳大利亚">
                                     <div class="pst-absolute councry-box bottom_90 bjcl-2887fb">
                                         <span>澳大利亚</span>
                                         <span>签证价格568MB起</span>
                                     </div>
                                 </div>
-                                <div class="pst-relative mg0">
+                                <div class="pst-relative mg0" @click="toPage('新西兰')">
                                     <img src="../assets/images/visa/oceania-03.png" alt="" class="imgeig" title="新西兰">
                                     <div class="pst-absolute councry-box bottom_90 bjcl-024dca">
                                         <span>新西兰</span>
@@ -533,10 +492,137 @@
 import Header from './public/MainHeader.vue'
 import Footer from './public/MainFooter.vue'
 export default {
-    name: 'Argee',
+    name: 'Visa',
+    data () {
+        return {
+            showZhow: 1,
+            meizhou: [],
+            ozhou: [],
+            yazhou: [],
+            aozhou: [],
+            feizhou: [],
+            mapbgclass: 'map-yazhou',
+            tabli: 1,
+            ulli: '',
+            changeImg: 0
+        }
+    },
     components: {
         Header,
         Footer
+    },
+    methods: {
+        changeZhou (v) {
+            this.showZhow = v
+            if (v === 1) {
+                this.mapbgclass = 'map-yazhou'
+            } else if (v === 2) {
+                this.mapbgclass = 'map-feizhou'
+            } else if (v === 3) {
+                this.mapbgclass = 'map-ozhou'
+            } else if (v === 4) {
+                this.mapbgclass = 'map-aozhou'
+            } else if (v === 5) {
+                this.mapbgclass = 'map-meizhou'
+            } 
+        },
+        toPage (v) {
+            this.$router.push({
+                path: '/visalist?name=' + v
+            })
+        }
+    },
+    created () {        
+        this.$http.get(this.uriw + '/ListCountryServlet', {}).then(res => {
+            console.log(res)
+            if (res.status === 200 && res.data.length > 0) {
+                let d = res.data
+                for (let i = 0; i<d.length; i++) {
+                    if (d[i].location == '美洲') {
+                        this.meizhou.push({name: d[i].name})
+                    } else if (d[i].location == '亚洲') {
+                        this.yazhou.push({name: d[i].name})
+                    } if (d[i].location == '欧洲') {
+                        this.ozhou.push({name: d[i].name})
+                    } if (d[i].location == '非洲') {
+                        this.feizhou.push({name: d[i].name})
+                    } if (d[i].location == '大洋洲') {
+                        this.aozhou.push({name: d[i].name})
+                    } 
+                }
+            }
+        })
+
+        this.ulli = reli(1)
+        setInterval(() => {
+            this.tabli = (this.tabli===1?2:1)
+            this.ulli = reli(this.tabli)
+        }, 2000);
+    }
+}
+
+function reli (v) {
+    var messages_wrapLiFir = '<li>\
+        <p>用户张亚* 132****7321 | 2018-06-01</p>\
+        <span>预订了利比亚商务包签</span>\
+    </li>\
+    <li>\
+        <p>用户王* 131****2321 | 2018-06-01</p>\
+        <span>预订了利比亚商务包签</span>\
+    </li>\
+    <li>\
+        <p>用户白义* 135****2229 | 2018-06-04</p>\
+        <span>预订了利比亚商务包签</span>\
+    </li>\
+    <li>\
+        <p>用户周璐* 137****6621 | 2018-06-04</p>\
+        <span>预订了利比亚商务包签</span>\
+    </li>\
+    <li>\
+        <p>用户王馨* 135****3321 | 2018-06-05</p>\
+        <span>预订了利比亚商务包签</span>\
+    </li>\
+    <li>\
+        <p>用户武* 132****7321 | 2018-06-06</p>\
+        <span>预订了利比亚商务包签</span>\
+    </li>\
+    <li>\
+        <p>用户郑* 132****7321 | 2018-06-06</p>\
+        <span>预订了利比亚商务包签</span>\
+    </li>';
+
+    var messages_wrapLiSec = '<li>\
+        <p>用户陈义* 132****7321 | 2018-06-06</p>\
+        <span>预订了利比亚商务包签</span>\
+    </li>\
+    <li>\
+        <p>用户张亚* 132****7321 | 2018-06-07</p>\
+        <span>预订了利比亚商务包签</span>\
+    </li>\
+    <li>\
+        <p>用户陈义* 132****7321 | 2018-06-07</p>\
+        <span>预订了利比亚商务包签</span>\
+    </li>\
+    <li>\
+        <p>用户张亚* 132****7321 | 2018-06-08</p>\
+        <span>预订了利比亚商务包签</span>\
+    </li>\
+    <li>\
+        <p>用户郑* 132****7321 | 2018-06-11</p>\
+        <span>预订了利比亚商务包签</span>\
+    </li>\
+    <li>\
+        <p>用户周璐* 132****7321 | 2018-06-11</p>\
+        <span>预订了利比亚商务包签</span>\
+    </li>\
+    <li>\
+        <p>用户王馨* 132****7321 | 2018-06-12</p>\
+        <span>预订了利比亚商务包签</span>\
+    </li>';
+    if (v === 1) {
+        return messages_wrapLiFir
+    } else {
+        return messages_wrapLiSec
     }
 }
 </script>
@@ -577,11 +663,11 @@ export default {
         margin-bottom: 20px;
     }
     .carousel .swiper-wrapper{
-        width: 5000px;
+        width: 1200px;
         height: 270px;
         overflow: hidden;
         position: absolute;
-        left: -408px;
+        left: 0;
         top:0;
 
     }
@@ -590,9 +676,18 @@ export default {
         height: 265px;
         float: left;
         border: 1px solid #cccccc;
-        margin-right: 20px;
+        margin-right: 18px;
         border-top:transparent;
         box-shadow: 0 3px 1px #cccccc;
+    }
+    .el-carousel__item .swiper-slide:last-child{
+        margin: 0;
+    }
+    .el-carousel__arrow{
+        background-color: rgba(255,255,255, .4);
+    }
+    .el-carousel__indicators{
+        display: none;
     }
     .carousel .swiper-wrapper img{
         display: inline-block;
@@ -1042,6 +1137,21 @@ export default {
         height: 558px;
         position: relative;
         background: url(../assets/images/visa/map.jpg) no-repeat;
+    }
+    .order-l .map-yazhou{
+        background-position: 0 -1116px;
+    }
+    .order-l .map-feizhou{
+        background-position: 0 -2790px;
+    }
+    .order-l .map-ozhou{
+        background-position: 0 -1674px;
+    }
+    .order-l .map-aozhou{
+        background-position: 0 -2232px;
+    }
+    .order-l .map-meizhou{
+        background-position: 0 -558px;
     }
 
     .world-asia{

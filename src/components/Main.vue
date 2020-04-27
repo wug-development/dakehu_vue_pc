@@ -171,7 +171,7 @@ export default {
                 if (_lv) {
                     if (_v.v != Number(_lv)) {
                         sessionStorage.setItem('version', _v.v)
-                        window.location.href = 'http://www.airkx.cn/?v=' + _v.v + '/#/index'
+                        window.location.href = 'http://www.airkx.cn/?v=' + _v.v + '/#/'
                     }
                 } else {
                     sessionStorage.setItem('version', _v.v)
