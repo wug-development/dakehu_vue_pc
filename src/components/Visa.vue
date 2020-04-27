@@ -1094,9 +1094,9 @@ function reli (v) {
     }
     .q-answers-item>div>img{
         float: left;
-        display: inline-block;
+        display: block;
         width: 30px;
-        -height: 27px;
+        height: 27px;
     }
     .q-answers-item>div>h4{
         display: inline-block;
