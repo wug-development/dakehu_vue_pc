@@ -7,23 +7,25 @@
             <div class="boxwidth contacts-box-body-white">
                 <div class="contacts-title">乘机人查询</div>
                 <div class="contacts-search-box">
-                    <input type="search" placeholder="请输入姓名、公司名称进行搜索" v-model="tname" maxlength="50" />
+                    <input type="search" placeholder="请输入姓名进行搜索" v-model="tname" maxlength="50" />
                     <div class="pubbtn btn" @click="getList">搜索</div>
                 </div>
                 <table class="table-list" cellpadding="0" cellspacing="0">
                     <thead>
                         <th>姓名</th>
-                        <th>公司名称</th>
+                        <th>性别</th>
+                        <th>出生日期</th>
                         <th>乘机人手机</th>
                         <th>紧急人手机</th>
                         <th>证件号码</th>
                         <th>护照号</th>
-                        <th>护照有效期</th>
+                        <th>护照到期日</th>
                     </thead>
                     <tbody>
                         <tr v-for="(item, i) in personList" :key="i">
                             <td>{{item.dcPerName}}</td>
-                            <td>{{item.uname}}</td>
+                            <td>{{item.dcSex}}</td>
+                            <td>{{item.dcBirthday}}</td>
                             <td>{{item.dcPhone}}</td>
                             <td>{{item.dcUrgentPhone}}</td>
                             <td>{{item.dcIDNumber}}</td>

@@ -4,7 +4,7 @@
         <Menu t="record"></Menu>
 
         <div class="payrecord-box-body">
-            <div class="boxwidth payrecord-money-box">
+            <!-- <div class="boxwidth payrecord-money-box">
                 <div class="money fukuan">
                     <div class="icon-money icon-fukuan"></div>
                     <div>
@@ -33,10 +33,10 @@
                         <span>急需结算金额</span>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="boxwidth payrecord-box-body-white">
-                <div class="payrecord-title">付款记录</div>
+                <div class="payrecord-title">付款记录 <span class="sp_paycount">（累计付款：{{utils.format(account.paycount)}}）</span> </div>
                 <table class="table-list" cellpadding="0" cellspacing="0">
                     <thead>
                         <th>付款金额</th>
@@ -207,6 +207,11 @@ export default {
                 height: 20px;
                 line-height: 20px;
                 position: relative;
+                .sp_paycount{
+                    margin-left: 30px;
+                    font-size: 14px;
+                    color: #ff9979;
+                }
             }
             .payrecord-title::before{
                 content: "";

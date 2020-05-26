@@ -1,6 +1,8 @@
 <template>
     <div class="index-box">
-        <div class="banner"></div>
+        <Header></Header>
+        <Menu t="index"></Menu>
+        <ProgressBar p="1"></ProgressBar>
 
         <div class="boxwidth bookbox">
             <div class="tab">
@@ -70,12 +72,14 @@
 <script>
 import Header from './public/Header.vue'
 import Footer from './public/Footer.vue'
+import Menu from './public/Menu.vue'
+import ProgressBar from './public/ProgressBar.vue'
 export default {
     data () {
         return {
             startCity: '',
             endCity: '',
-            flightType: 1,
+            flightType: 0,
             ticketType: 1,
             accountInfo: {
                 id: '',
@@ -117,7 +121,9 @@ export default {
     },
     components: {
         Header,
-        Footer
+        Footer,
+        Menu,
+        ProgressBar
     },
     methods: {
         selCountry (v) {
@@ -137,7 +143,7 @@ export default {
             for (let i=0; i < res.length; i++) {
                 for (let j=0; j < res[i].items.length; j++) {
                     let v = res[i].items[j]
-                    if(v.airportname.indexOf(queryString) > -1 || v.name.indexOf(queryString) > -1 || v.enname.indexOf(queryString.toLocaleUpperCase()) > -1 || v.code.indexOf(queryString) > -1) {
+                    if(v.airportname.indexOf(queryString) > -1 || v.name.indexOf(queryString) > -1 || v.enname.indexOf(queryString.toLocaleUpperCase()) > -1 || v.code.indexOf(queryString.toLocaleUpperCase()) > -1) {
                         v.value = v.airportname + ' ' + v.name + ' ' + v.enname + ' (' + v.code + ') ' + v.country,
                         v.address = ''
                         arr.push(v)
@@ -285,15 +291,15 @@ export default {
         }
 
         let scode = this.utils.getItem("scode") || 'PEK'
-        let ecode = this.utils.getItem("ecode") || 'LAX'
+        let ecode = this.utils.getItem("ecode") || 'CAN' // LAX
         let stime = this.utils.getItem("stime") || this.utils.dateFormat(this.utils.getAfterNDate(1,'d'),'yyyy-MM-dd')
         let etime = this.utils.getItem("etime") || this.utils.dateFormat(this.utils.getAfterNDate(2,'d'),'yyyy-MM-dd')
-        let ttype = this.utils.getItem("ttype") || true
-        let ftype = this.utils.getItem("ftype") || true
+        let ttype = this.utils.getItem("ttype") || false
+        let ftype = this.utils.getItem("ftype") || false
         let scity = this.utils.getItem("scity") || '北京'
-        let ecity = this.utils.getItem("ecity") || '洛杉矶  (加利福尼亚州) '
+        let ecity = this.utils.getItem("ecity") || '广州' // 洛杉矶  (加利福尼亚州) 
         let sflight = this.utils.getItem("sflight") || '北京首都机场'
-        let eflight = this.utils.getItem("eflight") || '洛杉矶国际机场'
+        let eflight = this.utils.getItem("eflight") || '广州白云机场' // 洛杉矶国际机场
         if(ttype == false || ttype == 'false'){
             this.ticketType = 0
         }
@@ -315,6 +321,7 @@ export default {
         getCityList(this)
 
         this.getNowOrder()
+
     }
 }
 
@@ -404,6 +411,10 @@ function getEndCityList(vue, data){
 <style lang="scss">
 @import '@/assets/sass/public.scss';
 .index-box{
+    background: url('../assets/images/passenger-bg.png') no-repeat bottom center;
+    background-size: auto 1200px;
+    min-height: 1200px;
+    box-sizing: border-box;
     .banner{
         background-image: url('../assets/images/banner.png');
         background-repeat: no-repeat;
@@ -414,12 +425,12 @@ function getEndCityList(vue, data){
     }
     .bookbox{
         position: relative;
-        top: -110px;
+        top: 60px;
         @import '@/assets/sass/flightsearch.scss';
     }
     .todayorder{
         position: relative;
-        top: -90px;
+        top: 80px;
         .todayorder-title{
             height: 60px;
             line-height: 60px;

@@ -79,7 +79,8 @@
                             <div class="cjr">
                                 <span>乘机人：</span>
                                 <input type="text" maxlength="50" v-model="item.CjrName" />
-                                <div class="formnotice">例如：zhang/tiantian</div>
+                                <i class="icon-close" v-if="person.length > 1" @click="delPerson(i, item.id)"></i>
+                                <div class="formnotice"></div>
                             </div>
                             <div class="csrq">
                                 <span>出生年月日：</span>
@@ -135,7 +136,9 @@
                                 <tr>
                                     <td></td>
                                     <td>乘机人姓名</td>
+                                    <td>出生日期</td>
                                     <td>护照号码</td>
+                                    <td>护照到期日</td>
                                     <td>乘机人手机</td>
                                     <td>紧急人手机</td>
                                     <td>操作</td>
@@ -145,7 +148,9 @@
                                 <tr v-for="(p, i) in PersonList">
                                     <td><div :class='"checkbox" + (selP.indexOf(i) > -1? " cur":"")' @click="checkPerson(p, i)"></div></td>
                                     <td><input type="text" :readonly="isEdit == i ? false : 'readonly'" v-model="p.CjrName" maxlength="20"></td>
+                                    <td><input type="text" :readonly="isEdit == i ? false : 'readonly'" v-model="p.CSRQ" maxlength="20"></td>
                                     <td><input type="text" :readonly="isEdit == i ? false : 'readonly'" v-model="p.HZH" maxlength="20"></td>
+                                    <td><input type="text" :readonly="isEdit == i ? false : 'readonly'" v-model="p.HZYXQ" maxlength="20"></td>
                                     <td><input type="text" :readonly="isEdit == i ? false : 'readonly'" v-model="p.phone" maxlength="20"></td>
                                     <td><input type="text" :readonly="isEdit == i ? false : 'readonly'" v-model="p.jingji" maxlength="20"></td>
                                     <td>
@@ -269,7 +274,7 @@ export default {
                 id: '',
                 phone: '',//手机号
                 jingji: '',//紧急手机号
-                isSafe: '' // 购买保险
+                isSafe: '0' // 购买保险
             },
             person: [],
             pList: [], // 提交订单
@@ -299,6 +304,7 @@ export default {
                 }
             } else {
                 this.selP.push(i)
+                p.isSafe = '0'
                 if (this.person.length === 1 && this.person[0].CjrName === '') {
                     this.person[0] = p
                 } else {
@@ -308,6 +314,21 @@ export default {
         },
         addPerson () {
             this.person.push(JSON.stringify(this.shiliPerson))
+        },
+        delPerson (i, id) {
+            let _index = this.selP.indexOf(id)
+            if (_index > -1) {
+                this.selP.splice(_index, 1)
+                let _i = this.person.findIndex(item => {
+                    return item.id === id
+                })
+                this.person.splice(_i, 1)
+                if (this.person.length < 1) {
+                    this.addPerson()
+                }
+            } else {                
+                this.person.splice(i, 1)
+            }
         },
         savePerson (p) {
             this.utils.http({
@@ -449,8 +470,8 @@ function checkVal(vue) {
         if(p[i].CSRQ.length > 1){
             age = parseInt(myDate) - parseInt(p[i].CSRQ.substr(0,4))
         }
-        if(p[i].CjrName.length < 1 || p[i].CjrName.length > 20 || !vue.utils.englishName(p[i].CjrName)){
-            vue.utils.alert(vue, '第' + (parseInt(i)+1) + '位乘机人姓名必须是拼音或英文')
+        if(p[i].CjrName.length < 1){ // || p[i].CjrName.length > 20 || !vue.utils.englishName(p[i].CjrName)
+            vue.utils.alert(vue, '请输入第' + (parseInt(i)+1) + '位乘机人姓名')
             ischeck = false
             break
         }else if(p[i].HZH.length < 1){
@@ -723,6 +744,18 @@ function checkVal(vue) {
                                     color: #f00;
                                 }
                             }
+                        }                        
+                        .icon-close{
+                            width: 20px;
+                            height: 20px;
+                            cursor: pointer;
+                            background: url('../assets/images/icon-close.png') no-repeat center;
+                            background-size: 70%;
+                            border-radius: 30px;
+                            border: 2px solid #666;
+                            margin-left: 20px;
+                            position: relative;
+                            top: 5px;
                         }
                     }
                     li:last-child{
@@ -779,7 +812,7 @@ function checkVal(vue) {
                             text-align: center;
                         }
                         input{
-                            width: 120px;
+                            width: 90px;
                             height: 30px;
                             margin: 0 auto;
                             text-align: center;
@@ -788,6 +821,7 @@ function checkVal(vue) {
                         }
                         input:read-only{
                             background-color: #ebebeb;
+                            border: 1px solid #999;
                         }
                         .checkbox{
                             width: 30px;
@@ -804,6 +838,9 @@ function checkVal(vue) {
                         }
                         .btn{
                             cursor: pointer;
+                        }
+                        .pubbtn{
+                            padding: 5px 10px;
                         }
                     }
                 }

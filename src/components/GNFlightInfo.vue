@@ -49,6 +49,7 @@
                                     <el-option v-for="p in personType" :key="p" :label="p" :value="p"></el-option>
                                 </el-select>
                                 <input type="text" v-model="item.name" maxlength="50" />
+                                <i class="icon-close" v-if="person.length > 1" @click="delPerson(i, item.id)"></i>
                             </div>
                             <div class="csrq">
                                 <span>证件信息：</span>
@@ -126,6 +127,7 @@
             <div class="airinfo-layer" v-if='showLayer' @click="closeLayer">
                 <div>
                     您已预订成功，请等待出票！
+                    <span class="layer-btn">确 定</span>
                 </div>
             </div>
         </div>
@@ -164,7 +166,7 @@ export default {
                 id: '',
                 phone: '',//手机号
                 jjphone: '',//紧急手机号
-                safenum: '', // 购买保险
+                safenum: '0', // 购买保险
                 cardtype: 1, // 1身份证2护照
             },
             person: [],
@@ -271,7 +273,7 @@ export default {
                         idcard: _no,
                         phone: obj.phone,
                         jjphone: obj.jjphone,
-                        safenum: 0
+                        safenum: '0'
                     }
                     if (this.person.length < 2 && this.person[0].name === '') {
                         this.person = []
@@ -292,6 +294,21 @@ export default {
                     this.isEdit = 'null'
                 }
             });
+        },
+        delPerson (i, id) {
+            let _index = this.selP.indexOf(id)
+            if (_index > -1) {
+                this.selP.splice(_index, 1)
+                let _i = this.person.findIndex(item => {
+                    return item.id === id
+                })
+                this.person.splice(_i, 1)
+                if (this.person.length < 1) {
+                    this.addPerson()
+                }
+            } else {                
+                this.person.splice(i, 1)
+            }
         },
         submit () {
             if(!this.isSumiting){
@@ -320,7 +337,7 @@ export default {
                             this.utils.setItem('selFlight', '')
                             this.utils.setItem('bookFlightSeat', '')
                         } else {
-                            this.MessageBox("下单失败，请检查数据！", '温馨提示')
+                            this.MessageBox("下单失败，" + res.msg, '温馨提示')
                         }
                         this.isSumiting = false
                     }).catch(res => {
@@ -703,6 +720,18 @@ export default {
                                 }
                             }
                         }
+                        .icon-close{
+                            width: 20px;
+                            height: 20px;
+                            cursor: pointer;
+                            background: url('../assets/images/icon-close.png') no-repeat center;
+                            background-size: 70%;
+                            border-radius: 30px;
+                            border: 2px solid #666;
+                            position: relative;
+                            top: 5px;
+                            margin-left: 20px;
+                        }
                     }
                     li:last-child{
                         border: 0;
@@ -855,15 +884,29 @@ export default {
                 height: 228px;
                 margin-left: -306px;
                 margin-top: -114px;
-                padding: 60px 0 0 80px;
+                padding: 60px 80px;
                 box-sizing: border-box;
                 color: #000;
                 font-family: "黑体", sans-serif;
                 font-size: 30px;
                 background: url('../assets/images/icon_layer_bg.png') no-repeat;
-                background-position: 325px 110px;
+                background-position: 365px 110px;
                 background-color: #fff;
                 border-radius: 10px;
+                .layer-btn{
+                    position: absolute;
+                    width: 100px;
+                    height: 40px;
+                    line-height: 40px;
+                    margin-left: -50px;
+                    color: #fff;
+                    background-color: #22a070;
+                    left: 50%;
+                    bottom: 30px;
+                    text-align: center;
+                    font-size: 18px;
+                    cursor: pointer;
+                }
             }
         }
     }

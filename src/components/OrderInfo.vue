@@ -4,24 +4,33 @@
         <Menu t="order"></Menu>
 
         <div class="boxwidth orderinfo-box-title box-shadow">
+            <i class="icon-back" @click="toBack"></i> 
+            <template v-if="orderInfo.dnStatus == 0">
             请仔细核对您的订单详情 <span>(取消此订单请联系客服！)</span>
+            </template>
+            <template v-else>
+            改期、退票请联系客服专员人工处理
+            </template>
+            <div class="sp_servicer">客服：{{service.name}}&nbsp;&nbsp;{{service.phone}}</div>
         </div>
         <div class="boxwidth orderinfo-box-body box-shadow">
-            <div class="icon-back" @click="toBack">处理该订单客服：{{orderInfo.dcAdminName}}</div>
             <div class="gn-box" v-if="orderInfo && orderInfo.dnOrderType == 0">
                 <table class="detail" cellpadding="0" cellspacing="0">
                     <tbody>
                         <tr>
                             <td>订单号：</td>
-                            <td>{{orderInfo.dcOrderID}}  {{orderInfo.dcLinkName}}</td>
+                            <td>{{orderInfo.dcOrderID}}</td>
                             <td>预订时间 ：</td>
-                            <td>{{orderInfo.dtAddTime}}</td>
+                            <td>
+                                {{orderInfo.dtAddTime}} 
+                            </td> 
                         </tr>
                         <tr>
                             <td>出发日期：</td>
                             <td>{{orderInfo.dcStartDate}}</td>
                             <td>订单状态：</td>
-                            <td>{{orderInfo.dnStatus == 0? '等待处理' : '预定成功'}}</td>
+                            <td v-if="orderInfo.dnStatus == 0" class="icon-wait">等待处理</td>
+                            <td v-else class="icon-success">出票完成</td>
                         </tr>
                         <tr>
                             <td>起落机场: </td>
@@ -39,7 +48,7 @@
                             <td>起落时间：</td>
                             <td>{{orderInfo.flight[0].dcSTime}}-{{orderInfo.flight[0].dcETime}}</td>
                             <td>CTCM：</td>
-                            <td>{{orderInfo.dcCTCM}}</td>
+                            <td>{{orderInfo.dcPhone}}</td>
                         </tr>
                         <tr>
                             <td>舱位：</td>
@@ -181,7 +190,8 @@ export default {
             orderID: '',
             orderInfo: {},
             toFlightList: [],
-            goFlightList: []
+            goFlightList: [],
+            service: {}
         }
     },    
     components: {
@@ -192,6 +202,21 @@ export default {
     methods: {
         toBack () {
             this.$router.go(-1)
+        },
+        getService (v, cid) {
+            this.utils.http({
+                name: this,
+                uri: '/order/getserviceinfo',
+                params: {
+                    params: { id: v, cid: cid}
+                },
+                success: res=>{
+                    console.log(res)
+                    if(res.status === 200 && res.data.status === 1){
+                        this.service = res.data.data[0]
+                    }
+                }
+            })
         }
     },
     created () {
@@ -212,6 +237,9 @@ export default {
                         } else {
                             this.toFlightList.push(this.orderInfo.flight[i])
                         }
+                    }
+                    if (res.data.data.dcAdminID || res.data.data.dcCompanyID) {
+                        this.getService(res.data.data.dcAdminID, res.data.data.dcCompanyID)
                     }
                 }
             }
@@ -237,15 +265,19 @@ export default {
             color: #fe7122;
             font-size: 14px;
         }
-    }
-    .orderinfo-box-title::before{
-        content: "";
-        position: absolute;
-        left: 15px;
-        top: 26px;
-        height: 18px;
-        border: 1.5px solid $pubcolor;
-        box-sizing: border-box;
+        .icon-back{
+            display: block;
+            width: 40px;
+            height: 20px;
+            float: left;
+            cursor: pointer;
+            background: url('../assets/images/icon-left.png') no-repeat left center;
+        }
+        .sp_servicer{
+            float: right;
+            margin-right: 40px;
+            color: #67aef3;
+        }
     }
     .orderinfo-box-body{
         margin-top: 20px;
@@ -297,6 +329,11 @@ export default {
                     border-bottom: 1px solid #ccc;
                     border-right: 1px solid #ccc;
                     box-sizing: border-box;
+                    .sp_servicer{
+                        margin-left: 40px;
+                        color: #307BBE;
+                        font-family: '黑体', sans-serif;
+                    }
                 }
                 td:nth-child(1){
                     border-left: 1px solid #ccc;

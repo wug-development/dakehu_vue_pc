@@ -4,7 +4,7 @@
         <Menu t="order"></Menu>
         
         <div class="orderlist-box-body">
-            <div class="boxwidth bookbox">
+            <!-- <div class="boxwidth bookbox">
                 <div class="tab">
                     <div data-type="gn" @click="selCountry(0)" :class="flightType?'':'cur'">预订国内</div>
                     <div data-type="gj" @click="selCountry(1)" :class="flightType?'cur':''">预订国际</div>
@@ -37,7 +37,7 @@
                         <div class="btn" @click="saveDingzhi">提交</div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="boxwidth orderlist-box-body-white">
                 <div class="orderlist-title">订单查询</div>
                 <div class="orderlist-search-box">
@@ -85,15 +85,16 @@
                         <th>状态</th>
                     </thead>
                     <tbody>
-                        <tr v-for="(item, i) in orderList" :key="i">
-                            <td class="cur" @click="checkInfo(item.OrderID)">{{item.OrderID}}</td>
+                        <tr v-for="(item, i) in orderList" :key="i" @click="checkInfo(item.OrderID)">
+                            <td class="cur">{{item.OrderID}}</td>
                             <td>{{item.name}}</td>
                             <td>{{item.startDate}}</td>
                             <td>{{item.startCity}} - {{item.endCity}}</td>
                             <td>{{item.OrderCode}}</td>
                             <td>{{item.TotalPrice}}</td>
                             <td>{{item.addTime}}</td>
-                            <td>{{item.Status == 1?'处理完成':'等待处理'}}</td>
+                            <td v-if="item.Status == 1" class="icon-success">处理完成</td>
+                            <td v-else class="icon-wait">等待处理</td>
                         </tr>
                     </tbody>
                 </table>
@@ -364,35 +365,35 @@ export default {
             this.accountInfo.id = _user.id
         }
 
-        let scode = this.utils.getItem("scode") || 'PEK'
-        let ecode = this.utils.getItem("ecode") || 'LAX'
-        let stime = this.utils.getItem("stime") || this.utils.dateFormat(this.utils.getAfterNDate(1,'d'),'yyyy-MM-dd')
-        let etime = this.utils.getItem("etime") || this.utils.dateFormat(this.utils.getAfterNDate(2,'d'),'yyyy-MM-dd')
-        let ttype = this.utils.getItem("ttype") || true
-        let ftype = this.utils.getItem("ftype") || true
-        let scity = this.utils.getItem("scity") || '北京'
-        let ecity = this.utils.getItem("ecity") || '洛杉矶  (加利福尼亚州) '
-        let sflight = this.utils.getItem("sflight") || '北京首都机场'
-        let eflight = this.utils.getItem("eflight") || '洛杉矶国际机场'
-        if(ttype == false || ttype == 'false'){
-            this.ticketType = 0
-        }
-        if(ftype == false || ftype == 'false'){
-            this.flightType = 0
-        }
-        this.flightInfo.startCity = scity
-        this.flightInfo.startCityShort = scode
-        this.flightInfo.startCityValue = sflight
-        this.flightInfo.startCityText = sflight + '(' + scode + ')'
-        this.flightInfo.endCity = ecity
-        this.flightInfo.endCityShort = ecode
-        this.flightInfo.endCityValue = eflight
-        this.flightInfo.endCityText = eflight + '(' + ecode + ')'
-        this.flightInfo.startTime = stime
-        this.flightInfo.endTime = etime
+        // let scode = this.utils.getItem("scode") || 'PEK'
+        // let ecode = this.utils.getItem("ecode") || 'LAX'
+        // let stime = this.utils.getItem("stime") || this.utils.dateFormat(this.utils.getAfterNDate(1,'d'),'yyyy-MM-dd')
+        // let etime = this.utils.getItem("etime") || this.utils.dateFormat(this.utils.getAfterNDate(2,'d'),'yyyy-MM-dd')
+        // let ttype = this.utils.getItem("ttype") || true
+        // let ftype = this.utils.getItem("ftype") || true
+        // let scity = this.utils.getItem("scity") || '北京'
+        // let ecity = this.utils.getItem("ecity") || '洛杉矶  (加利福尼亚州) '
+        // let sflight = this.utils.getItem("sflight") || '北京首都机场'
+        // let eflight = this.utils.getItem("eflight") || '洛杉矶国际机场'
+        // if(ttype == false || ttype == 'false'){
+        //     this.ticketType = 0
+        // }
+        // if(ftype == false || ftype == 'false'){
+        //     this.flightType = 0
+        // }
+        // this.flightInfo.startCity = scity
+        // this.flightInfo.startCityShort = scode
+        // this.flightInfo.startCityValue = sflight
+        // this.flightInfo.startCityText = sflight + '(' + scode + ')'
+        // this.flightInfo.endCity = ecity
+        // this.flightInfo.endCityShort = ecode
+        // this.flightInfo.endCityValue = eflight
+        // this.flightInfo.endCityText = eflight + '(' + ecode + ')'
+        // this.flightInfo.startTime = stime
+        // this.flightInfo.endTime = etime
 
-        // 获取城市列表
-        getCityList(this)
+        // // 获取城市列表
+        // getCityList(this)
 
         let acount = JSON.parse(sessionStorage.getItem('account'))
         this.userID = acount.id
@@ -489,7 +490,7 @@ function getEndCityList(vue, data){
     .orderlist-box-body{
         background: url('../assets/images/passenger-bg.png') no-repeat bottom center;
         background-size: auto 1200px;
-        height: 1200px;
+        min-height: 1200px;
         padding-top: 50px;
         box-sizing: border-box;
         .bookbox{
@@ -498,7 +499,6 @@ function getEndCityList(vue, data){
         }
 
         .orderlist-box-body-white{
-            margin-top: 50px;
             background-color: #fff;
             height: 740px;
             box-sizing: border-box;
@@ -557,6 +557,12 @@ function getEndCityList(vue, data){
                 }
             }
             @import '@/assets/sass/tablelist.scss';
+            tr{
+                cursor: pointer;
+            }
+            tr:hover{
+                background-color: #f1f1f1;
+            }
         }
 
         @import '@/assets/sass/page.scss';

@@ -151,7 +151,7 @@ export default {
                     if (res.data.status == '1') {
                         sessionStorage.setItem('account', JSON.stringify(res.data.data[0]))
                         this.$router.push({
-                            path: '/orderlist'
+                            path: '/index'
                         })
                     } else {
                         this.MessageBox(res.data.msg)

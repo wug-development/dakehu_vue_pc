@@ -447,7 +447,7 @@ export default {
                 this.utils.alert(this, '请选择出发时间')
             } else if (this.ticketType === 1 && this.flightInfo.endTime === "") {
                 this.utils.alert(this, '请选择返回时间')
-            } else if (this.utils.dateTab(this.flightInfo.startTime, this.flightInfo.endTime)) {
+            } else if (this.ticketType === 1 && this.utils.dateTab(this.flightInfo.startTime, this.flightInfo.endTime)) {
                 this.utils.alert(this, '返回时间不得早于出发时间')
             } else {
                 this.utils.setItem("scity", this.flightInfo.startCity)
