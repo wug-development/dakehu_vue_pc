@@ -6,8 +6,8 @@
 
         <div class="boxwidth bookbox">
             <div class="tab">
-                <div data-type="gn" @click="selCountry(0)" :class="flightType?'':'cur'">预订国内</div>
-                <div data-type="gj" @click="selCountry(1)" :class="flightType?'cur':''">预订国际</div>
+                <div data-type="gn" @click="selCountry(0)" :class="flightType == 1?'':'cur'">预订国内</div>
+                <div data-type="gj" @click="selCountry(1)" :class="flightType == 1?'cur':''">预订国际</div>
             </div>
             <div class="padding">
                 <div class="menu">
@@ -17,15 +17,15 @@
                 </div>
                 <div class="go-return-box" v-if="ticketType != 2">
                     <div class="out">
-                        <el-autocomplete class="inline-input" :clearable="false" v-model="flightInfo.startCityText" :fetch-suggestions="querySearch" placeholder="出发地" @blur="checkCity(0)" @select="selStartCity" ></el-autocomplete>
+                        <el-autocomplete class="inline-input" :clearable="false" v-model="flightInfo.startCityText" :fetch-suggestions="querySearch" :placeholder="flightInfo.startCityPlaceholder" @blur="checkCity(0)" @select="selStartCity" ></el-autocomplete>
                     </div>
                     <div class="daoda">
-                        <el-autocomplete class="inline-input" :clearable="false" v-model="flightInfo.endCityText" :fetch-suggestions="queryEndSearch" placeholder="出发地" @blur="checkCity(1)" @select="selEndCity" ></el-autocomplete>
+                        <el-autocomplete class="inline-input" :clearable="false" v-model="flightInfo.endCityText" :fetch-suggestions="queryEndSearch" :placeholder="flightInfo.endCityPlaceholder" @blur="checkCity(1)" @select="selEndCity" ></el-autocomplete>
                     </div>
                     <div class="outdate">
                         <el-date-picker v-model="flightInfo.startTime" type="date" value-format="yyyy-MM-dd" placeholder="选择出发日期"> </el-date-picker>
                     </div>
-                    <div class="daodadate" v-show="ticketType">
+                    <div class="daodadate" v-show="flightType == 1 && ticketType">
                         <el-date-picker v-model="flightInfo.endTime" type="date" format="yyyy-MM-dd" value-format="yyyy-MM-dd" placeholder="选择返回日期"> </el-date-picker>
                     </div>
                     <div class="btn" @click="findFlight">搜索</div>
@@ -79,8 +79,8 @@ export default {
         return {
             startCity: '',
             endCity: '',
-            flightType: 0,
-            ticketType: 1,
+            flightType: 0, // 1国际 0国内航线
+            ticketType: 1, // 0直飞 1往返
             accountInfo: {
                 id: '',
                 username: '',
@@ -91,10 +91,12 @@ export default {
                 startCityValue: '',
                 startCityShort: '',
                 startCityText: '',
+                startCityPlaceholder: '出发地',
                 endCity: '',
                 endCityValue: '',
                 endCityShort: '',
                 endCityText: '',
+                endCityPlaceholder: '目的地',
                 startTime: '',
                 endTime: ''
             },
@@ -136,8 +138,15 @@ export default {
             }
             this.flightInfo.endCityText = ''
             this.flightInfo.endCityShort = ''
+            this.flightInfo.endCityValue = ''
+            this.flightInfo.endCityPlaceholder = '目的地'
         },
         querySearch (queryString, cb) {
+            if (queryString.indexOf('(') > 0) {
+                queryString = ''
+                this.flightInfo.startCityText = ''
+                this.flightInfo.startCityPlaceholder = this.flightInfo.startCityValue + '(' + this.flightInfo.startCityShort + ')'
+            }
             let res = this.startCityList
             let arr = []
             for (let i=0; i < res.length; i++) {
@@ -153,6 +162,11 @@ export default {
             cb(arr)
         },
         queryEndSearch (queryString, cb) {
+            if (queryString.indexOf('(') > 0) {
+                queryString = ''
+                this.flightInfo.endCityText = ''
+                this.flightInfo.endCityPlaceholder = this.flightInfo.endCityValue + '(' + this.flightInfo.endCityShort + ')'
+            }
             let res = []
             if (this.flightType) {
                 res = this.gjendCityList
@@ -163,7 +177,7 @@ export default {
             for (let i=0; i < res.length; i++) {
                 for (let j=0; j < res[i].items.length; j++) {
                     let v = res[i].items[j]
-                    if(v.airportname.indexOf(queryString) > -1 || v.name.indexOf(queryString) > -1 || v.enname.indexOf(queryString.toLocaleUpperCase()) > -1 || v.code.indexOf(queryString) > -1) {
+                    if(v.airportname.indexOf(queryString) > -1 || v.name.indexOf(queryString) > -1 || v.enname.indexOf(queryString.toLocaleUpperCase()) > -1 || v.code.indexOf(queryString.toLocaleUpperCase()) > -1) {
                         v.value = v.airportname + ' ' + v.name + ' ' + v.enname + ' (' + v.code + ') ' + v.country,
                         v.address = ''
                         arr.push(v)
@@ -176,11 +190,15 @@ export default {
             if (v) {
                 if (this.flightInfo.endCityText != '' && this.flightInfo.endCityValue) {
                     this.flightInfo.endCityText = this.flightInfo.endCityValue + '(' + this.flightInfo.endCityShort + ')'
+                } else if (this.flightInfo.endCityText == '' && this.flightInfo.endCityValue) {
+                    this.flightInfo.endCityText = this.flightInfo.endCityValue + '(' + this.flightInfo.endCityShort + ')'
                 } else {
                     this.flightInfo.endCityText = ''
                 }
             } else {
                 if (this.flightInfo.startCityText != '' && this.flightInfo.startCityValue) {
+                    this.flightInfo.startCityText = this.flightInfo.startCityValue + '(' + this.flightInfo.startCityShort + ')'
+                } else if (this.flightInfo.startCityText == '' && this.flightInfo.startCityValue) {
                     this.flightInfo.startCityText = this.flightInfo.startCityValue + '(' + this.flightInfo.startCityShort + ')'
                 } else {
                     this.flightInfo.startCityText = ''
@@ -219,8 +237,8 @@ export default {
                 this.utils.setItem("eflight", this.flightInfo.endCityValue)
                 this.utils.setItem("stime", this.flightInfo.startTime)
                 this.utils.setItem("etime", this.flightInfo.endTime)
-                this.utils.setItem("ttype", this.ticketType)
-                this.utils.setItem("ftype", this.flightType)
+                this.utils.setItem("ttype", this.ticketType == 1)
+                this.utils.setItem("ftype", this.flightType == 1)
                 this.$router.push({
                     path: '/flightlist'
                 })
@@ -273,6 +291,39 @@ export default {
                     }
                 }
             })
+        },
+        getDefaultData () {
+            let scode = this.utils.getItem("scode") || 'PEK'
+            let ecode = this.utils.getItem("ecode") || 'CAN' // LAX
+            let stime = this.utils.getItem("stime") || this.utils.dateFormat(this.utils.getAfterNDate(1,'d'),'yyyy-MM-dd')
+            let etime = this.utils.getItem("etime") || this.utils.dateFormat(this.utils.getAfterNDate(2,'d'),'yyyy-MM-dd')
+            let ttype = this.utils.getItem("ttype") || false
+            let ftype = this.utils.getItem("ftype") || false
+            let scity = this.utils.getItem("scity") || '北京'
+            let ecity = this.utils.getItem("ecity") || '广州' // 洛杉矶  (加利福尼亚州) 
+            let sflight = this.utils.getItem("sflight") || '北京首都机场'
+            let eflight = this.utils.getItem("eflight") || '广州白云机场' // 洛杉矶国际机场
+            console.log(ttype, ftype)
+            if(ttype == false || ttype == 'false'){
+                this.ticketType = 0
+            } else {
+                this.ticketType = 1
+            }
+            if(ftype == false || ftype == 'false'){
+                this.flightType = 0
+            } else {
+                this.flightType = 1
+            }
+            this.flightInfo.startCity = scity
+            this.flightInfo.startCityShort = scode
+            this.flightInfo.startCityValue = sflight
+            this.flightInfo.startCityText = sflight + '(' + scode + ')'
+            this.flightInfo.endCity = ecity
+            this.flightInfo.endCityShort = ecode
+            this.flightInfo.endCityValue = eflight
+            this.flightInfo.endCityText = eflight + '(' + ecode + ')'
+            this.flightInfo.startTime = stime
+            this.flightInfo.endTime = etime
         }
     },
     created () {
@@ -290,32 +341,7 @@ export default {
             this.accountInfo.id = _user.id
         }
 
-        let scode = this.utils.getItem("scode") || 'PEK'
-        let ecode = this.utils.getItem("ecode") || 'CAN' // LAX
-        let stime = this.utils.getItem("stime") || this.utils.dateFormat(this.utils.getAfterNDate(1,'d'),'yyyy-MM-dd')
-        let etime = this.utils.getItem("etime") || this.utils.dateFormat(this.utils.getAfterNDate(2,'d'),'yyyy-MM-dd')
-        let ttype = this.utils.getItem("ttype") || false
-        let ftype = this.utils.getItem("ftype") || false
-        let scity = this.utils.getItem("scity") || '北京'
-        let ecity = this.utils.getItem("ecity") || '广州' // 洛杉矶  (加利福尼亚州) 
-        let sflight = this.utils.getItem("sflight") || '北京首都机场'
-        let eflight = this.utils.getItem("eflight") || '广州白云机场' // 洛杉矶国际机场
-        if(ttype == false || ttype == 'false'){
-            this.ticketType = 0
-        }
-        if(ftype == false || ftype == 'false'){
-            this.flightType = 0
-        }
-        this.flightInfo.startCity = scity
-        this.flightInfo.startCityShort = scode
-        this.flightInfo.startCityValue = sflight
-        this.flightInfo.startCityText = sflight + '(' + scode + ')'
-        this.flightInfo.endCity = ecity
-        this.flightInfo.endCityShort = ecode
-        this.flightInfo.endCityValue = eflight
-        this.flightInfo.endCityText = eflight + '(' + ecode + ')'
-        this.flightInfo.startTime = stime
-        this.flightInfo.endTime = etime
+        this.getDefaultData()
 
         // 获取城市列表
         getCityList(this)
