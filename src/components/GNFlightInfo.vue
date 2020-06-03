@@ -337,7 +337,7 @@ export default {
                             this.utils.setItem('selFlight', '')
                             this.utils.setItem('bookFlightSeat', '')
                         } else {
-                            this.MessageBox("下单失败，" + res.msg, '温馨提示')
+                            this.MessageBox("下单失败 " + (res.msg || ''), '温馨提示')
                         }
                         this.isSumiting = false
                     }).catch(res => {

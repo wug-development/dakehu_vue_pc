@@ -10,7 +10,7 @@
                     <div class="menu">
                         <div @click="ticketType = 0" :class="'go' + (ticketType == 0?' cur':'')">单程</div>
                         <div v-if="flightType" @click="ticketType = 1" :class="'return' + (ticketType == 1?' cur':'')">往返</div>
-                        <div @click="ticketType = 2" :class="'made' + (ticketType == 2?' cur':'')">定制</div>
+                        <div @click="ticketType = 2" :class="'made' + (ticketType == 2?' cur':'')" style="display:none">定制</div>
                     </div>
                     <div class="go-return-box" v-if="ticketType != 2">
                         <div class="out">
@@ -31,7 +31,7 @@
                         <div class="text-box">
                             <textarea id="txt_made" cols="30" rows="10" placeholder="请尽量详细描述您的航班需求，以便我们能更好为您量身设计行程！"></textarea>
                         </div>
-                        <div class="btn">搜索</div>
+                        <div class="btn">提交</div>
                     </div>
                 </div>
             </div>
@@ -487,6 +487,7 @@ export default {
                         'type': this.ticketType
                     }
                 }
+                this.dataList = []
                 if (this.flightInfo.ticketType) {
                     getFightList(this, param)
                 } else {
