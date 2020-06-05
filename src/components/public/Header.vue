@@ -27,7 +27,7 @@ export default {
         const _account = sessionStorage.getItem('account')
         if (_account) {
             let _user = JSON.parse(_account)
-            this.uname = _user.uname
+            this.uname = _user.allname
         }
     }
 }
