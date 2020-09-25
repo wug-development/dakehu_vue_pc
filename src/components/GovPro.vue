@@ -13,22 +13,22 @@
             </div>
             <ul class="zfcg-list boxwidth">
                 <li class="zfcg-item">
-                    <div class="item-img"><img src="../assets/images/img-xy.png" alt="凯行网"></div>
+                    <div class="item-img"><img :src='IMGW_URL + "img-xy.png"' alt="凯行网"></div>
                     <div class="item-title">可靠的信用资质</div>
                     <div class="item-content">我公司是政府采购机票的定点单位，具备国际航协及国内航协的认可资质，同时具有中航鑫港公司的政府采购机票担保函</div>
                 </li>
                 <li class="zfcg-item">
-                    <div class="item-img"><img src="../assets/images/img-cg.png" alt="凯行网"></div>
+                    <div class="item-img"><img :src='IMGW_URL + "img-cg.png"' alt="凯行网"></div>
                     <div class="item-title">公务机票采购优惠</div>
                     <div class="item-content">各政府部门、科学院校、医院等事业单位。持有公务卡的公务员、老师、医生等相关人员；在我单位购买机票可享受全价票<span>8.8</span>折，折扣票<span>9.5</span>折的优惠</div>
                 </li>
                 <li class="zfcg-item">
-                    <div class="item-img"><img src="../assets/images/img-zf.png" alt="凯行网"></div>
+                    <div class="item-img"><img :src='IMGW_URL + "img-zf.png"' alt="凯行网"></div>
                     <div class="item-title">公务卡简捷支付</div>
                     <div class="item-content">购买机票可以使用公务卡进行网上无卡支付，我们也可以上门刷卡支付</div>
                 </li>
                 <li class="zfcg-item">
-                    <div class="item-img"><img src="../assets/images/img-yj.png" alt="凯行网"></div>
+                    <div class="item-img"><img :src='IMGW_URL + "img-yj.png"' alt="凯行网"></div>
                     <div class="item-title">可签约月结服务</div>
                     <div class="item-content">我公司提供政府单位签约进行<span>先</span>乘机<span>后</span>付款月结服务</div>
                 </li>
@@ -56,6 +56,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/assets/sass/set.scss';
 .govpro-box{
     margin: 0;
     overflow: hidden;
@@ -63,7 +64,7 @@ export default {
     background-color: #fff;
     .banner-govpro-box{
         height: 557px;
-        background: url('../assets/images/gov-banner.jpg') no-repeat center;
+        background: url($imguri + 'gov-banner.jpg') no-repeat center;
         color: #fff;
         text-align: center;
         .banner-title{

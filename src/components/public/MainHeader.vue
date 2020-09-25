@@ -1,7 +1,7 @@
 <template>
     <div class="main-header-box">
         <div class="mh-body boxwidth">
-            <div class="logo"><router-link :to="{path: '/'}"><img src="../../assets/images/logo.png" alt=""></router-link></div>
+            <div class="logo"><router-link :to="{path: '/'}"><img :src='IMGW_URL + "logo.png"' alt=""></router-link></div>
             <nav>
                 <router-link :to="{path: '/'}">首页</router-link>
                 <router-link :to="{path: '/aboutme'}">关于我们</router-link>

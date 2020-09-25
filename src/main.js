@@ -6,8 +6,8 @@ import App from './App'
 import router from './router'
 import Axios from 'axios'
 
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+// import ElementUI from 'element-ui';
+// import 'element-ui/lib/theme-chalk/index.css';
 import messagebox from 'element-ui/lib/message-box'
 import Carousel from 'element-ui/lib/carousel'
 import CarouselItem from 'element-ui/lib/carousel-item'
@@ -24,12 +24,14 @@ Vue.prototype.urio = process.env.APIO_URL
 Vue.prototype.utils = common.utils
 Vue.prototype.MessageBox = messagebox
 Vue.prototype.imguri = process.env.IMG_URL
+Vue.prototype.IMGICON_URL = process.env.IMGICON_URL
+Vue.prototype.IMGW_URL = process.env.IMGW_URL
 
 Vue.component(Carousel.name, Carousel)
 Vue.component(CarouselItem.name, CarouselItem)
 Vue.component(Image.name, Image)
 
-Vue.use(ElementUI)
+// Vue.use(ElementUI)
 
 /* eslint-disable no-new */
 new Vue({

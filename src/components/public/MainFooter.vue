@@ -49,7 +49,7 @@
                 <div class="card card-shiming"><a href="https://www.anquan.org/seccenter/search/www.airkx.com" target="_blank"></a></div>
             </div>
             <div class="img-code">
-                <img src="../../assets/images/icon-code.png" alt="凯行网企业公众号">
+                <img :src='IMGW_URL + "icon-code.png"' alt="凯行网企业公众号">
             </div>
         </div>
     </div>
@@ -62,6 +62,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/assets/sass/set.scss';
 .mainfooter-box{
     background-color: #212121;
     color: #fff;
@@ -77,16 +78,16 @@ export default {
             display: flex;
             float: left;
             .yw-fbkj{
-                background: url('../../assets/images/icon-fbkjfw.png') no-repeat center;
+                background: url($imguri + 'icon-fbkjfw.png') no-repeat center;
             }
             .yw-lhjszq{
-                background: url('../../assets/images/icon-lhjszq.png') no-repeat center;
+                background: url($imguri + 'icon-lhjszq.png') no-repeat center;
             }
             .yw-ppys{
-                background: url('../../assets/images/icon-ppys.png') no-repeat center;
+                background: url($imguri + 'icon-ppys.png') no-repeat center;
             }
             .yw-kxwys{
-                background: url('../../assets/images/icon-kxwys.png') no-repeat center;
+                background: url($imguri + 'icon-kxwys.png') no-repeat center;
             }
             .yw-icon{
                 width: 80px;
@@ -125,11 +126,11 @@ export default {
                 float: left;
             }
             .footer-tel{
-                background: url('../../assets/images/icon-footer-tel.png') no-repeat left center;
+                background: url($imguri + 'icon-footer-tel.png') no-repeat left center;
                 background-size: 23px auto;
             }
             .footer-addr{
-                background: url('../../assets/images/icon-footer-addr.png') no-repeat left center;
+                background: url($imguri + 'icon-footer-addr.png') no-repeat left center;
                 background-size: 24px auto;
             }
         }
@@ -153,19 +154,19 @@ export default {
                 }
             }
             .card-zzrz{
-                background: url('../../assets/images/card-zzrz.png') no-repeat left center;
+                background: url($imguri + 'card-zzrz.png') no-repeat left center;
             }
             .card-cata{
-                background: url('../../assets/images/card-cata.png') no-repeat left center;
+                background: url($imguri + 'card-cata.png') no-repeat left center;
             }
             .card-beian{
-                background: url('../../assets/images/card-beian.png') no-repeat left center;
+                background: url($imguri + 'card-beian.png') no-repeat left center;
             }
             .card-webbeian{
-                background: url('../../assets/images/card-webbeian.png') no-repeat left center;
+                background: url($imguri + 'card-webbeian.png') no-repeat left center;
             }
             .card-shiming{
-                background: url('../../assets/images/card-shiming.png') no-repeat left center;
+                background: url($imguri + 'card-shiming.png') no-repeat left center;
             }
         }
         .img-code{

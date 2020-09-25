@@ -488,7 +488,7 @@ function getEndCityList(vue, data){
 @import '@/assets/sass/set.scss';
 .orderlist-box{
     .orderlist-box-body{
-        background: url('../assets/images/passenger-bg.png') no-repeat bottom center;
+        background: url($imguri + 'passenger-bg.png') no-repeat bottom center;
         background-size: auto 1200px;
         min-height: 1200px;
         padding-top: 50px;

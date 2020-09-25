@@ -271,7 +271,7 @@ export default {
             height: 20px;
             float: left;
             cursor: pointer;
-            background: url('../assets/images/icon-left.png') no-repeat left center;
+            background: url($imguri + 'icon-left.png') no-repeat left center;
         }
         .sp_servicer{
             float: right;
@@ -287,7 +287,7 @@ export default {
         box-sizing: border-box;
         .icon-back{
             height: 22px;
-            background: url('../assets/images/icon-left.png') no-repeat left center;
+            background: url($imguri + 'icon-left.png') no-repeat left center;
             padding-left: 40px;
             color: #f00;
         }

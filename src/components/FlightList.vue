@@ -53,7 +53,7 @@
                     <li class="tbody" v-for="(item, i) in startList" :key="i">
                         <div class="tbody-flg">
                             <div class="w15 flg-company flg-flex">
-                                <div><img :src="item[0].airinfo.Picture" alt=""></div>
+                                <div><img :src="IMGICON_URL + item[0].airinfo.Picture" alt=""></div>
                                 <div>{{item[0].airinfo.CompanyName}}</div>
                             </div>
                             <div class="w60">
@@ -246,7 +246,7 @@
                         <div class="tbody-flg">
                             <div class="w26 flg-airinfo flg-flex">
                                 <div>
-                                    <div class="flg-airinfo-logo"><img :src="'/icons/' + (item.flightNo.substr(0,2)) + '.gif'" alt=""></div>
+                                    <div class="flg-airinfo-logo"><img :src="IMGICON_URL + (item.flightNo.substr(0,2)) + '.gif'" alt=""></div>
                                     <div class="flg-airinfo-company">
                                         <div>{{checkAirCompany(item.flightNo.substr(0,2))}}</div> 
                                         <span>机型：<span>{{item.planeType}}</span></span>
@@ -1008,7 +1008,7 @@ function getEndCityList(vue, data){
             color: #000;            
             .icon-go{
                 width: 40px;
-                background: url('../assets/images/icon_list_go.png') no-repeat;
+                background: url($imguri + 'icon_list_go.png') no-repeat;
                 background-position: center;                
             }
             .s{
@@ -1109,7 +1109,7 @@ function getEndCityList(vue, data){
                     }
                 }
                 .flg-icon{
-                    background: url('../assets/images/icon_list_goback.png') no-repeat;
+                    background: url($imguri + 'icon_list_goback.png') no-repeat;
                     background-position: center;
                 }
                 .flg-more{

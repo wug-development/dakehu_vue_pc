@@ -106,7 +106,7 @@ export default {
 @import '@/assets/sass/set.scss';
 .contacts-box{
     .contacts-box-body{
-        background: url('../assets/images/passenger-bg.png') no-repeat bottom center;
+        background: url($imguri + 'passenger-bg.png') no-repeat bottom center;
         background-size: auto 978px;
         height: 978px;
         padding-top: 50px;

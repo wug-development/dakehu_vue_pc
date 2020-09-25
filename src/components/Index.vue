@@ -437,12 +437,12 @@ function getEndCityList(vue, data){
 <style lang="scss">
 @import '@/assets/sass/public.scss';
 .index-box{
-    background: url('../assets/images/passenger-bg.png') no-repeat bottom center;
+    background: url($imguri + 'passenger-bg.png') no-repeat bottom center;
     background-size: auto 1200px;
     min-height: 1200px;
     box-sizing: border-box;
     .banner{
-        background-image: url('../assets/images/banner.png');
+        background-image: url($imguri + 'banner.png');
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;

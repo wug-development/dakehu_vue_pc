@@ -33,32 +33,32 @@
             color: $pubcolor;
         }
         .go{
-            background: url('../assets/images/icon_book_go.png') no-repeat;
+            background: url($imguri + 'icon_book_go.png') no-repeat;
             background-position: 5px center;
             background-size: 24px auto;
         }
         .go.cur{
-            background: url('../assets/images/icon_book_go_cur.png') no-repeat;
+            background: url($imguri + 'icon_book_go_cur.png') no-repeat;
             background-position: 5px center;
             background-size: 24px auto;
         }
         .return{
-            background: url('../assets/images/icon_book_return.png') no-repeat;
+            background: url($imguri + 'icon_book_return.png') no-repeat;
             background-position: 5px center;
             background-size: 24px auto;
         }
         .return.cur{
-            background: url('../assets/images/icon_book_return_cur.png') no-repeat;
+            background: url($imguri + 'icon_book_return_cur.png') no-repeat;
             background-position: 5px center;
             background-size: 24px auto;
         }
         .made{
-            background: url('../assets/images/icon_book_made.png') no-repeat;
+            background: url($imguri + 'icon_book_made.png') no-repeat;
             background-position: 5px center;
             background-size: 24px auto;
         }
         .made.cur{
-            background: url('../assets/images/icon_book_made_cur.png') no-repeat;
+            background: url($imguri + 'icon_book_made_cur.png') no-repeat;
             background-position: 5px center;
             background-size: 24px auto;
         }
@@ -105,13 +105,13 @@
             }
         }
         .out{
-            background: url('../assets/images/icon_book_out.png') no-repeat;
+            background: url($imguri + 'icon_book_out.png') no-repeat;
             background-position: 208px center;
             background-size: 20px auto;
         }
         .daoda{
             position: relative;
-            background: url('../assets/images/icon_book_destination.png') no-repeat;
+            background: url($imguri + 'icon_book_destination.png') no-repeat;
             background-position: 208px center;
             background-size: 20px auto;
         }
@@ -123,17 +123,17 @@
             display: block;
             width: 20px;
             height: 20px;
-            background: url('../assets/images/icon_goback.png') no-repeat;
+            background: url($imguri + 'icon_goback.png') no-repeat;
             background-position: center center;
             background-size: 20px auto;
         }
         .outdate{
-            background: url('../assets/images/icon_book_outdate.png') no-repeat;
+            background: url($imguri + 'icon_book_outdate.png') no-repeat;
             background-position: 208px center;
             background-size: 20px auto;
         }
         .daodadate{
-            background: url('../assets/images/icon_book_outdate.png') no-repeat;
+            background: url($imguri + 'icon_book_outdate.png') no-repeat;
             background-position: 208px center;
             background-size: 20px auto;
         }

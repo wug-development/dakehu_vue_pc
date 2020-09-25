@@ -2,7 +2,7 @@
     <div class="pubfooter">
         <div class="footer-box">
             <div class="footerbox-beian">
-                <div><img src="../../assets/images/beian_icon.png" alt=""></div>
+                <div><img :src='IMGW_URL + "beian_icon.png"' alt=""></div>
                 <div>互联网站<br>备案信息</div>
             </div>
             <div class="footerbox-info">
@@ -20,6 +20,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/assets/sass/set.scss';
 .pubfooter{
     background-color: #fff;
     height: 120px;

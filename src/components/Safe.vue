@@ -94,7 +94,7 @@
                         <li>
                             <div class="safeguard_title">保障详情</div>
                             <div class="safeguard-details">
-                                <img src="../assets/images/safe/bzxq_01.png" alt="">
+                                <img :src='IMGW_URL + "safe/bzxq_01.png"' alt="">
                                 <ul>
                                     <li>
                                         <p>全球救援服务</p>
@@ -119,7 +119,7 @@
                             <div class="safeguard_title">预订须知</div>
                             <div class="reservation-notes">
                                 <p>网上预定保险方便快捷，只需三步流程，帮您买到你想要的保险。</p>
-                                <img src="../assets/images/safe/bj_zu_01.png" alt="">
+                                <img :src='IMGW_URL + "safe/bj_zu_01.png"' alt="">
                                 <div class="line"></div>
                                 <ul class="notes-list">
                                     <li>
@@ -183,21 +183,21 @@
                             <div class="common-problem">
                                 <div class="list">
                                     <div>
-                                        <img src="../assets/images/safe/wen_01.png" alt="">
+                                        <img :src='IMGW_URL + "safe/wen_01.png"' alt="">
                                         <span> 多人出行必须分多次为每人投保吗？</span>
                                     </div>
                                     <div>
-                                        <img src="../assets/images/safe/da_01.png" alt="">
+                                        <img :src='IMGW_URL + "safe/da_01.png"' alt="">
                                         <span>不需要哦。您一次最多可为30人投保，我们将为每位被保险人单独出具保单。如需为多于30人投保，可在确认30人保险信息并生成投保申请号后关闭页面，重新填写其他人的投保信息后进入网站会员专区，将待支付保单合并支付，多张保单，只支付一次，为您的投保节省时间。</span>
                                     </div>
                                 </div>
                                 <div class="list">
                                     <div>
-                                        <img src="../assets/images/safe/wen_01.png" alt="">
+                                        <img :src='IMGW_URL + "safe/wen_01.png"' alt="">
                                         <span> 主要责任可能会排除的内容有哪些？</span>
                                     </div>
                                     <div>
-                                        <img src="../assets/images/safe/da_01.png" alt="">
+                                        <img :src='IMGW_URL + "safe/da_01.png"' alt="">
                                         <span>
                                             1、任何以出国治疗为目的的行为。<br>
                                             2、战争、军事行动、武装叛乱或内乱。<br>
@@ -210,11 +210,11 @@
                                 </div>
                                 <div class="list">
                                     <div>
-                                        <img src="../assets/images/safe/wen_01.png" alt="">
+                                        <img :src='IMGW_URL + "safe/wen_01.png"' alt="">
                                         <span>  享受保障的具体前提？</span>
                                     </div>
                                     <div>
-                                        <img src="../assets/images/safe/da_01.png" alt="">
+                                        <img :src='IMGW_URL + "safe/da_01.png"' alt="">
                                         <span>
                                             一、凡身体健康，年满2周岁到70周岁且符合下列条件之一的合法出境人员，均可作为本保险的被保人 <br>
                                               （1）中国公民、香港、澳门、台湾居民还需在境内有经常居住地且持有中国政府部门签发的合法有效的大陆通行证或者就业证。<br>
@@ -228,11 +228,11 @@
                                 </div>
                                 <div class="list">
                                     <div>
-                                        <img src="../assets/images/safe/wen_01.png" alt="">
+                                        <img :src='IMGW_URL + "safe/wen_01.png"' alt="">
                                         <span>  如何申请保险金？ </span>
                                     </div>
                                     <div>
-                                        <img src="../assets/images/safe/da_01.png" alt="">
+                                        <img :src='IMGW_URL + "safe/da_01.png"' alt="">
                                         <span>
                                             若被保险人在境外出险，请在旅行结束后向本公司索取《理赔申请书》。填写表格后，携带保险单、护照原件及相关索赔文件，到我公司申请理赔，如果委托他人还需被保险人出具《委托授权书》并亲笔签名。相关索赔文件包括：<br>
                                             （1）若被保险人发生保险事故责任范围内的身故，还需要当地使、领馆及医院出具被保险人死亡公证书及有关死亡处理或遗体遣返费用的交费收据。<br>
@@ -243,11 +243,11 @@
                                 </div>
                                 <div class="list">
                                     <div>
-                                        <img src="../assets/images/safe/wen_01.png" alt="">
+                                        <img :src='IMGW_URL + "safe/wen_01.png"' alt="">
                                         <span>无法实施保障和救援的国家有哪些？ </span>
                                     </div>
                                     <div>
-                                        <img src="../assets/images/safe/da_01.png" alt="">
+                                        <img :src='IMGW_URL + "safe/da_01.png"' alt="">
                                         <span>
                                             欧 洲：波黑地区、巴尔干地区；<br>
                                             亚 洲：阿富汗、伊拉克、Cocos lslands、东帝汶、英属印度洋领域；<br>
@@ -259,11 +259,11 @@
                                 </div>
                                 <div class="list">
                                     <div>
-                                        <img src="../assets/images/safe/wen_01.png" alt="">
+                                        <img :src='IMGW_URL + "safe/wen_01.png"' alt="">
                                         <span>我买保险是用于办理签证的，购买的时候应该注意哪些事项？</span>
                                     </div>
                                     <div>
-                                        <img src="../assets/images/safe/da_01.png" alt="">
+                                        <img :src='IMGW_URL + "safe/da_01.png"' alt="">
                                         <span>
                                             1. 为了使您的签证更加顺利，建议您选择旅行日期时延长2天的出行天数。（一般情况下意大利要求前后各延长2天，比利时使馆要求结尾延长2天。具体天数请以领事馆要求或者信件通知为准）。<br>
                                             2. 我们将为每位被保险人单独出具保单。<br>
@@ -274,11 +274,11 @@
                                 </div>
                                 <div class="list">
                                     <div>
-                                        <img src="../assets/images/safe/wen_01.png" alt="">
+                                        <img :src='IMGW_URL + "safe/wen_01.png"' alt="">
                                         <span>什么是旅行延误，怎么理赔？</span>
                                     </div>
                                     <div>
-                                        <img src="../assets/images/safe/da_01.png" alt="">
+                                        <img :src='IMGW_URL + "safe/da_01.png"' alt="">
                                         <span>
                                             境外旅行期间，因公共交通工具延误每5小时赔偿300元（5小时起赔），最多赔偿1200元。记得向公共交通运营商索取延误证明哦。
                                         </span>
@@ -310,6 +310,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/assets/sass/set.scss';
 .safe-box{
     .banner{
         width: 100%;
@@ -324,7 +325,7 @@ export default {
         position: absolute;
         left: 0;
         top:0;
-        background-image: url(../assets/images/safe/bx_banner_01_01.png);
+        background-image: url($imguri + 'safe/bx_banner_01_01.png');
         background-repeat: no-repeat;
         background-position: right top;
     }
@@ -334,7 +335,7 @@ export default {
         position: absolute;
         right: 0;
         top:0;
-        background-image: url(../assets/images/safe/bx_banner_01_02.png);
+        background-image: url($imguri + 'safe/bx_banner_01_02.png');
         background-repeat: no-repeat;
         background-position: left top;
     }
@@ -486,7 +487,7 @@ export default {
     .product-features{
         width: 100%;
         height: 290px;
-        background: url("../assets/images/safe/bj_cptd_01.png") no-repeat left;
+        background: url($imguri + 'safe/bj_cptd_01.png') no-repeat left;
     }
     .product-features .text{
         float: right;
@@ -523,7 +524,7 @@ export default {
         height: 192px;
         margin-top: 50px;
         text-align: right;
-        background: url("../assets/images/safe/bj_bzxq_01.png") no-repeat center;
+        background: url($imguri + 'safe/bj_bzxq_01.png') no-repeat center;
     }
     .safeguard-details ul li{
         display: inline-block;
@@ -540,7 +541,7 @@ export default {
         height: 30px;
         line-height: 30px;
         font-size: 18px;
-        background: url("../assets/images/safe/tj_01.png") no-repeat left;
+        background: url($imguri + 'safe/tj_01.png') no-repeat left;
     }
     .reservation-notes{
         width: 100%;
@@ -576,7 +577,7 @@ export default {
         width: 19px;
         height: 13px;
         line-height: 13px;
-        background: url("../assets/images/safe/bj_square_01.png") no-repeat center;
+        background: url($imguri + "safe/bj_square_01.png") no-repeat center;
     }
     .notes-list li span{
         font-size: 14px;

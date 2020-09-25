@@ -236,6 +236,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/assets/sass/set.scss';
 .argee-box{
     margin: 0;
     overflow: hidden;
@@ -246,7 +247,7 @@ export default {
     }
     .banner-contmpl-box{
         height: 302px;
-        background: url('../assets/images/banner-aboutme.png') no-repeat center;
+        background: url($imguri + 'banner-aboutme.png') no-repeat center;
         .my-data{
             color: #fff;
             text-align: center;

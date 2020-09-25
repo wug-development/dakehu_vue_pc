@@ -9,7 +9,7 @@
             <div class="boxwidth">
                 <div class="linkme-call">CALL</div>
                 <div class="linkme-map">
-                    <img src="../assets/images/img-map.jpg" alt="">
+                    <img :src='IMGW_URL + "img-map.jpg"' alt="">
                 </div>
                 <div class="linkme-body">
                     <div class="linkme-title">联系方式</div>
@@ -47,6 +47,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/assets/sass/set.scss';
 .linkme-box{
     margin: 0;
     overflow: hidden;
@@ -54,7 +55,7 @@ export default {
     background-color: #fff;
     .banner-linkme-box{
         height: 557px;
-        background: url('../assets/images/banner-linkme.jpg') no-repeat center;
+        background: url($imguri + 'banner-linkme.jpg') no-repeat center;
         color: #fff;
         text-align: center;
         .banner-title{

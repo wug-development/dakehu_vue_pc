@@ -28,7 +28,7 @@
                 <h3>签证人申请信息</h3>
                 <h5> 请准确填写申请人信息，标注红色星号的为必填项</h5>
                 <div class="fillcontext" v-for="(item, i) in persons" :key="i">
-                    <div class="btn-close" @click="delperson(i)" v-if="i > 0"><img src="../assets/images/visabook/btn-close.png" alt=""></div>
+                    <div class="btn-close" @click="delperson(i)" v-if="i > 0"><img :src='IMGW_URL + "visabook/btn-close.png"' alt=""></div>
                     <div class="list">
                         <div class="listl"><i>*</i>英文姓名:</div>
                         <div class="listr">
@@ -84,7 +84,7 @@
                 <button @click="addPerson">+添加申请人</button>
             </div>
             <div class="remarks">
-                <img src="../assets/images/visabook/remarks_01.png" alt="">
+                <img :src='IMGW_URL + "visabook/remarks_01.png"' alt="">
                 <div class="remarks_text">
                     <textarea name="" id="" cols="30" rows="1" class="BZXX" v-model="orderbody.content" placeholder="｜如果您其他备注要求请在此处填写"></textarea>
                 </div>
@@ -93,7 +93,7 @@
                 <h3>选择支付方式</h3>
                 <div class="selectBank">
                     <div class="selectitle" @click="isShowWangyin = !isShowWangyin">
-                        <img src="../assets/images/visabook/makevisabottom.png" :class='isShowWangyin?"active":""' alt="">
+                        <img :src='IMGW_URL + "visabook/makevisabottom.png"' :class='isShowWangyin?"active":""' alt="">
                         <h3>网站银行支付</h3>
                         <h5>(银行卡支付,支持大额支付,需开通网银)</h5>
                     </div>
@@ -101,156 +101,156 @@
                         <ul>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '工商银行'">
-                                <img src="../assets/images/visabook/gongshang.png" alt="">
+                                <img :src='IMGW_URL + "visabook/gongshang.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '招商银行'">
-                                <img src="../assets/images/visabook/zhaoshang.png" alt="">
+                                <img :src='IMGW_URL + "visabook/zhaoshang.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '农业银行'">
-                                <img src="../assets/images/visabook/nongye.png" alt="">
+                                <img :src='IMGW_URL + "visabook/nongye.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '建设银行'">
-                                <img src="../assets/images/visabook/jianshe.png" alt="">
+                                <img :src='IMGW_URL + "visabook/jianshe.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '北京银行'">
-                                <img src="../assets/images/visabook/beijing.png" alt="">
+                                <img :src='IMGW_URL + "visabook/beijing.png"' alt="">
                             </li>
                             <li class="mgr0">
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '交通银行'">
-                                <img src="../assets/images/visabook/jiaotong.png" alt="">
+                                <img :src='IMGW_URL + "visabook/jiaotong.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '兴业银行'">
-                                <img src="../assets/images/visabook/xingye.png" alt="">
+                                <img :src='IMGW_URL + "visabook/xingye.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '南京银行'">
-                                <img src="../assets/images/visabook/nanjing.png" alt="">
+                                <img :src='IMGW_URL + "visabook/nanjing.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '民生银行'">
-                                <img src="../assets/images/visabook/minsheng.png" alt="">
+                                <img :src='IMGW_URL + "visabook/minsheng.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '光大银行'">
-                                <img src="../assets/images/visabook/guangda.png" alt="">
+                                <img :src='IMGW_URL + "visabook/guangda.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '中国银行'">
-                                <img src="../assets/images/visabook/zhongguo.png" alt="">
+                                <img :src='IMGW_URL + "visabook/zhongguo.png"' alt="">
                             </li>
                             <li class="mgr0">
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '平安银行'">
-                                <img src="../assets/images/visabook/pingan.png" alt="">
+                                <img :src='IMGW_URL + "visabook/pingan.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '中信银行'">
-                                <img src="../assets/images/visabook/zhongxin.png" alt="">
+                                <img :src='IMGW_URL + "visabook/zhongxin.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '广发银行'">
-                                <img src="../assets/images/visabook/guangfa.png" alt="">
+                                <img :src='IMGW_URL + "visabook/guangfa.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '上海浦东发展银行'">
-                                <img src="../assets/images/visabook/shanghaipudong.png" alt="">
+                                <img :src='IMGW_URL + "visabook/shanghaipudong.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '中国邮政储蓄'">
-                                <img src="../assets/images/visabook/youzheng.png" alt="">
+                                <img :src='IMGW_URL + "visabook/youzheng.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '上海银行'">
-                                <img src="../assets/images/visabook/shanghai.png" alt="">
+                                <img :src='IMGW_URL + "visabook/shanghai.png"' alt="">
                             </li>
                             <li class="mgr0">
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '华夏银行'">
-                                <img src="../assets/images/visabook/huaxia.png" alt="">
+                                <img :src='IMGW_URL + "visabook/huaxia.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '宁波银行'">
-                                <img src="../assets/images/visabook/ningbo.png" alt="">
+                                <img :src='IMGW_URL + "visabook/ningbo.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '深圳发展银行'">
-                                <img src="../assets/images/visabook/shenzhne.png" alt="">
+                                <img :src='IMGW_URL + "visabook/shenzhne.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '浙商银行'">
-                                <img src="../assets/images/visabook/zheshang.png" alt="">
+                                <img :src='IMGW_URL + "visabook/zheshang.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '东亚银行'">
-                                <img src="../assets/images/visabook/dongya.png" alt="">
+                                <img :src='IMGW_URL + "visabook/dongya.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '渤海银行'">
-                                <img src="../assets/images/visabook/bohai.png" alt="">
+                                <img :src='IMGW_URL + "visabook/bohai.png"' alt="">
                             </li>
                             <li class="mgr0">
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '北京农村商业银行'">>
-                                <img src="../assets/images/visabook/nongshang.png" alt="">
+                                <img :src='IMGW_URL + "visabook/nongshang.png"' alt="">
                             </li>
                         </ul>
                     </div>
                     <div class="selectitle" @click="isShowXinyong = !isShowXinyong">
-                        <img src="../assets/images/visabook/makevisabottom.png" :class='isShowXinyong?"active":""' alt="">
+                        <img :src='IMGW_URL + "visabook/makevisabottom.png"' :class='isShowXinyong?"active":""' alt="">
                         <h3>信用卡支付</h3>
                     </div>
                     <div class="seleccontext" v-show="isShowXinyong">
                         <ul>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '工商银行信用卡'">
-                                <img src="../assets/images/visabook/gongshang.png" alt="">
+                                <img :src='IMGW_URL + "visabook/gongshang.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '招商银行信用卡'">
-                                <img src="../assets/images/visabook/zhaoshang.png" alt="">
+                                <img :src='IMGW_URL + "visabook/zhaoshang.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '农业银行信用卡'">
-                                <img src="../assets/images/visabook/nongye.png" alt="">
+                                <img :src='IMGW_URL + "visabook/nongye.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '建设银行信用卡'">
-                                <img src="../assets/images/visabook/jianshe.png" alt="">
+                                <img :src='IMGW_URL + "visabook/jianshe.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '北京银行信用卡'">
-                                <img src="../assets/images/visabook/beijing.png" alt="">
+                                <img :src='IMGW_URL + "visabook/beijing.png"' alt="">
                             </li>
                             <li class="mgr0">
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '广发银行信用卡'">
-                                <img src="../assets/images/visabook/guangfa.png" alt="">
+                                <img :src='IMGW_URL + "visabook/guangfa.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '兴业银行信用卡'">
-                                <img src="../assets/images/visabook/xingye.png" alt="">
+                                <img :src='IMGW_URL + "visabook/xingye.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '平安银行信用卡'">
-                                <img src="../assets/images/visabook/pingan.png" alt="">
+                                <img :src='IMGW_URL + "visabook/pingan.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '民生银行信用卡'">
-                                <img src="../assets/images/visabook/minsheng.png" alt="">
+                                <img :src='IMGW_URL + "visabook/minsheng.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '中国银行信用卡'">
-                                <img src="../assets/images/visabook/zhongguo.png" alt="">
+                                <img :src='IMGW_URL + "visabook/zhongguo.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '中信银行信用卡'">
-                                <img src="../assets/images/visabook/zhongxin.png" alt="">
+                                <img :src='IMGW_URL + "visabook/zhongxin.png"' alt="">
                             </li>
                         </ul>
                     </div>
                     <div class="selectitle" @click="isShowOther = !isShowOther">
-                        <img src="../assets/images/visabook/makevisabottom.png" :class='isShowOther?"active":""' alt="">
+                        <img :src='IMGW_URL + "visabook/makevisabottom.png"' :class='isShowOther?"active":""' alt="">
                         <h3>其他支付</h3>
                         <h5>(奥斯卡支付,现金支付,银行汇款)</h5>
                     </div>
@@ -258,15 +258,15 @@
                         <ul>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '奥斯卡支付'">
-                                <img src="../assets/images/visabook/aosika.png" alt="">
+                                <img :src='IMGW_URL + "visabook/aosika.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '银行汇款'">
-                                <img src="../assets/images/visabook/huikuan.png" alt="">
+                                <img :src='IMGW_URL + "visabook/huikuan.png"' alt="">
                             </li>
                             <li>
                                 <input type="radio" name="selecBank" class="selecBank" @click="orderbody.payType = '现金支付'">
-                                <img src="../assets/images/visabook/xianjin.png" alt="">
+                                <img :src='IMGW_URL + "visabook/xianjin.png"' alt="">
                             </li>
                         </ul>
                     </div>

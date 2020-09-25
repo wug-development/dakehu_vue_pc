@@ -148,7 +148,7 @@ export default {
 @import '@/assets/sass/set.scss';
 .payrecord-box{
     .payrecord-box-body{
-        background: url('../assets/images/passenger-bg.png') no-repeat bottom center;
+        background: url($imguri + 'passenger-bg.png') no-repeat bottom center;
         background-size: auto 1100px;
         height: 1100px;
         padding-top: 50px;
@@ -165,22 +165,22 @@ export default {
                 display: flex;
                 .icon-fukuan{
                     width: 112px;
-                    background: url('../assets/images/icon-money_1.png') no-repeat center;
+                    background: url($imguri + 'icon-money_1.png') no-repeat center;
                     background-color: #ff9979;
                 }
                 .icon-qiankuan{
                     width: 112px;
-                    background: url('../assets/images/icon-money_2.png') no-repeat center;
+                    background: url($imguri + 'icon-money_2.png') no-repeat center;
                     background-color: #6ec7e5;
                 }
                 .icon-xinyong{
                     width: 112px;
-                    background: url('../assets/images/icon-money_3.png') no-repeat center;
+                    background: url($imguri + 'icon-money_3.png') no-repeat center;
                     background-color: #bda7e2;
                 }
                 .icon-jiesuan{
                     width: 112px;
-                    background: url('../assets/images/icon-money_4.png') no-repeat center;
+                    background: url($imguri + 'icon-money_4.png') no-repeat center;
                     background-color: #83cec9;
                 }
                 div{

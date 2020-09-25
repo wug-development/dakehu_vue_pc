@@ -215,13 +215,14 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/assets/sass/set.scss';
 .main-box{
     background-color: #fff;
     .main-banner{
         max-width: 1920px;
         margin: 0 auto;
         height: 621px;
-        background: url('../assets/images/main/index-banner.jpg') no-repeat center;
+        background: url($imguri + 'main/index-banner.jpg') no-repeat center;
         background-size: auto 100%;
         .banner-txt{
             float: left;
@@ -233,7 +234,7 @@ export default {
             }
             .bt-content{
                 margin-top: 30px;
-                background: url('../assets/images/main/main_24.png') no-repeat left center;
+                background: url($imguri + 'main/main_24.png') no-repeat left center;
                 background-size: 88px auto;
                 padding-left: 100px;
                 height: 104px;
@@ -268,7 +269,7 @@ export default {
                     .from-title{
                         font-size: 20px;
                         text-align: center;
-                        background: url('../assets/images/main/main_dot_login.png') no-repeat center;
+                        background: url($imguri + 'main/main_dot_login.png') no-repeat center;
                     }
                     .txts{
                         width: 100%;
@@ -283,13 +284,13 @@ export default {
                         box-sizing: border-box;
                     }
                     .txt-account{
-                        background: url('../assets/images/main/icon-account.png') no-repeat left center;
+                        background: url($imguri + 'main/icon-account.png') no-repeat left center;
                         background-size: 23px 25px;
                         background-position-x: 11px;
                         margin-top: 36px;
                     }
                     .txt-pass{
-                        background: url('../assets/images/main/icon-pass.png') no-repeat left center;
+                        background: url($imguri + 'main/icon-pass.png') no-repeat left center;
                         background-size: 20px auto;
                         background-position-x: 13px;
                     }
@@ -320,7 +321,7 @@ export default {
         height: 687px;
         max-width: 1920px;
         margin: 0 auto;
-        background: url('../assets/images/main/main_earth.png') no-repeat center;
+        background: url($imguri + 'main/main_earth.png') no-repeat center;
         background-size: auto 100%;
         .bus-title{
             font-size: 36px;
@@ -331,7 +332,7 @@ export default {
         }
         .bus-dot{
             height: 14px;
-            background: url('../assets/images/main/icon-dot-bus.png') no-repeat center;
+            background: url($imguri + 'main/icon-dot-bus.png') no-repeat center;
             margin-top: 18px;
         }
         .bus-list{
@@ -346,23 +347,23 @@ export default {
                 text-align: center;
                 float: left;
                 .icon-gj{
-                    background: url('../assets/images/main/icon-bus_gj.png') no-repeat center;
+                    background: url($imguri + 'main/icon-bus_gj.png') no-repeat center;
                     height: 94px;
                 }
                 .icon-gn{
-                    background: url('../assets/images/main/icon-bus_gn.png') no-repeat center;
+                    background: url($imguri + 'main/icon-bus_gn.png') no-repeat center;
                     height: 94px;
                 }
                 .icon-qy{
-                    background: url('../assets/images/main/icon-bus_qy.png') no-repeat center;
+                    background: url($imguri + 'main/icon-bus_qy.png') no-repeat center;
                     height: 94px;
                 }
                 .icon-qz{
-                    background: url('../assets/images/main/icon-bus_qz.png') no-repeat center;
+                    background: url($imguri + 'main/icon-bus_qz.png') no-repeat center;
                     height: 94px;
                 }
                 .icon-bx{
-                    background: url('../assets/images/main/icon-bus_bx.png') no-repeat center;
+                    background: url($imguri + 'main/icon-bus_bx.png') no-repeat center;
                     height: 94px;
                 }
                 .item-title{
@@ -417,13 +418,13 @@ export default {
             float: left;
             width: 50%;
             height: 100%;
-            background: url('../assets/images/main/main_jp.png') no-repeat center;
+            background: url($imguri + 'main/main_jp.png') no-repeat center;
         }
         .other-aboutme{
             width: 50%;
             float: right;
             height: 100%;
-            background: url('../assets/images/main/main_blue.png') no-repeat center;
+            background: url($imguri + 'main/main_blue.png') no-repeat center;
             color: #fff;
             text-align: center;
             .ab-width{
@@ -438,7 +439,7 @@ export default {
                 .icon-dot{
                     margin-top: 20px;
                     height: 14px;
-                    background: url('../assets/images/main/icon-dot-aboutme.png') no-repeat center;
+                    background: url($imguri + 'main/icon-dot-aboutme.png') no-repeat center;
                 }
                 .ab-content{
                     margin-top: 36px;
@@ -493,7 +494,7 @@ export default {
         }
         .cus-dot{
             height: 14px;
-            background: url('../assets/images/main/icon-dot-bus.png') no-repeat center;
+            background: url($imguri + 'main/icon-dot-bus.png') no-repeat center;
             margin-top: 18px;
         }
         .cus-list{

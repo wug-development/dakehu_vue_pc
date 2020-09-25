@@ -7,7 +7,7 @@
         </div>
         <div class="cus-logo">
             <ul class="cus-list boxwidth">
-                <li v-for="(item, i) in iconcount" :key="i"><img :src='"../assets/images/icon-logo/comlogo_" + i + ".png"' alt=""></li>
+                <li v-for="(item, i) in iconcount" :key="i"><img :src='IMGW_URL + "icon-logo/comlogo_" + i + ".png"' alt=""></li>
             </ul>
             <div class="loadmore" v-if="isload" @click="loadMore"><&nbsp;&nbsp;加载更多&nbsp;&nbsp;></div>
         </div>
@@ -44,6 +44,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/assets/sass/set.scss';
 .customer-box{
     margin: 0;
     overflow: hidden;
@@ -51,7 +52,7 @@ export default {
     background-color: #fff;
     .banner-customer-box{
         height: 557px;
-        background: url('../assets/images/cus-banner.jpg') no-repeat center;
+        background: url($imguri + 'cus-banner.jpg') no-repeat center;
         color: #fff;
         text-align: center;
         .cus-banner-title{

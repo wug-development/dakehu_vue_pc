@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="aboutme-info-img">
-                    <img src="../assets/images/zizhi/aboutme_05.png" alt="">
+                    <img :src='IMGW_URL + "zizhi/aboutme_05.png"' alt="">
                 </div>
             </div>
         </div>
@@ -163,13 +163,14 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/assets/sass/set.scss';
 .aboutme-box{
     margin: 0;
     overflow: hidden;
     font-family: '微软雅黑', sans-serif;
     .banner-aboutme-box{
         height: 557px;
-        background: url('../assets/images/banner-aboutme.png') no-repeat center;
+        background: url($imguri + 'banner-aboutme.png') no-repeat center;
         .my-data{
             color: #fff;
             text-align: center;

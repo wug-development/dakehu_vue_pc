@@ -523,7 +523,7 @@ function checkVal(vue) {
                     color: #000;             
                 }
                 .goback{
-                    background: url('../assets/images/icon_flight_goback.png') no-repeat;
+                    background: url($imguri + 'icon_flight_goback.png') no-repeat;
                     background-position: left center;
                     background-size: auto 20px;
                 }
@@ -555,7 +555,7 @@ function checkVal(vue) {
                         }
                         .ticon{
                             width: 23px;
-                            background: url('../assets/images/icon_list_go.png') no-repeat;
+                            background: url($imguri + 'icon_list_go.png') no-repeat;
                             background-position: center;
                             background-size: 23px auto;
                         }
@@ -599,7 +599,7 @@ function checkVal(vue) {
                             }
                             .air-port-icon{
                                 width: 126px;
-                                background: url('../assets/images/icon_person_goback.png') no-repeat;
+                                background: url($imguri + 'icon_person_goback.png') no-repeat;
                                 background-position: center;
                                 background-size: 100%;
                             }
@@ -620,7 +620,7 @@ function checkVal(vue) {
                 .rule{
                     color: #f00;
                     padding-left: 18px;
-                    background: url('../assets/images/icon_rule.png') no-repeat left center;
+                    background: url($imguri + 'icon_rule.png') no-repeat left center;
                     background-size: 14px;
                     position: relative;
                     .content-layer{
@@ -646,7 +646,7 @@ function checkVal(vue) {
                 .notice{
                     color: #f00;
                     padding-left: 17px;
-                    background: url('../assets/images/icon_notice.png') no-repeat left center;
+                    background: url($imguri + 'icon_notice.png') no-repeat left center;
                     background-size: 13px;
                 }
                 .price{
@@ -749,7 +749,7 @@ function checkVal(vue) {
                             width: 20px;
                             height: 20px;
                             cursor: pointer;
-                            background: url('../assets/images/icon-close.png') no-repeat center;
+                            background: url($imguri + 'icon-close.png') no-repeat center;
                             background-size: 70%;
                             border-radius: 30px;
                             border: 2px solid #666;
@@ -832,7 +832,7 @@ function checkVal(vue) {
                             cursor: pointer;
                         }
                         .checkbox.cur{
-                            background: url('../assets/images/icon_dui.png') no-repeat center;
+                            background: url($imguri + 'icon_dui.png') no-repeat center;
                             background-size: 20px;
                             background-color: $pubcolor;
                         }
@@ -898,7 +898,7 @@ function checkVal(vue) {
                 color: #000;
                 font-family: "黑体", sans-serif;
                 font-size: 30px;
-                background: url('../assets/images/icon_layer_bg.png') no-repeat;
+                background: url($imguri + 'icon_layer_bg.png') no-repeat;
                 background-position: 325px 110px;
                 background-color: #fff;
                 border-radius: 10px;

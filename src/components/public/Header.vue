@@ -1,7 +1,7 @@
 <template>
     <div class="pubheader">
         <div class="pubheader-box">
-            <div class="logo" @click="toHome"><img src="../../assets/images/logo.png" alt=""></div>
+            <div class="logo" @click="toHome"><img :src='IMGW_URL + "logo.png"' alt=""></div>
             <div class="name-box">
                 <a class="name" id="lab_name">{{uname}}</a>
             </div>

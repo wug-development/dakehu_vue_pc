@@ -8,7 +8,7 @@
         <div class="bus-mod-box">
             <div class="boxwidth">
                 <div class="mod-l">
-                    <img src="../assets/images/bus/bus_gj.jpg" alt="">
+                    <img :src='IMGW_URL + "bus/bus_gj.jpg"' alt="">
                 </div>
                 <div class="mod-r mod-info">
                     <div class="info-title">国际机票</div>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="mod-r">
-                    <img src="../assets/images/bus/bus_gn.jpg" alt="">
+                    <img :src='IMGW_URL + "bus/bus_gn.jpg"' alt="">
                 </div>
             </div>
             <div style="clear:both;"></div>
@@ -40,7 +40,7 @@
         <div class="bus-mod-box">
             <div class="boxwidth">
                 <div class="mod-l">
-                    <img src="../assets/images/bus/bus_qy.jpg" alt="">
+                    <img :src='IMGW_URL + "bus/bus_qy.jpg"' alt="">
                 </div>
                 <div class="mod-r mod-info">
                     <div class="info-title">企业月结</div>
@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <div class="mod-r">
-                    <img src="../assets/images/bus/bus_qz.jpg" alt="">
+                    <img :src='IMGW_URL + "bus/bus_qz.jpg"' alt="">
                 </div>
             </div>
             <div style="clear:both;"></div>
@@ -72,7 +72,7 @@
         <div class="bus-mod-box">
             <div class="boxwidth">
                 <div class="mod-l">
-                    <img src="../assets/images/bus/bus_qy.jpg" alt="">
+                    <img :src='IMGW_URL + "bus/bus_qy.jpg"' alt="">
                 </div>
                 <div class="mod-r mod-info">
                     <div class="info-title">保险</div>
@@ -110,6 +110,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/assets/sass/set.scss';
 .business-box{
     margin: 0;
     overflow: hidden;
@@ -117,7 +118,7 @@ export default {
     background-color: #fff;
     .banner-business-box{
         height: 557px;
-        background: url('../assets/images/bus/bus_banner.jpg') no-repeat center;
+        background: url($imguri + 'bus/bus_banner.jpg') no-repeat center;
         color: #fff;
         text-align: center;
         .bus-banner-title{
