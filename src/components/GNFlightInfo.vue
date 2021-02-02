@@ -56,7 +56,7 @@
                                 <el-select v-model="item.cardtype" value-key="value" @change="changeCardType(item)" placeholder="身份证">
                                     <el-option v-for="t in cardType" :key="t.key" :label="t.value" :value="t.key"></el-option>
                                 </el-select>
-                                <input type="text" v-model="item.idcard" maxlength="50" />
+                                <input type="text" v-model="item.idcard" maxlength="18" />
                                 <div class="formnotice"></div>
                             </div>
                             <div class="cjrphone">
