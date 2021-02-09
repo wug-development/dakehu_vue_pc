@@ -89,7 +89,7 @@
                             </div>
                             <div class="hzhm">
                                 <span>护照号码：</span>
-                                <input type="text" maxlength="50" v-model="item.HZH" />
+                                <input type="text" maxlength="15" v-model="item.HZH" />
                                 <div class="formnotice"></div>
                             </div>
                             <div class="hzdateend">
@@ -149,7 +149,7 @@
                                     <td><div :class='"checkbox" + (selP.indexOf(i) > -1? " cur":"")' @click="checkPerson(p, i)"></div></td>
                                     <td><input type="text" :readonly="isEdit == i ? false : 'readonly'" v-model="p.CjrName" maxlength="20"></td>
                                     <td><input type="text" :readonly="isEdit == i ? false : 'readonly'" v-model="p.CSRQ" maxlength="20"></td>
-                                    <td><input type="text" :readonly="isEdit == i ? false : 'readonly'" v-model="p.HZH" maxlength="20"></td>
+                                    <td><input type="text" :readonly="isEdit == i ? false : 'readonly'" v-model="p.HZH" maxlength="15"></td>
                                     <td><input type="text" :readonly="isEdit == i ? false : 'readonly'" v-model="p.HZYXQ" maxlength="20"></td>
                                     <td><input type="text" :readonly="isEdit == i ? false : 'readonly'" v-model="p.phone" maxlength="20"></td>
                                     <td><input type="text" :readonly="isEdit == i ? false : 'readonly'" v-model="p.jingji" maxlength="20"></td>

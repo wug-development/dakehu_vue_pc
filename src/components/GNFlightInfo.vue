@@ -56,7 +56,7 @@
                                 <el-select v-model="item.cardtype" value-key="value" @change="changeCardType(item)" placeholder="身份证">
                                     <el-option v-for="t in cardType" :key="t.key" :label="t.value" :value="t.key"></el-option>
                                 </el-select>
-                                <input type="text" v-model="item.idcard" maxlength="18" />
+                                <input type="text" v-model="item.idcard" :maxlength="getLen(item.cardtype)" />
                                 <div class="formnotice"></div>
                             </div>
                             <div class="cjrphone">
@@ -310,6 +310,17 @@ export default {
             } else {                
                 this.person.splice(i, 1)
             }
+        },
+        getLen (v) {
+            let _len = 18
+            switch (v) {
+                case 2 : _len = 15; break
+                case 1 : _len = 18; break
+                case 3 : _len = 12; break
+                case 4 : _len = 12; break
+                default: _len = 18; break
+            }
+            return _len
         },
         submit () {
             if(!this.isSumiting){
