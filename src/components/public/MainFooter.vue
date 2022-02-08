@@ -42,7 +42,10 @@
       </div>
       <div class="footer-beianNo">
         ©2000-2022 Air, .Inc or its affiliates. All Rights Reserved. 版权所有
-        京ICP证060116号 京ICP备05055661号-5
+        京ICP证060116号
+        <a target="_blank" href="https://beian.miit.gov.cn"
+          >京ICP备05055661号-5</a
+        >
       </div>
       <div class="card-all">
         <div class="card card-zzrz">
@@ -95,16 +98,16 @@ export default {};
       display: flex;
       float: left;
       .yw-fbkj {
-        background: url($imguri + "icon-fbkjfw.png") no-repeat center;
+        background: url($imguri+"icon-fbkjfw.png") no-repeat center;
       }
       .yw-lhjszq {
-        background: url($imguri + "icon-lhjszq.png") no-repeat center;
+        background: url($imguri+"icon-lhjszq.png") no-repeat center;
       }
       .yw-ppys {
-        background: url($imguri + "icon-ppys.png") no-repeat center;
+        background: url($imguri+"icon-ppys.png") no-repeat center;
       }
       .yw-kxwys {
-        background: url($imguri + "icon-kxwys.png") no-repeat center;
+        background: url($imguri+"icon-kxwys.png") no-repeat center;
       }
       .yw-icon {
         width: 80px;
@@ -143,11 +146,11 @@ export default {};
         float: left;
       }
       .footer-tel {
-        background: url($imguri + "icon-footer-tel.png") no-repeat left center;
+        background: url($imguri+"icon-footer-tel.png") no-repeat left center;
         background-size: 23px auto;
       }
       .footer-addr {
-        background: url($imguri + "icon-footer-addr.png") no-repeat left center;
+        background: url($imguri+"icon-footer-addr.png") no-repeat left center;
         background-size: 24px auto;
       }
     }
@@ -171,19 +174,19 @@ export default {};
         }
       }
       .card-zzrz {
-        background: url($imguri + "card-zzrz.png") no-repeat left center;
+        background: url($imguri+"card-zzrz.png") no-repeat left center;
       }
       .card-cata {
-        background: url($imguri + "card-cata.png") no-repeat left center;
+        background: url($imguri+"card-cata.png") no-repeat left center;
       }
       .card-beian {
-        background: url($imguri + "card-beian.png") no-repeat left center;
+        background: url($imguri+"card-beian.png") no-repeat left center;
       }
       .card-webbeian {
-        background: url($imguri + "card-webbeian.png") no-repeat left center;
+        background: url($imguri+"card-webbeian.png") no-repeat left center;
       }
       .card-shiming {
-        background: url($imguri + "card-shiming.png") no-repeat left center;
+        background: url($imguri+"card-shiming.png") no-repeat left center;
       }
     }
     .img-code {
